@@ -10,7 +10,7 @@
     :root {
       --bg: #fafafa;
       --sidebar-bg: #ffffff;
-      --accent: #ff6b35;
+      --accent: #FDB515;
       --text: #1a1a1a;
       --text-muted: #666;
       --border: #e5e5e5;
@@ -25,20 +25,30 @@
     .logo-text p { font-size: 13px; color: var(--text-muted); font-family: -apple-system, sans-serif; line-height: 1.3; font-weight: 500; }
     
     /* Mobile menu toggle */
-    .mobile-menu-toggle { display: none; position: fixed; top: 20px; right: 20px; z-index: 1001; background: var(--text); color: white; border: none; padding: 12px 16px; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: 700; }
-    .mobile-menu-toggle:hover { background: var(--accent); }
+    .mobile-menu-toggle { display: none; position: fixed; top: 60px; right: 16px; z-index: 999; background: transparent; border: none; font-size: 24px; cursor: pointer; }
+    
+    /* Mobile Header */
+    .mobile-header { display: none; position: fixed; top: 0; left: 0; right: 0; background: var(--sidebar-bg); border-bottom: 2px solid var(--accent); z-index: 900; padding: 12px 16px; }
+    .mobile-header.active { display: block; }
+    .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .header-logo { display: flex; align-items: center; gap: 12px; cursor: pointer; flex: 1; }
+    .header-logo img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+    .header-logo-text h3 { font-size: 13px; font-weight: 700; font-family: Arial, sans-serif; }
+    .header-logo-text p { font-size: 9px; color: var(--text-muted); font-family: -apple-system, sans-serif; }
+    .header-date { font-size: 9px; color: var(--text-muted); font-family: -apple-system, sans-serif; font-weight: 500; text-align: right; line-height: 1.3; }
+    .nav-tabs-mobile { display: flex; gap: 4px; }
+    .nav-tab { padding: 6px 11px; background: none; border: none; font-size: 11px; font-weight: 600; color: var(--text-muted); cursor: pointer; border-radius: 3px; transition: all 0.2s; font-family: -apple-system, sans-serif; }
+    .nav-tab.active { background: var(--accent); color: #000; }
+    .nav-tab:hover:not(.active) { background: var(--hover); }
     
     .nav-tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-    .nav-tab { padding: 8px 16px; background: none; border: none; font-size: 14px; font-weight: 600; color: var(--text-muted); cursor: pointer; border-radius: 6px; transition: all 0.2s; font-family: -apple-system, sans-serif; }
-    .nav-tab.active { background: var(--accent); color: white; }
-    .nav-tab:hover:not(.active) { background: var(--hover); }
     .search-box { margin-top: 8px; }
     .search-box input { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 4px; font-size: 14px; font-family: -apple-system, sans-serif; }
     .search-box input:focus { outline: none; border-color: var(--accent); }
     .subscribe-section h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; font-family: Arial, sans-serif; }
     .subscribe-section input { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 4px; font-size: 14px; margin-bottom: 8px; font-family: -apple-system, sans-serif; }
     .subscribe-section input:focus { outline: none; border-color: var(--accent); }
-    .subscribe-btn { width: 100%; padding: 10px; background: #FDB515; color: #000; border: none; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: Arial, sans-serif; }
+    .subscribe-btn { width: 100%; padding: 10px; background: var(--accent); color: #000; border: none; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: Arial, sans-serif; }
     .subscribe-btn:hover { background: #e5a213; }
     .connect-section h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; font-family: Arial, sans-serif; }
     .social-links { display: flex; gap: 12px; }
@@ -75,9 +85,9 @@
     .post-item h2:hover { color: var(--accent); }
     .post-item .post-body { font-size: 18px; line-height: 1.7; color: var(--text); margin-bottom: 16px; }
     .post-item .post-body p { margin-bottom: 18px; }
-    .post-item .post-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
-    .post-item .post-date { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-family: -apple-system, sans-serif; }
-    .post-item .post-share { display: flex; gap: 10px; }
+    .post-item .post-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; gap: 12px; }
+    .post-item .post-date { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-family: -apple-system, sans-serif; white-space: nowrap; }
+    .post-item .post-share { display: flex; gap: 10px; flex-wrap: wrap; }
     
     /* Single post view */
     .single-post-content { display: none; }
@@ -85,15 +95,15 @@
     .single-post-header h1 { font-size: 42px; font-weight: 700; margin-bottom: 28px; line-height: 1.2; font-family: Georgia, serif; }
     .single-post-body { font-size: 19px; line-height: 1.7; margin-bottom: 32px; }
     .single-post-body p { margin-bottom: 20px; }
-    .single-post-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid var(--border); margin-top: 32px; }
-    .single-post-meta { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-family: -apple-system, sans-serif; }
+    .single-post-footer { display: flex; justify-content: space-between; align-items: flex-start; padding-top: 20px; border-top: 1px solid var(--border); margin-top: 32px; gap: 16px; }
+    .single-post-meta { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-family: -apple-system, sans-serif; white-space: nowrap; }
     
-    .share-icons { display: flex; gap: 10px; }
-    .share-icon { width: 32px; height: 32px; background: var(--text); color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s; }
+    .share-icons { display: flex; gap: 8px; flex-wrap: wrap; }
+    .share-icon { width: 32px; height: 32px; background: var(--text); color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s; flex-shrink: 0; }
     .share-icon svg { width: 16px; height: 16px; fill: currentColor; }
     .share-icon:hover { background: var(--accent); }
     
-    .post-actions { display: flex; gap: 14px; margin-top: 24px; }
+    .post-actions { display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
     .action-btn { padding: 10px 22px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s; border: none; background: var(--text); color: white; text-transform: uppercase; letter-spacing: 0.5px; font-family: Arial, sans-serif; }
     .action-btn:hover { background: #333; }
     
@@ -117,12 +127,13 @@
     .project-card h4 { font-size: 18px; margin: 20px 0 12px 0; font-weight: 600; font-family: -apple-system, sans-serif; }
     .project-card ul { margin-left: 20px; color: var(--text-muted); }
     .project-card li { margin-bottom: 8px; }
-    .buy-btn, .project-status { display: inline-block; padding: 10px 24px; background: var(--accent); color: white; border-radius: 4px; font-size: 14px; font-weight: 700; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; font-family: Arial, sans-serif; }
-    .buy-btn:hover, .project-status:hover { background: #ff8556; }
-    .coming-soon { background: var(--text-muted); }
+    .buy-btn, .project-status { display: inline-block; padding: 10px 24px; background: var(--accent); color: #000; border-radius: 4px; font-size: 14px; font-weight: 700; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; font-family: Arial, sans-serif; }
+    .buy-btn:hover, .project-status:hover { background: #e5a213; }
+    .coming-soon { background: var(--text-muted); color: white; }
     .coming-soon:hover { background: #555; }
     
     @media (max-width: 968px) { 
+      .mobile-header.active { display: block; }
       .mobile-menu-toggle { display: block; }
       .sidebar { 
         position: fixed; 
@@ -134,28 +145,54 @@
         border-right: 1px solid var(--border);
         transition: left 0.3s ease;
         box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        padding: 20px;
+        gap: 20px;
       }
       .sidebar.active { left: 0; }
       .container { grid-template-columns: 1fr; }
-      .main-content { padding: 80px 20px 30px 20px; }
-      .post-item .post-footer, .single-post-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .main-content { padding: 100px 20px 30px 20px; }
+      .post-item .post-footer { flex-wrap: wrap; }
+      .single-post-footer { flex-wrap: wrap; }
       .date-header { margin-bottom: 24px; padding-bottom: 16px; }
       .hijri-date { font-size: 18px; }
-      .logo-section { flex-direction: column; align-items: center; text-align: center; }
-      .logo-section img { width: 70px; height: 70px; margin-bottom: 12px; }
+      .share-icons { gap: 6px; }
+      .share-icon { width: 28px; height: 28px; }
+      .share-icon svg { width: 14px; height: 14px; }
+      .post-actions { gap: 8px; }
+      .action-btn { padding: 8px 14px; font-size: 11px; flex: 0 1 auto; }
+      .single-post-header h1 { font-size: 28px; margin-bottom: 20px; }
+      .single-post-body { font-size: 16px; }
+      .post-item h2 { font-size: 22px; margin-bottom: 16px; }
+      .search-results-header h1 { font-size: 24px; }
     }
     @media (max-width: 640px) { 
-      .post-item h2 { font-size: 24px; }
-      .single-post-header h1 { font-size: 28px; }
-      .post-actions { flex-wrap: wrap; }
-      .action-btn { flex: 1; min-width: 100px; font-size: 11px; padding: 10px 16px; }
-      .sidebar { width: 85%; max-width: 320px; }
+      .post-item h2 { font-size: 20px; }
+      .single-post-header h1 { font-size: 24px; }
+      .action-btn { padding: 8px 12px; font-size: 10px; }
+      .sidebar { width: 85%; max-width: 280px; }
+      .main-content { padding: 100px 16px 30px 16px; }
+      .search-result-item h3 { font-size: 18px; }
+      .header-logo-text h3 { font-size: 12px; }
+      .header-logo-text p { font-size: 8px; }
     }
   </style>
 </head>
 <body>
-  <!-- Mobile menu toggle button -->
-  <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+  <!-- Mobile Header -->
+  <header class="mobile-header" id="mobileHeader">
+    <div class="header-top">
+      <div class="header-logo" id="mobileLogoSection">
+        <img src="logoz.png" alt="Mission Seventy Logo" loading="eager" decoding="async">
+        <div class="header-logo-text">
+          <h3>Mission Seventy</h3>
+          <p>Making What Matters Work</p>
+        </div>
+      </div>
+      <div class="header-date" id="mobileHeaderDate"></div>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+    </div>
+    <div class="nav-tabs-mobile" id="navTabsMobile"></div>
+  </header>
   
   <div class="container" id="mainContainer">
     <aside class="sidebar" id="sidebar">
@@ -165,7 +202,7 @@
           <p>Making What Matters Work</p>
         </div>
       </div>
-      <div class="nav-tabs">
+      <div class="nav-tabs" id="navTabsDesktop">
         <button class="nav-tab active" data-tab="blog">BLOG</button>
         <button class="nav-tab" data-tab="project">PROJECTS</button>
         <button class="nav-tab" data-tab="about">ABOUT</button>
@@ -281,7 +318,7 @@
             <li>70-day tracking system with accountability built in</li>
             <li>Real examples from Mission Seventy posts</li>
           </ul>
-          <div style="margin-top: 24px;"><a href="#" class="buy-btn">BUY NOW - $21</a></div>
+          <div style="margin-top: 24px;"><a href="https://missionseventy.gumroad.com/l/cpseyb" target="_blank" class="buy-btn">BUY NOW - $21</a></div>
         </div>
         <div class="project-card">
           <h3>Nurayni.com</h3>
@@ -315,12 +352,10 @@
   <script src="posts.js"></script>
   
   <script>
-    // posts array is now loaded from posts.js
-    
     const postsFeed = document.getElementById('postsFeed');
     const subscribeModal = document.getElementById('subscribeModal');
     const searchInput = document.getElementById('searchInput');
-    const navTabs = document.querySelectorAll('.nav-tab');
+    const navTabsDesktop = document.querySelectorAll('#navTabsDesktop .nav-tab');
     const postsSection = document.getElementById('postsSection');
     const aboutSection = document.getElementById('aboutSection');
     const projectsSection = document.getElementById('projectsSection');
@@ -329,11 +364,13 @@
     const sidebar = document.getElementById('sidebar');
     const logoSection = document.getElementById('logoSection');
     const dateHeader = document.getElementById('dateHeader');
+    const mobileHeader = document.getElementById('mobileHeader');
+    const mobileLogoSection = document.getElementById('mobileLogoSection');
+    const navTabsMobile = document.getElementById('navTabsMobile');
     let currentPostId = null;
 
     // Mobile menu toggle
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const mainContainer = document.getElementById('mainContainer');
     
     mobileMenuToggle.addEventListener('click', () => {
       sidebar.classList.toggle('active');
@@ -348,6 +385,61 @@
       }
     });
 
+    // Create mobile nav tabs
+    function createMobileNavTabs() {
+      navTabsMobile.innerHTML = '';
+      const tabs = ['BLOG', 'PROJECTS', 'ABOUT'];
+      const tabNames = ['blog', 'project', 'about'];
+      
+      tabs.forEach((tab, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `nav-tab ${idx === 0 ? 'active' : ''}`;
+        btn.textContent = tab;
+        btn.dataset.tab = tabNames[idx];
+        btn.addEventListener('click', () => handleTabClick(tabNames[idx], btn));
+        navTabsMobile.appendChild(btn);
+      });
+    }
+
+    function handleTabClick(tabName, btn) {
+      // Update all tabs
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      
+      postsSection.classList.remove('active');
+      aboutSection.classList.remove('active');
+      projectsSection.classList.remove('active');
+      singlePostView.classList.remove('active');
+      searchResultsPage.classList.remove('active');
+      
+      if (tabName === 'blog') {
+        postsSection.classList.add('active');
+        dateHeader.classList.remove('hidden');
+      } else if (tabName === 'about') {
+        aboutSection.classList.add('active');
+        dateHeader.classList.add('hidden');
+      } else if (tabName === 'project') {
+        projectsSection.classList.add('active');
+        dateHeader.classList.add('hidden');
+      }
+      
+      sidebar.classList.remove('active');
+    }
+
+    navTabsDesktop.forEach(tab => {
+      tab.addEventListener('click', () => {
+        handleTabClick(tab.dataset.tab, tab);
+        // Also update mobile tabs
+        const mobileTabs = document.querySelectorAll('#navTabsMobile .nav-tab');
+        mobileTabs.forEach((mt, idx) => {
+          if (mt.dataset.tab === tab.dataset.tab) {
+            mobileTabs.forEach(t => t.classList.remove('active'));
+            mt.classList.add('active');
+          }
+        });
+      });
+    });
+
     function renderPosts(postsToRender = posts) {
       postsFeed.innerHTML = '';
       postsToRender.forEach(post => {
@@ -358,7 +450,7 @@
           <div class="post-body">${post.body}</div>
           <div class="post-footer">
             <div class="post-date">${post.date}</div>
-            <div class="share-icons">
+            <div class="post-share">
               <a href="#" class="share-icon share-fb" data-post-id="${post.id}" title="Facebook">
                 <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
               </a>
@@ -434,6 +526,7 @@
         });
       }
       
+      sidebar.classList.remove('active');
       window.scrollTo(0, 0);
     }
 
@@ -450,6 +543,7 @@
       document.getElementById('singlePostBody').innerHTML = post.body;
       
       window.scrollTo(0, 0);
+      sidebar.classList.remove('active');
       
       const postUrl = window.location.href;
       const postTitle = encodeURIComponent(post.title);
@@ -484,42 +578,31 @@
       }
     });
 
-    navTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        navTabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const tabName = tab.dataset.tab;
-        
-        postsSection.classList.remove('active');
-        aboutSection.classList.remove('active');
-        projectsSection.classList.remove('active');
-        singlePostView.classList.remove('active');
-        searchResultsPage.classList.remove('active');
-        
-        if (tabName === 'blog') {
-          postsSection.classList.add('active');
-          dateHeader.classList.remove('hidden');
-        } else if (tabName === 'about') {
-          aboutSection.classList.add('active');
-          dateHeader.classList.add('hidden');
-        } else if (tabName === 'project') {
-          projectsSection.classList.add('active');
-          dateHeader.classList.add('hidden');
-        }
-      });
-    });
-
     logoSection.addEventListener('click', () => {
       if (singlePostView.classList.contains('active') || searchResultsPage.classList.contains('active')) {
         closeSinglePost();
       }
-      navTabs.forEach(t => t.classList.remove('active'));
-      navTabs[0].classList.add('active');
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab')[0].classList.add('active');
       postsSection.classList.add('active');
       aboutSection.classList.remove('active');
       projectsSection.classList.remove('active');
       searchResultsPage.classList.remove('active');
       dateHeader.classList.remove('hidden');
+    });
+
+    mobileLogoSection.addEventListener('click', () => {
+      if (singlePostView.classList.contains('active') || searchResultsPage.classList.contains('active')) {
+        closeSinglePost();
+      }
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab')[0].classList.add('active');
+      postsSection.classList.add('active');
+      aboutSection.classList.remove('active');
+      projectsSection.classList.remove('active');
+      searchResultsPage.classList.remove('active');
+      dateHeader.classList.remove('hidden');
+      sidebar.classList.remove('active');
     });
 
     document.getElementById('backBtn').addEventListener('click', closeSinglePost);
@@ -581,8 +664,6 @@
       ];
       
       const now = new Date();
-      
-      // Create Hijri date formatter
       const hijriFormatter = new Intl.DateTimeFormat('en-US-u-ca-islamic', {
         day: 'numeric',
         month: 'numeric',
@@ -613,10 +694,25 @@
       
       document.getElementById('hijriDate').textContent = hijri;
       document.getElementById('gregorianDate').textContent = gregorian;
+      document.getElementById('mobileHeaderDate').textContent = hijri;
     }
+
+    // Check if mobile
+    function checkMobile() {
+      if (window.innerWidth <= 968) {
+        mobileHeader.classList.add('active');
+        createMobileNavTabs();
+      } else {
+        mobileHeader.classList.remove('active');
+        sidebar.classList.remove('active');
+      }
+    }
+
+    window.addEventListener('resize', checkMobile);
 
     renderPosts();
     updateDates();
+    checkMobile();
   </script>
 </body>
 </html>
