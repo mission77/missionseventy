@@ -323,7 +323,7 @@
             <li>70-day tracking system with accountability built in</li>
             <li>Real examples from Mission Seventy posts</li>
           </ul>
-          <div style="margin-top: 24px;"><a href="https://gumroad.com/your-gumroad-username/the-seventy-system" target="_blank" class="buy-btn">BUY NOW - $21</a></div>
+          <div style="margin-top: 24px;"><a href="https://missionseventy.gumroad.com/l/cpseyb" target="_blank" class="buy-btn">BUY NOW - $21</a></div>
         </div>
         <div class="project-card">
           <h3>Nurayni.com</h3>
@@ -596,158 +596,81 @@
     });
 
     mobileLogoSection.addEventListener('click', () => {
-        if (singlePostView.classList.contains('active') || searchResultsPage.classList.contains('active')) {
-            closeSinglePost();
-        }
-        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.nav-tab')[0].classList.add('active');
-        postsSection.classList.add('active');
-        aboutSection.classList.remove('active');
-        projectsSection.classList.remove('active');
-        searchResultsPage.classList.remove('active');
-        dateHeader.classList.remove('hidden');
-        sidebar.classList.remove('active');
+      if (singlePostView.classList.contains('active') || searchResultsPage.classList.contains('active')) {
+        closeSinglePost();
+      }
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-tab')[0].classList.add('active');
+      postsSection.classList.add('active');
+      aboutSection.classList.remove('active');
+      projectsSection.classList.remove('active');
+      searchResultsPage.classList.remove('active');
+      dateHeader.classList.remove('hidden');
+      sidebar.classList.remove('active');
     });
 
     document.getElementById('backBtn').addEventListener('click', closeSinglePost);
 
     document.getElementById('randomBtn').addEventListener('click', () => {
-        const randomPost = posts[Math.floor(Math.random() * posts.length)];
-        openSinglePost(randomPost);
+      const randomPost = posts[Math.floor(Math.random() * posts.length)];
+      openSinglePost(randomPost);
     });
 
     document.getElementById('nextBtn').addEventListener('click', () => {
-        const currentIndex = posts.findIndex(p => p.id === currentPostId);
-        const nextIndex = (currentIndex + 1) % posts.length;
-        openSinglePost(posts[nextIndex]);
+      const currentIndex = posts.findIndex(p => p.id === currentPostId);
+      const nextIndex = (currentIndex + 1) % posts.length;
+      openSinglePost(posts[nextIndex]);
     });
 
-    // --- CORE MAILCHIMP FETCH FUNCTION ---
+    document.getElementById('shareCopy2').addEventListener('click', (e) => {
+      e.preventDefault();
+      navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
+    });
+document.getElementById('subscribeBtn').addEventListener('click', async () => {
+    const email = document.getElementById('sidebarEmail').value;
     
-    // The base URL for your Mailchimp list's JSON endpoint.
-    const mailchimpUrl = "https://missionseventy.us20.list-manage.com/subscribe/post-json?u=60488e0888884e75b0778f48d&id=08263c50c8&c=?" 
-    
-    /**
-     * Handles the subscription via AJAX/Fetch to Mailchimp's JSON endpoint.
-     * Returns true on success, false on failure.
-     */
-    async function subscribeEmail(email) {
-        const url = `${mailchimpUrl}&EMAIL=${encodeURIComponent(email)}`;
-        
-        try {
-            const response = await fetch(url, {
-                method: 'GET', // Mailchimp's JSON endpoint uses GET
-                mode: 'cors'
-            });
+    // Check if email is valid
+    if (email && email.includes('@')) {
+        // Asynchronously call the function that submits to Mailchimp
+        const isSuccess = await subscribeEmail(email);
 
-            if (response.ok) {
-                return true; 
-            } else {
-                console.error("Mailchimp endpoint responded with error status:", response.status);
-                return false;
-            }
-        } catch (error) {
-            console.error("Error submitting to Mailchimp:", error);
-            return false;
+        if (isSuccess) {
+            // Show the user the success message instantly
+            alert(`Thank you for subscribing! We'll send updates to ${email}. Please check your inbox for a confirmation link.`);
+            document.getElementById('sidebarEmail').value = ''; // Clear the input
+        } else {
+            // Show a friendly error message
+            alert('Subscription failed. Please use the form in the modal to try again.');
         }
+    } else {
+        // If no email is entered, open the full modal form
+        subscribeModal.classList.add('active');
     }
-
-    // --- SIDEBAR BUTTON LOGIC (NOW USES subscribeEmail) ---
-    document.getElementById('subscribeBtn').addEventListener('click', async () => {
-        const email = document.getElementById('sidebarEmail').value;
-        
-        // Check if email is valid
-        if (email && email.includes('@')) {
-            // Asynchronously call the function that submits to Mailchimp
-            const isSuccess = await subscribeEmail(email);
-
-            if (isSuccess) {
-                // Show the user the success message instantly
-                alert(`Thank you for subscribing! We'll send updates to ${email}. Please check your inbox for a confirmation link.`);
-                document.getElementById('sidebarEmail').value = ''; // Clear the input
-            } else {
-                // Show a friendly error message
-                alert('Subscription failed. Please use the form in the modal to try again.');
-            }
-        } else {
-            // If no email is entered, open the full modal form
-            subscribeModal.classList.add('active');
-        }
-    });
-
-    // --- MODAL CLOSING LOGIC (UPDATED TO RESET VIEW) ---
-    document.getElementById('closeSubscribe').addEventListener('click', () => {
-        subscribeModal.classList.remove('active');
-        // Reset the view to show the form next time
-        document.getElementById('subscription-form-section').style.display = 'block';
-        document.getElementById('subscription-success-section').style.display = 'none';
-    });
-
-    // --- MODAL SUBMIT LOGIC (UPDATED TO USE AJAX/FETCH) ---
-    // NOTE: This now assumes your form has id="subscribe-form" and is using type="submit" for the button.
-    document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
-        e.preventDefault(); // Stop the default form submission (prevents page refresh)
-        
-        const emailInput = document.getElementById('emailInput');
-        const email = emailInput.value;
-        const formMessage = document.getElementById('form-message');
-        const submitButton = document.getElementById('submitSubscribe');
-
-        if (email && email.includes('@')) {
-            formMessage.textContent = 'Subscribing...';
-            submitButton.disabled = true;
-
-            const isSuccess = await subscribeEmail(email);
-            
-            submitButton.disabled = false;
-
-            if (isSuccess) {
-                // Success: Hide form, show success message
-                document.getElementById('subscription-form-section').style.display = 'none';
-                document.getElementById('subscription-success-section').style.display = 'block';
-
-                // Update success message
-                document.getElementById('success-message').innerHTML = `Thank you for subscribing! We'll send updates to **${email}**.`;
-                
-                emailInput.value = '';
-                formMessage.textContent = '';
-                
-            } else {
-                // Error: Show message in the form
-                formMessage.textContent = 'Subscription failed. Please try again.';
-            }
-
-        } else {
-            formMessage.textContent = 'Please enter a valid email address.';
-        }
+});
+   
     });
     
-    // --- ADDITIONAL CLOSING LOGIC ---
-
-    // Closes the modal from the "Close" button on the success screen
-    document.getElementById('closeSuccess').addEventListener('click', () => {
+    document.getElementById('closeSubscribe').addEventListener('click', () => subscribeModal.classList.remove('active'));
+    document.getElementById('submitSubscribe').addEventListener('click', () => {
+      const email = document.getElementById('emailInput').value;
+      if (email) {
+        alert(`Thank you for subscribing! We'll send updates to ${email}`);
         subscribeModal.classList.remove('active');
-        // Reset the modal view
-        document.getElementById('subscription-form-section').style.display = 'block';
-        document.getElementById('subscription-success-section').style.display = 'none';
+        document.getElementById('emailInput').value = '';
+      } else alert('Please enter your email');
     });
 
     subscribeModal.addEventListener('click', (e) => { 
-        if (e.target === subscribeModal) {
-            subscribeModal.classList.remove('active');
-            // Reset the modal view
-            document.getElementById('subscription-form-section').style.display = 'block';
-            document.getElementById('subscription-success-section').style.display = 'none';
-        }
+      if (e.target === subscribeModal) subscribeModal.classList.remove('active'); 
     });
     
     document.addEventListener('keydown', (e) => { 
-        if (e.key === 'Escape') { 
-            if (singlePostView.classList.contains('active')) {
-                closeSinglePost();
-            }
-            subscribeModal.classList.remove('active'); 
-        } 
+      if (e.key === 'Escape') { 
+        if (singlePostView.classList.contains('active')) {
+          closeSinglePost();
+        }
+        subscribeModal.classList.remove('active'); 
+      } 
     });
 
     function getHijriDate() {
@@ -810,6 +733,7 @@
   </script>
 </body>
 </html>
+
 
 
 
