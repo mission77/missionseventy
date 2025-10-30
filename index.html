@@ -627,24 +627,52 @@
       navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
     });
 
+    // --- UPDATED SUBSCRIBE LOGIC ---
+    
+    // This is your unique Mailchimp form link
+    const mailchimpFormUrl = "https://missionseventy.us20.list-manage.com/subscribe/post?u=60488e0888884e75b0778f48d&id=08263c50c8&f_id=002803eef0";
+
     document.getElementById('subscribeBtn').addEventListener('click', () => {
-      const email = document.getElementById('sidebarEmail').value;
-      if (email) {
-        alert(`Thank you for subscribing! We'll send updates to ${email}`);
-        document.getElementById('sidebarEmail').value = '';
-      } else {
-        alert('Please enter your email');
-      }
+        const email = document.getElementById('sidebarEmail').value;
+        
+        // Check if email is not empty and looks like an email
+        if (email && email.includes('@')) {
+            // Create the full URL with the email pre-filled
+            const fullUrl = `${mailchimpFormUrl}&EMAIL=${encodeURIComponent(email)}`;
+            
+            // Open the Mailchimp page in a new tab
+            window.open(fullUrl, '_blank');
+            document.getElementById('sidebarEmail').value = ''; // Clear the input
+        } else {
+            // If no email is entered, just open the modal
+            subscribeModal.classList.add('active');
+        }
     });
     
     document.getElementById('closeSubscribe').addEventListener('click', () => subscribeModal.classList.remove('active'));
+    
     document.getElementById('submitSubscribe').addEventListener('click', () => {
-      const email = document.getElementById('emailInput').value;
-      if (email) {
-        alert(`Thank you for subscribing! We'll send updates to ${email}`);
-        subscribeModal.classList.remove('active');
-        document.getElementById('emailInput').value = '';
-      } else alert('Please enter your email');
+        const email = document.getElementById('emailInput').value;
+        
+        // Check if email is not empty and looks like an email
+        if (email && email.includes('@')) {
+            // Create the full URL with the email pre-filled
+            const fullUrl = `${mailchimpFormUrl}&EMAIL=${encodeURIComponent(email)}`;
+            
+            // Open the Mailchimp page in a new tab
+            window.open(fullUrl, '_blank');
+            
+            // Close the modal and clear the input
+            subscribeModal.classList.remove('active');
+            document.getElementById('emailInput').value = '';
+        } else {
+            alert('Please enter a valid email address');
+        }
+    });
+
+    // This part of your code stays the same:
+    subscribeModal.addEventListener('click', (e) => { 
+        if (e.target === subscribeModal) subscribeModal.classList.remove('active'); 
     });
 
     subscribeModal.addEventListener('click', (e) => { 
@@ -720,6 +748,7 @@
   </script>
 </body>
 </html>
+
 
 
 
