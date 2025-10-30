@@ -23,6 +23,11 @@
     .logo-section { cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; }
     .logo-section img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 12px; }
     .logo-text p { font-size: 13px; color: var(--text-muted); font-family: -apple-system, sans-serif; line-height: 1.3; font-weight: 500; }
+    
+    /* Mobile menu toggle */
+    .mobile-menu-toggle { display: none; position: fixed; top: 20px; right: 20px; z-index: 1001; background: var(--text); color: white; border: none; padding: 12px 16px; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: 700; }
+    .mobile-menu-toggle:hover { background: var(--accent); }
+    
     .nav-tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
     .nav-tab { padding: 8px 16px; background: none; border: none; font-size: 14px; font-weight: 600; color: var(--text-muted); cursor: pointer; border-radius: 6px; transition: all 0.2s; font-family: -apple-system, sans-serif; }
     .nav-tab.active { background: var(--accent); color: white; }
@@ -118,29 +123,40 @@
     .coming-soon:hover { background: #555; }
     
     @media (max-width: 968px) { 
-      .container { grid-template-columns: 1fr; } 
-      .sidebar { position: relative; height: auto; border-right: none; border-bottom: 1px solid var(--border); padding: 20px; } 
-      .logo-section { flex-direction: row; align-items: center; gap: 12px; text-align: left; justify-content: flex-start; }
-      .logo-section img { width: 50px; height: 50px; margin-bottom: 0; }
-      .logo-text p { font-size: 12px; }
-      .nav-tabs { justify-content: center; gap: 4px; margin-top: 16px; }
-      .nav-tab { padding: 8px 20px; font-size: 13px; flex: 1; text-align: center; }
-      .search-box, .subscribe-section, .connect-section { display: none; }
-      .main-content { padding: 30px 20px; }
+      .mobile-menu-toggle { display: block; }
+      .sidebar { 
+        position: fixed; 
+        top: 0; 
+        left: -100%; 
+        height: 100vh; 
+        width: 280px; 
+        z-index: 1000; 
+        border-right: 1px solid var(--border);
+        transition: left 0.3s ease;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      }
+      .sidebar.active { left: 0; }
+      .container { grid-template-columns: 1fr; }
+      .main-content { padding: 80px 20px 30px 20px; }
       .post-item .post-footer, .single-post-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
       .date-header { margin-bottom: 24px; padding-bottom: 16px; }
       .hijri-date { font-size: 18px; }
+      .logo-section { flex-direction: column; align-items: center; text-align: center; }
+      .logo-section img { width: 70px; height: 70px; margin-bottom: 12px; }
     }
     @media (max-width: 640px) { 
       .post-item h2 { font-size: 24px; }
       .single-post-header h1 { font-size: 28px; }
       .post-actions { flex-wrap: wrap; }
       .action-btn { flex: 1; min-width: 100px; font-size: 11px; padding: 10px 16px; }
-      .nav-tab { font-size: 12px; padding: 6px 12px; }
+      .sidebar { width: 85%; max-width: 320px; }
     }
   </style>
 </head>
 <body>
+  <!-- Mobile menu toggle button -->
+  <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+  
   <div class="container" id="mainContainer">
     <aside class="sidebar" id="sidebar">
       <div class="logo-section" id="logoSection">
@@ -314,6 +330,23 @@
     const logoSection = document.getElementById('logoSection');
     const dateHeader = document.getElementById('dateHeader');
     let currentPostId = null;
+
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mainContainer = document.getElementById('mainContainer');
+    
+    mobileMenuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+    
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 968) {
+        if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+          sidebar.classList.remove('active');
+        }
+      }
+    });
 
     function renderPosts(postsToRender = posts) {
       postsFeed.innerHTML = '';
@@ -587,6 +620,7 @@
   </script>
 </body>
 </html>
+
 
 
 
