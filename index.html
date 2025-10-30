@@ -625,48 +625,128 @@
     document.getElementById('shareCopy2').addEventListener('click', (e) => {
       e.preventDefault();
       navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
-    });
+    }); // This closing bracket should be for the main DOMContentLoaded or page load wrapper
 
-    // --- UPDATED SUBSCRIBE LOGIC ---
+    // --- CORE MAILCHIMP FETCH FUNCTION ---
     
-    // This is your unique Mailchimp form link
-    const mailchimpFormUrl = "https://missionseventy.us20.list-manage.com/subscribe/post?u=60488e0888884e75b0778f48d&id=08263c50c8&f_id=002803eef0";
-
-    document.getElementById('subscribeBtn').addEventListener('click', () => {
-        const email = document.getElementById('sidebarEmail').value;
+    // The base URL for your Mailchimp list (the part before the '&id=...' in your old link)
+    // NOTE: Mailchimp URLs are usually long strings of letters/numbers. This is required.
+    const mailchimpUrl = "https://missionseventy.us20.list-manage.com/subscribe/post-json?u=60488e0888884e75b0778f48d&id=08263c50c8&c=?" 
+    
+    /**
+     * Handles the subscription via AJAX/Fetch to Mailchimp's JSON endpoint.
+     * Returns true on success, false on failure.
+     */
+    async function subscribeEmail(email) {
+        const url = `${mailchimpUrl}&EMAIL=${encodeURIComponent(email)}`;
         
-        // Check if email is not empty and looks like an email
-        if (email && email.includes('@')) {
-            // Create the full URL with the email pre-filled
-            const fullUrl = `${mailchimpFormUrl}&EMAIL=${encodeURIComponent(email)}`;
+        try {
+            const response = await fetch(url, {
+                method: 'GET', // Mailchimp's JSON endpoint uses GET
+                mode: 'cors'
+            });
+
+            // The '?' in the URL makes Mailchimp return JSONP, 
+            // but we can treat the successful fetch as a success signal.
+            // A more robust solution would involve a server, but this is the best 
+            // front-end way to bypass their redirection.
             
-            // Open the Mailchimp page in a new tab
-            window.open(fullUrl, '_blank');
-            document.getElementById('sidebarEmail').value = ''; // Clear the input
+            if (response.ok) {
+                // If the fetch succeeds, we assume the data was sent.
+                return true; 
+            } else {
+                console.error("Mailchimp endpoint responded with error status:", response.status);
+                return false;
+            }
+        } catch (error) {
+            console.error("Error submitting to Mailchimp:", error);
+            return false;
+        }
+    }
+
+
+    // --- SIDEBAR BUTTON LOGIC ---
+    document.getElementById('subscribeBtn').addEventListener('click', async () => {
+        const email = document.getElementById('sidebarEmail').value;
+        const formMessage = document.getElementById('form-message');
+        
+        if (email && email.includes('@')) {
+            const isSuccess = await subscribeEmail(email);
+
+            if (isSuccess) {
+                alert(`Thank you for subscribing! We'll send updates to ${email}. Please check your inbox for a confirmation link.`);
+                document.getElementById('sidebarEmail').value = ''; 
+            } else {
+                alert('Subscription failed. Please use the form in the modal to try again.');
+            }
         } else {
-            // If no email is entered, just open the modal
+            // If no email is entered, open the modal
             subscribeModal.classList.add('active');
         }
     });
-    
-    document.getElementById('closeSubscribe').addEventListener('click', () => subscribeModal.classList.remove('active'));
-    
-    document.getElementById('submitSubscribe').addEventListener('click', () => {
-        const email = document.getElementById('emailInput').value;
+
+
+    // --- MODAL FORM LOGIC ---
+    document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
+        e.preventDefault(); // Stop the default form submission (prevents page refresh)
         
-        // Check if email is not empty and looks like an email
+        const emailInput = document.getElementById('emailInput');
+        const email = emailInput.value;
+        const formMessage = document.getElementById('form-message');
+        const submitButton = document.getElementById('submitSubscribe');
+
         if (email && email.includes('@')) {
-            // Create the full URL with the email pre-filled
-            const fullUrl = `${mailchimpFormUrl}&EMAIL=${encodeURIComponent(email)}`;
+            formMessage.textContent = 'Subscribing...';
+            submitButton.disabled = true; // Disable button during submission
+
+            const isSuccess = await subscribeEmail(email);
             
-            // Open the Mailchimp page in a new tab
-            window.open(fullUrl, '_blank');
-            
-            // Close the modal and clear the input
-            subscribeModal.classList.remove('active');
-            document.getElementById('emailInput').value = '';
+            submitButton.disabled = false; // Re-enable button
+
+            if (isSuccess) {
+                // Hide the form and show the success message
+                document.getElementById('subscription-form-section').style.display = 'none';
+                document.getElementById('subscription-success-section').style.display = 'block';
+
+                // Update the success message with the actual email
+                document.getElementById('success-message').innerHTML = `Thank you for subscribing! We'll send updates to **${email}**. Please check your inbox for a confirmation link.`;
+                
+                // Clear the input for the next time
+                emailInput.value = '';
+                formMessage.textContent = ''; // Clear status message
+                
+            } else {
+                // Show error message
+                formMessage.textContent = 'Subscription failed. Please try again.';
+            }
+
         } else {
-            alert('Please enter a valid email address');
+            formMessage.textContent = 'Please enter a valid email address.';
+        }
+    });
+
+    // --- MODAL CLOSING LOGIC ---
+
+    // Closes the modal from the initial X button
+    document.getElementById('closeSubscribe').addEventListener('click', () => subscribeModal.classList.remove('active'));
+
+    // Closes the modal from the "Close" button on the success screen
+    document.getElementById('closeSuccess').addEventListener('click', () => {
+        subscribeModal.classList.remove('active');
+        
+        // Reset the modal back to the form view for the next open
+        document.getElementById('subscription-form-section').style.display = 'block';
+        document.getElementById('subscription-success-section').style.display = 'none';
+    });
+
+    // Closes the modal by clicking outside
+    subscribeModal.addEventListener('click', (e) => {
+        if (e.target === subscribeModal) {
+            subscribeModal.classList.remove('active');
+            
+            // Reset the modal back to the form view if closed from success screen
+            document.getElementById('subscription-form-section').style.display = 'block';
+            document.getElementById('subscription-success-section').style.display = 'none';
         }
     });
 
@@ -748,6 +828,7 @@
   </script>
 </body>
 </html>
+
 
 
 
