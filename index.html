@@ -621,152 +621,146 @@
       const nextIndex = (currentIndex + 1) % posts.length;
       openSinglePost(posts[nextIndex]);
     });
+document.getElementById('shareCopy2').addEventListener('click', (e) => {
+        e.preventDefault();
+        navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
+    }); 
+// Note: The main closing bracket '});' for the DOMContentLoaded/window.onload wrapper 
+// is correctly placed at the very end of this entire block.
 
-    document.getElementById('shareCopy2').addEventListener('click', (e) => {
-      e.preventDefault();
-      navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
-    }); // This closing bracket should be for the main DOMContentLoaded or page load wrapper
+// --- CORE MAILCHIMP FETCH FUNCTION ---
 
-    // --- CORE MAILCHIMP FETCH FUNCTION ---
+// The base URL for your Mailchimp list's JSON endpoint.
+const mailchimpUrl = "https://missionseventy.us20.list-manage.com/subscribe/post-json?u=60488e0888884e75b0778f48d&id=08263c50c8&c=?" 
+
+/**
+ * Handles the subscription via AJAX/Fetch to Mailchimp's JSON endpoint.
+ * Returns true on success, false on failure.
+ */
+async function subscribeEmail(email) {
+    const url = `${mailchimpUrl}&EMAIL=${encodeURIComponent(email)}`;
     
-    // The base URL for your Mailchimp list (the part before the '&id=...' in your old link)
-    // NOTE: Mailchimp URLs are usually long strings of letters/numbers. This is required.
-    const mailchimpUrl = "https://missionseventy.us20.list-manage.com/subscribe/post-json?u=60488e0888884e75b0778f48d&id=08263c50c8&c=?" 
-    
-    /**
-     * Handles the subscription via AJAX/Fetch to Mailchimp's JSON endpoint.
-     * Returns true on success, false on failure.
-     */
-    async function subscribeEmail(email) {
-        const url = `${mailchimpUrl}&EMAIL=${encodeURIComponent(email)}`;
-        
-        try {
-            const response = await fetch(url, {
-                method: 'GET', // Mailchimp's JSON endpoint uses GET
-                mode: 'cors'
-            });
+    try {
+        const response = await fetch(url, {
+            method: 'GET', // Mailchimp's JSON endpoint uses GET
+            mode: 'cors'
+        });
 
-            // The '?' in the URL makes Mailchimp return JSONP, 
-            // but we can treat the successful fetch as a success signal.
-            // A more robust solution would involve a server, but this is the best 
-            // front-end way to bypass their redirection.
-            
-            if (response.ok) {
-                // If the fetch succeeds, we assume the data was sent.
-                return true; 
-            } else {
-                console.error("Mailchimp endpoint responded with error status:", response.status);
-                return false;
-            }
-        } catch (error) {
-            console.error("Error submitting to Mailchimp:", error);
+        // We assume success if the request completes successfully (response.ok is true).
+        if (response.ok) {
+            return true; 
+        } else {
+            console.error("Mailchimp endpoint responded with error status:", response.status);
             return false;
         }
+    } catch (error) {
+        console.error("Error submitting to Mailchimp:", error);
+        return false;
     }
+}
 
 
-    // --- SIDEBAR BUTTON LOGIC ---
-    document.getElementById('subscribeBtn').addEventListener('click', async () => {
-        const email = document.getElementById('sidebarEmail').value;
-        const formMessage = document.getElementById('form-message');
-        
-        if (email && email.includes('@')) {
-            const isSuccess = await subscribeEmail(email);
+// --- SIDEBAR BUTTON LOGIC ---
+document.getElementById('subscribeBtn').addEventListener('click', async () => {
+    const email = document.getElementById('sidebarEmail').value;
+    
+    if (email && email.includes('@')) {
+        const isSuccess = await subscribeEmail(email);
 
-            if (isSuccess) {
-                alert(`Thank you for subscribing! We'll send updates to ${email}. Please check your inbox for a confirmation link.`);
-                document.getElementById('sidebarEmail').value = ''; 
-            } else {
-                alert('Subscription failed. Please use the form in the modal to try again.');
-            }
+        if (isSuccess) {
+            alert(`Thank you for subscribing! We'll send updates to ${email}. Please check your inbox for a confirmation link.`);
+            document.getElementById('sidebarEmail').value = ''; 
         } else {
-            // If no email is entered, open the modal
-            subscribeModal.classList.add('active');
+            alert('Subscription failed. Please use the form in the modal to try again.');
         }
-    });
+    } else {
+        // If no email is entered, open the modal
+        subscribeModal.classList.add('active');
+    }
+});
 
 
-    // --- MODAL FORM LOGIC ---
-    document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
-        e.preventDefault(); // Stop the default form submission (prevents page refresh)
+// --- MODAL FORM LOGIC ---
+document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
+    e.preventDefault(); // Stop the default form submission (prevents page refresh)
+    
+    const emailInput = document.getElementById('emailInput');
+    const email = emailInput.value;
+    const formMessage = document.getElementById('form-message');
+    const submitButton = document.getElementById('submitSubscribe');
+
+    if (email && email.includes('@')) {
+        formMessage.textContent = 'Subscribing...';
+        submitButton.disabled = true; // Disable button during submission
+
+        const isSuccess = await subscribeEmail(email);
         
-        const emailInput = document.getElementById('emailInput');
-        const email = emailInput.value;
-        const formMessage = document.getElementById('form-message');
-        const submitButton = document.getElementById('submitSubscribe');
+        submitButton.disabled = false; // Re-enable button
 
-        if (email && email.includes('@')) {
-            formMessage.textContent = 'Subscribing...';
-            submitButton.disabled = true; // Disable button during submission
+        if (isSuccess) {
+            // Hide the form and show the success message
+            document.getElementById('subscription-form-section').style.display = 'none';
+            document.getElementById('subscription-success-section').style.display = 'block';
 
-            const isSuccess = await subscribeEmail(email);
+            // Update the success message with the actual email
+            document.getElementById('success-message').innerHTML = `Thank you for subscribing! We'll send updates to **${email}**. Please check your inbox for a confirmation link.`;
             
-            submitButton.disabled = false; // Re-enable button
-
-            if (isSuccess) {
-                // Hide the form and show the success message
-                document.getElementById('subscription-form-section').style.display = 'none';
-                document.getElementById('subscription-success-section').style.display = 'block';
-
-                // Update the success message with the actual email
-                document.getElementById('success-message').innerHTML = `Thank you for subscribing! We'll send updates to **${email}**. Please check your inbox for a confirmation link.`;
-                
-                // Clear the input for the next time
-                emailInput.value = '';
-                formMessage.textContent = ''; // Clear status message
-                
-            } else {
-                // Show error message
-                formMessage.textContent = 'Subscription failed. Please try again.';
-            }
-
+            // Clear the input for the next time
+            emailInput.value = '';
+            formMessage.textContent = ''; // Clear status message
+            
         } else {
-            formMessage.textContent = 'Please enter a valid email address.';
+            // Show error message
+            formMessage.textContent = 'Subscription failed. Please try again.';
         }
-    });
 
-    // --- MODAL CLOSING LOGIC ---
+    } else {
+        formMessage.textContent = 'Please enter a valid email address.';
+    }
+});
 
-    // Closes the modal from the initial X button
-    document.getElementById('closeSubscribe').addEventListener('click', () => subscribeModal.classList.remove('active'));
+// --- MODAL CLOSING LOGIC ---
 
-    // Closes the modal from the "Close" button on the success screen
-    document.getElementById('closeSuccess').addEventListener('click', () => {
+// Closes the modal from the initial X button
+document.getElementById('closeSubscribe').addEventListener('click', () => {
+    subscribeModal.classList.remove('active');
+    // Reset the modal view
+    document.getElementById('subscription-form-section').style.display = 'block';
+    document.getElementById('subscription-success-section').style.display = 'none';
+});
+
+// Closes the modal from the "Close" button on the success screen
+document.getElementById('closeSuccess').addEventListener('click', () => {
+    subscribeModal.classList.remove('active');
+    
+    // Reset the modal view
+    document.getElementById('subscription-form-section').style.display = 'block';
+    document.getElementById('subscription-success-section').style.display = 'none';
+});
+
+// Closes the modal by clicking outside
+subscribeModal.addEventListener('click', (e) => {
+    if (e.target === subscribeModal) {
         subscribeModal.classList.remove('active');
         
-        // Reset the modal back to the form view for the next open
+        // Reset the modal view
         document.getElementById('subscription-form-section').style.display = 'block';
         document.getElementById('subscription-success-section').style.display = 'none';
-    });
+    }
+});
 
-    // Closes the modal by clicking outside
-    subscribeModal.addEventListener('click', (e) => {
-        if (e.target === subscribeModal) {
-            subscribeModal.classList.remove('active');
-            
-            // Reset the modal back to the form view if closed from success screen
-            document.getElementById('subscription-form-section').style.display = 'block';
-            document.getElementById('subscription-success-section').style.display = 'none';
-        }
-    });
-
-    // This part of your code stays the same:
-    subscribeModal.addEventListener('click', (e) => { 
-        if (e.target === subscribeModal) subscribeModal.classList.remove('active'); 
-    });
-
-    subscribeModal.addEventListener('click', (e) => { 
-      if (e.target === subscribeModal) subscribeModal.classList.remove('active'); 
-    });
-    
-    document.addEventListener('keydown', (e) => { 
-      if (e.key === 'Escape') { 
+// Original keydown event listener (preserved)
+document.addEventListener('keydown', (e) => { 
+    if (e.key === 'Escape') { 
         if (singlePostView.classList.contains('active')) {
-          closeSinglePost();
+            closeSinglePost();
         }
+        // Also close the subscribe modal on escape
         subscribeModal.classList.remove('active'); 
-      } 
-    });
+    } 
+});
+
+// Note: The redundant subscribeModal.addEventListener('click', ...) has been removed.
 
     function getHijriDate() {
       const hijriMonths = [
@@ -828,6 +822,7 @@
   </script>
 </body>
 </html>
+
 
 
 
