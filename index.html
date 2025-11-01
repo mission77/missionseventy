@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preload" as="image" href="logoz.png">
   <title>Mission Seventy — Making What Matters Work</title>
+  
+  <!-- Open Graph Meta Tags for Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mission Seventy — Making What Matters Work">
+  <meta property="og:description" content="Observations on faith, building, and finding solutions.">
+  <meta property="og:image" content="https://missionseventy.com/logoz.png">
+  <meta property="og:url" content="https://missionseventy.com">
+  <meta property="og:site_name" content="Mission Seventy">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mission Seventy — Making What Matters Work">
+  <meta name="twitter:description" content="Observations on faith, building, and finding solutions.">
+  <meta name="twitter:image" content="https://missionseventy.com/logoz.png">
+  <meta name="twitter:creator" content="@missionseventy">
+  
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -574,6 +590,13 @@
       document.getElementById('singlePostDate').textContent = post.date;
       document.getElementById('singlePostBody').innerHTML = post.body;
       
+      // Update meta tags for social sharing
+      document.querySelector('meta[property="og:title"]').setAttribute('content', post.title);
+      document.querySelector('meta[property="og:description"]').setAttribute('content', post.excerpt);
+      document.querySelector('meta[name="twitter:title"]').setAttribute('content', post.title);
+      document.querySelector('meta[name="twitter:description"]').setAttribute('content', post.excerpt);
+      document.title = post.title + ' — Mission Seventy';
+      
       window.scrollTo(0, 0);
       sidebar.classList.remove('active');
       
@@ -802,6 +825,7 @@
   </script>
 </body>
 </html>
+
 
 
 
