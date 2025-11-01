@@ -1,4 +1,14 @@
-const posts = [
+const posts = [{
+  id: ,
+  title: "Teaching the Nafs to Endure",
+  excerpt: "Patience (Sabr) is the discipline of the soul, the tongue, and the limbs, and a key to success in this life and the Hereafter.",
+  body: "<p>BISMILLAH.</p>" +
+        "<p>Patience (Sabr) means, as Ibn al-Qayyim said, “to restrain the soul from impatience, the tongue from complaint, and the limbs from inappropriate actions.” (Madarij al-Salikin). It is said that patience is half of faith, as mentioned by Abdullah ibn Mas'ud. The Qur'an is filled with verses that praise the patient and show how Allah loves them. Patience is also a condition for success in the Hereafter.</p>" +
+        "<p>In our day-to-day lives, we are tested in every way possible, and it is highly important to be conscious of how we face those tests. We might fail to be patient at times, but we need to pick ourselves up and continue practicing patience. We must resist all forms of things that go against what Allah wants for us.</p>" +
+        "<p>It is challenging to practice patience, but that’s how it has always been. The best of humans, the Prophets, were tested in the hardest ways. How can we think we will not go through some of what they went through?</p>" +
+        "<p>Being patient is a habit that can be taught to the nafs (self). Over time, it becomes stronger, able to endure hard and seemingly impossible things that others cannot. May Allah help us practice patience and make us among the patient.</p>",
+  date: "10 Jumada al‑Awwal 1447 / 1 Nov 2025"
+},
 {id: 1, 
 title: "Boredom's gift",
         excerpt: "The people who succeed in this noisy environment are the ones who can restrain themselves and not be influenced by impulse scrolling all the time.",
@@ -213,3 +223,4 @@ title: "The missing piece",
          
   // Add more posts here - newest at the top!
 ];
+
