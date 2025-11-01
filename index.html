@@ -320,7 +320,7 @@
           <p>Mission Seventy is my laboratory for making what matters work. This blog is where I share observations on faith, building, and finding solutions.</p>
           <p>As a builder, I write to think clearly. To see ideas in the open. To refine them. Here you'll find finished projects, upcoming work, and resources; some free, some paid.</p>
           <p>Subscribe to follow along. This is my main platform beyond social media. If you spot anything incorrect Islamically or want to discuss a topic, reach out.</p>
-          <p>Ahlan wa sahlan, Ha dhawaaw/Soo dhawoow, Karibu, welcome.</p>
+          <p>Ahlan wa sahlan,Ha dhawaaw/Soo dhawoow, Karibu, welcome.</p>
         </div>
       </div>
       
@@ -597,10 +597,16 @@
       document.querySelector('meta[name="twitter:description"]').setAttribute('content', post.excerpt);
       document.title = post.title + ' — Mission Seventy';
       
+      // Update URL without page reload
+      const postSlug = post.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+      window.history.pushState({postId: post.id}, post.title, `?post=${post.id}`);
+      
       window.scrollTo(0, 0);
       sidebar.classList.remove('active');
       
-      const postUrl = window.location.href;
+      const postUrl = window.location.origin + window.location.pathname + '?post=' + post.id;
+      document.querySelector('meta[property="og:url"]').setAttribute('content', postUrl);
+      
       const postTitle = encodeURIComponent(post.title);
       document.getElementById('shareFacebook2').href = `https://www.facebook.com/sharer/sharer.php?u=${postUrl}`;
       document.getElementById('shareTwitter2').href = `https://twitter.com/intent/tweet?text=${postTitle}&url=${postUrl}`;
@@ -825,6 +831,7 @@
   </script>
 </body>
 </html>
+
 
 
 
