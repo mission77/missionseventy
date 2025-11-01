@@ -50,8 +50,20 @@
     .subscribe-section h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; font-family: Arial, sans-serif; }
     .subscribe-section input { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 4px; font-size: 14px; margin-bottom: 8px; font-family: -apple-system, sans-serif; }
     .subscribe-section input:focus { outline: none; border-color: var(--accent); }
-    .subscribe-btn { width: 100%; padding: 10px; background: var(--accent); color: #000; border: none; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: Arial, sans-serif; }
+    .subscribe-btn { width: 100%; padding: 10px; background: var(--accent); color: #000; border: none; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: Arial, sans-serif; transition: all 0.2s; }
     .subscribe-btn:hover { background: #e5a213; }
+    .subscribe-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    
+    /* Thank You Modal */
+    .thank-you-modal { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); z-index: 1100; padding: 40px; }
+    .thank-you-modal.active { display: flex; align-items: center; justify-content: center; animation: slideUp 0.3s ease-out; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .thank-you-content { background: white; border-radius: 12px; max-width: 500px; width: 100%; padding: 50px 40px; text-align: center; }
+    .thank-you-icon { font-size: 64px; margin-bottom: 20px; }
+    .thank-you-content h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; font-family: Arial, sans-serif; color: var(--accent); }
+    .thank-you-content p { font-size: 16px; color: var(--text-muted); margin-bottom: 24px; font-family: -apple-system, sans-serif; line-height: 1.6; }
+    .thank-you-btn { padding: 12px 32px; background: var(--text); color: white; border: none; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: Arial, sans-serif; transition: all 0.2s; }
+    .thank-you-btn:hover { background: var(--accent); color: #000; }
     .connect-section h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; font-family: Arial, sans-serif; }
     .social-links { display: flex; gap: 12px; }
     .social-link { width: 36px; height: 36px; background: var(--text); color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s; }
@@ -323,7 +335,7 @@
             <li>70-day tracking system with accountability built in</li>
             <li>Real examples from Mission Seventy posts</li>
           </ul>
-          <div style="margin-top: 24px;"><a href="https://missionseventy.gumroad.com/l/cpseyb" target="_blank" class="buy-btn">BUY NOW - $21</a></div>
+          <div style="margin-top: 24px;"><a href="https://gumroad.com/your-gumroad-username/the-seventy-system" target="_blank" class="buy-btn">BUY NOW - $21</a></div>
         </div>
         <div class="project-card">
           <h3>Nurayni.com</h3>
@@ -350,6 +362,15 @@
       <input type="email" id="emailInput" placeholder="your@email.com">
       <button class="subscribe-btn" id="submitSubscribe">Sign Up</button>
       <button class="btn" id="closeSubscribe" style="width: 100%; margin-top: 12px;">Close</button>
+    </div>
+  </div>
+  
+  <div class="thank-you-modal" id="thankYouModal">
+    <div class="thank-you-content">
+      <div class="thank-you-icon">✓</div>
+      <h2>Welcome to Mission Seventy!</h2>
+      <p>Thank you for subscribing. Check your email for a confirmation link, and get ready to receive insights, updates, and reflections delivered straight to your inbox.</p>
+      <button class="thank-you-btn" id="closeThankYou">Done</button>
     </div>
   </div>
   
@@ -626,38 +647,26 @@
       e.preventDefault();
       navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
     });
-document.getElementById('subscribeBtn').addEventListener('click', async () => {
-    const email = document.getElementById('sidebarEmail').value;
-    
-    // Check if email is valid
-    if (email && email.includes('@')) {
-        // Asynchronously call the function that submits to Mailchimp
-        const isSuccess = await subscribeEmail(email);
 
-        if (isSuccess) {
-            // Show the user the success message instantly
-            alert(`Thank you for subscribing! We'll send updates to ${email}. Please check your inbox for a confirmation link.`);
-            document.getElementById('sidebarEmail').value = ''; // Clear the input
-        } else {
-            // Show a friendly error message
-            alert('Subscription failed. Please use the form in the modal to try again.');
-        }
-    } else {
-        // If no email is entered, open the full modal form
-        subscribeModal.classList.add('active');
-    }
-});
-   
-    
+    document.getElementById('subscribeBtn').addEventListener('click', () => {
+      const email = document.getElementById('sidebarEmail').value;
+      if (email) {
+        subscribeToMailchimp(email, 'sidebar');
+      } else {
+        alert('Please enter your email');
+      }
+    });
     
     document.getElementById('closeSubscribe').addEventListener('click', () => subscribeModal.classList.remove('active'));
     document.getElementById('submitSubscribe').addEventListener('click', () => {
       const email = document.getElementById('emailInput').value;
       if (email) {
-        alert(`Thank you for subscribing! We'll send updates to ${email}`);
-        subscribeModal.classList.remove('active');
-        document.getElementById('emailInput').value = '';
+        subscribeToMailchimp(email, 'modal');
       } else alert('Please enter your email');
+    });
+
+    document.getElementById('closeThankYou').addEventListener('click', () => {
+      document.getElementById('thankYouModal').classList.remove('active');
     });
 
     subscribeModal.addEventListener('click', (e) => { 
@@ -727,12 +736,66 @@ document.getElementById('subscribeBtn').addEventListener('click', async () => {
 
     window.addEventListener('resize', checkMobile);
 
+    // Mailchimp subscription function
+    function subscribeToMailchimp(email, source) {
+      const btn = source === 'sidebar' ? document.getElementById('subscribeBtn') : document.getElementById('submitSubscribe');
+      const originalText = btn.textContent;
+      btn.textContent = 'Subscribing...';
+      btn.disabled = true;
+
+      // Mailchimp form data
+      const formData = new FormData();
+      formData.append('EMAIL', email);
+      formData.append('u', '60488e0888884e75b0778f48d');
+      formData.append('id', '08263c50c8');
+
+      // Use JSONP to avoid CORS issues
+      const script = document.createElement('script');
+      script.src = `https://missionseventy.us20.list-manage.com/subscribe/post-json?u=60488e0888884e75b0778f48d&id=08263c50c8&EMAIL=${encodeURIComponent(email)}&c=jsonpCallback`;
+      
+      window.jsonpCallback = function(data) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+
+        if (data.result === 'success' || data.msg.includes('already subscribed')) {
+          // Show thank you modal
+          document.getElementById('thankYouModal').classList.add('active');
+          
+          // Clear forms
+          if (source === 'sidebar') {
+            document.getElementById('sidebarEmail').value = '';
+            subscribeModal.classList.remove('active');
+          } else {
+            document.getElementById('emailInput').value = '';
+            subscribeModal.classList.remove('active');
+          }
+        } else {
+          alert('Error: ' + data.msg);
+        }
+
+        // Clean up
+        script.remove();
+        delete window.jsonpCallback;
+      };
+
+      script.onerror = function() {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('Error subscribing. Please try again.');
+        script.remove();
+        delete window.jsonpCallback;
+      };
+
+      document.body.appendChild(script);
+    }
+
     renderPosts();
     updateDates();
     checkMobile();
   </script>
 </body>
 </html>
+
 
 
 
