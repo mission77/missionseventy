@@ -1,5 +1,5 @@
 const posts = [{
-  id: ,
+  id:1 ,
   title: "Teaching the Nafs to Endure",
   excerpt: "Patience (Sabr) is the discipline of the soul, the tongue, and the limbs, and a key to success in this life and the Hereafter.",
   body: "<p>BISMILLAH.</p>" +
@@ -223,4 +223,5 @@ title: "The missing piece",
          
   // Add more posts here - newest at the top!
 ];
+
 
