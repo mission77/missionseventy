@@ -261,7 +261,24 @@ const posts = [
           "<p>It is challenging to practice patience, but that's how it has always been. The best of humans, the Prophets, were tested in the hardest ways. How can we think we will not go through some of what they went through?</p>" +
           "<p>Being patient is a habit that can be taught to the nafs (self). Over time, it becomes stronger, able to endure hard and seemingly impossible things that others cannot. May Allah help us practice patience and make us among the patient.</p>",
     date: "10 Jumada al‑Awwal 1447 / 1 Nov 2025"
-  }
+       },
+
+  {
+
+
+  id: 21,
+  title: "The Face That Welcomes",
+  excerpt: "A cheerful face is silent charity — it opens hearts before words do.",
+  body: "<p>BISMILLAH.</p>" +
+        "<p>What makes someone approachable at first sight? It’s the warmth of their face: eager, open, smiling.</p>" +
+        "<p>The opposite is just as true. Even if you needed something important from a person, one unwelcoming expression could make you hesitate and keep your distance.</p>" +
+        "<p>In every setting, whether in business or teaching, it’s important to make others feel at ease. A welcoming attitude can open hearts long before words do.</p>" +
+        "<p>As our Prophet ﷺ said, “Every good deed is charity. Verily, it is a good deed to meet your brother with a cheerful face.”</p>" +
+        "<p>May Allah bless us with good morals and hearts that shine through our faces.</p>",
+  date: "11 Jumada al-Awwal 1447 / 2 Nov 2025"
+}
+
+  
 
   // TO ADD A NEW POST:
   // 1. Copy the format below
@@ -279,3 +296,4 @@ const posts = [
   },
   */
 ];
+
