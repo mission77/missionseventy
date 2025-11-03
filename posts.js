@@ -288,7 +288,7 @@ const posts = [
         "<p>Each person’s spark is different. Some find it in writing, others in reading, and some through doing hard things. For me, it comes from running. Even after one mile, the fog clears. My body lightens. Tasks that felt heavy suddenly feel easy.</p>" +
         "<p>Some people know what fuels them and lean into it. Others don’t, and that’s why their days swing between motion and stillness, energy and fatigue.</p>" +
         "<p>What’s your spark? What brings you back when life slows you down?</p>",
-  date: "10 Jumada al-Awwal 1447 / 1 Nov 2025"
+  date: "11 Jumada al-Awwal 1447 / 3 Nov 2025"
 }
 
 
@@ -311,5 +311,6 @@ const posts = [
   },
   */
 ];
+
 
 
