@@ -276,7 +276,22 @@ const posts = [
         "<p>As our Prophet ﷺ said, “Every good deed is charity. Verily, it is a good deed to meet your brother with a cheerful face.”</p>" +
         "<p>May Allah bless us with good morals and hearts that shine through our faces.</p>",
   date: "11 Jumada al-Awwal 1447 / 2 Nov 2025"
+     },
+
+  {
+
+  id: 22,
+  title: "The Spark Within",
+  excerpt: "Everyone has a spark — a hidden drive that awakens when motivation fades.",
+  body: "<p>BISMILLAH.</p>" +
+        "<p>What if you were told that everyone has a spark, a hidden drive that awakens them when motivation fades?</p>" +
+        "<p>Each person’s spark is different. Some find it in writing, others in reading, and some through doing hard things. For me, it comes from running. Even after one mile, the fog clears. My body lightens. Tasks that felt heavy suddenly feel easy.</p>" +
+        "<p>Some people know what fuels them and lean into it. Others don’t, and that’s why their days swing between motion and stillness, energy and fatigue.</p>" +
+        "<p>What’s your spark? What brings you back when life slows you down?</p>",
+  date: "10 Jumada al-Awwal 1447 / 1 Nov 2025"
 }
+
+
 
   
 
@@ -296,4 +311,5 @@ const posts = [
   },
   */
 ];
+
 
