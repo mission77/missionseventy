@@ -289,7 +289,24 @@ const posts = [
         "<p>Some people know what fuels them and lean into it. Others don’t, and that’s why their days swing between motion and stillness, energy and fatigue.</p>" +
         "<p>What’s your spark? What brings you back when life slows you down?</p>",
   date: "12 Jumada al-Awwal 1447 / 3 Nov 2025"
+},
+
+{
+  id: 23,
+  title: "When Effort Becomes Easy",
+  excerpt: "Consistency turns difficulty into ease — and with Allah’s help, effort becomes effortless.",
+  body: "<p>BISMILLAH.</p>" +
+        "<p>Have you ever seen someone do things so effortlessly that it feels like they’re superhuman?</p>" +
+        "<p>The reason behind that ease often lies in many factors, but one stands out above all: consistency.</p>" +
+        "<p>They’ve shown up every day, putting in hours of quiet effort until what was once difficult became second nature.</p>" +
+        "<p>The beautiful thing is that anyone can reach that level. All it takes is showing up daily, even when it’s boring, even when you don’t feel like it.</p>" +
+        "<p>To develop that mindset, start by figuring out what you truly want. And if you don’t know yet, do what fulfills you, especially what benefits your Muslim community. Through trying, reflecting, and adjusting, you’ll eventually find what you’re meant to do.</p>" +
+        "<p>Don’t forget du’a. It’s the greatest source of strength; effort alone isn’t enough without Allah’s help.</p>" +
+        "<p>As Muslims, our intentions and actions are always to please Allah ﷻ. So seek His help and do what benefits both you and the Ummah. Once Allah blesses your effort, showing up becomes effortless.</p>" +
+        "<p>May Allah grant us goodness in this world and the Hereafter.</p>",
+  date: "13 Jumada al-Awwal 1447 / 4 Nov 2025"
 }
+
 
 
 
@@ -311,6 +328,7 @@ const posts = [
   },
   */
 ];
+
 
 
 
