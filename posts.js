@@ -291,8 +291,8 @@ const posts = [
   date: "12 Jumada al-Awwal 1447 / 3 Nov 2025"
 },
 
-{
-  id: 23,
+  {
+    id: 23,
   title: "When Effort Becomes Easy",
   excerpt: "Consistency turns difficulty into ease — and with Allah’s help, effort becomes effortless.",
   body: "<p>BISMILLAH.</p>" +
@@ -340,6 +340,7 @@ const posts = [
   },
   */
 ];
+
 
 
 
