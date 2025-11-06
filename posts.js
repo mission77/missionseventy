@@ -305,10 +305,22 @@ const posts = [
         "<p>As Muslims, our intentions and actions are always to please Allah ﷻ. So seek His help and do what benefits both you and the Ummah. Once Allah blesses your effort, showing up becomes effortless.</p>" +
         "<p>May Allah grant us goodness in this world and the Hereafter.</p>",
   date: "13 Jumada al-Awwal 1447 / 4 Nov 2025"
+
+  
+},
+
+
+{
+  id: 24,
+  title: "Make the Qur’an Your Daily Companion",
+  excerpt: "The Qur’an brings ease to the heart and clarity to the mind — make it your companion every day.",
+  body: "<p>BISMILLAH.</p>" +
+        "<p>The Glorious Qur’an is blessed. Beginning and ending your day with it brings ease to the heart and clarity to the mind.</p>" +
+        "<p>At first, shaitan will discourage you from reading or listening. Ignore him. Let the Qur’an be your companion throughout the day.</p>" +
+        "<p>And don’t forget to reflect upon its verses and understand their meaning.</p>" +
+        "<p>May Allah make us among the people of the Qur’an.</p>",
+  date: "14 Jumada al-Awwal 1447 / 5 Nov 2025"
 }
-
-
-
 
   
 
@@ -328,6 +340,7 @@ const posts = [
   },
   */
 ];
+
 
 
 
