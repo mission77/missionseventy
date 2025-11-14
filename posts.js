@@ -353,9 +353,13 @@ const posts = [
         "<p>We need platforms that strengthen our iman, not ones filled with mockery of our Prophet ﷺ and the values we hold sacred. Yet some of us unknowingly help spread it further.</p>" +
         "<p>May Allah awaken our hearts and guide us to what pleases Him.</p>",
   date: "22 Jumada al-Awwal 1447 / 13 Nov 2025"
-},
+  },
+
+
+
   */
 ];
+
 
 
 
