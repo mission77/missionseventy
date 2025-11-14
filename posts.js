@@ -320,7 +320,22 @@ const posts = [
         "<p>And don’t forget to reflect upon its verses and understand their meaning.</p>" +
         "<p>May Allah make us among the people of the Qur’an.</p>",
   date: "14 Jumada al-Awwal 1447 / 5 Nov 2025"
-}
+},
+{
+  id: 25,
+  title: "The Question Most People Never Ask",
+  excerpt: "Every tap on social media carries weight — either a reward or a sin. Most people never pause to ask why they’re even there.",
+  body: "<p>BISMILLAH.</p>" +
+        "<p>Have you ever paused and asked yourself: Why am I on social media? Most people never do, and that’s where the damage begins.</p>" +
+        "<p>Social media is powerful. It can spread kheyr, reminders, knowledge and dawah that soften the heart. But the same platforms spread fitnah, immodesty and corruption just as quickly.</p>" +
+        "<p>Every tap matters. A like. A comment. A share. You carry its reward if it’s good and its sin if it’s harmful. Our nafs forgets that.</p>" +
+        "<p>If you see something evil, don’t interact. Mute it, hide it, avoid it. Never support content that disrespects Islam or spreads immodesty.</p>" +
+        "<p>I’ve seen harmful videos appear on my feed simply because someone I follow liked them. Imagine the chain reaction. One careless like exposes hundreds of people.</p>" +
+        "<p>And even worse, some Muslims casually share videos of women not dressed according to Islamic guidelines. Do we realize how many people we are sending that to?</p>" +
+        "<p>We need platforms that strengthen our iman, not ones filled with mockery of our Prophet ﷺ and the values we hold sacred. Yet some of us unknowingly help spread it further.</p>" +
+        "<p>May Allah awaken our hearts and guide us to what pleases Him.</p>",
+  date: "22 Jumada al-Awwal 1447 / 13 Nov 2025"
+  },
 
   
 
@@ -339,26 +354,12 @@ const posts = [
     date: "Day Month Year / Gregorian Date"
   },
 
-{
-  id: 25,
-  title: "The Question Most People Never Ask",
-  excerpt: "Every tap on social media carries weight — either a reward or a sin. Most people never pause to ask why they’re even there.",
-  body: "<p>BISMILLAH.</p>" +
-        "<p>Have you ever paused and asked yourself: Why am I on social media? Most people never do, and that’s where the damage begins.</p>" +
-        "<p>Social media is powerful. It can spread kheyr, reminders, knowledge and dawah that soften the heart. But the same platforms spread fitnah, immodesty and corruption just as quickly.</p>" +
-        "<p>Every tap matters. A like. A comment. A share. You carry its reward if it’s good and its sin if it’s harmful. Our nafs forgets that.</p>" +
-        "<p>If you see something evil, don’t interact. Mute it, hide it, avoid it. Never support content that disrespects Islam or spreads immodesty.</p>" +
-        "<p>I’ve seen harmful videos appear on my feed simply because someone I follow liked them. Imagine the chain reaction. One careless like exposes hundreds of people.</p>" +
-        "<p>And even worse, some Muslims casually share videos of women not dressed according to Islamic guidelines. Do we realize how many people we are sending that to?</p>" +
-        "<p>We need platforms that strengthen our iman, not ones filled with mockery of our Prophet ﷺ and the values we hold sacred. Yet some of us unknowingly help spread it further.</p>" +
-        "<p>May Allah awaken our hearts and guide us to what pleases Him.</p>",
-  date: "22 Jumada al-Awwal 1447 / 13 Nov 2025"
-  },
 
 
 
   */
 ];
+
 
 
 
