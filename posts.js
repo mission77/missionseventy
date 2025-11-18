@@ -321,7 +321,8 @@ const posts = [
         "<p>May Allah make us among the people of the Qur’an.</p>",
   date: "14 Jumada al-Awwal 1447 / 5 Nov 2025"
 },
-{
+
+  {
   id: 25,
   title: "The Question Most People Never Ask",
   excerpt: "Every tap on social media carries weight — either a reward or a sin. Most people never pause to ask why they’re even there.",
@@ -335,8 +336,8 @@ const posts = [
         "<p>We need platforms that strengthen our iman, not ones filled with mockery of our Prophet ﷺ and the values we hold sacred. Yet some of us unknowingly help spread it further.</p>" +
         "<p>May Allah awaken our hearts and guide us to what pleases Him.</p>",
   date: "22 Jumada al-Awwal 1447 / 13 Nov 2025"
+    },
 
-  },
   {
   id: 26,
   title: "Setting a Standard",
@@ -347,7 +348,9 @@ const posts = [
         "<p>If your daily Qur’an reading drops, if three weekly workouts become one, or if you complete fewer projects than your minimum, pause, ask why, and fix it quickly.</p>" +
         "<p>People with standards are rare. Those whose standards come from the Qur’an and Sunnah and who remain committed to them are rarer still.</p>",
   date: "27 Jumada al-Awwal 1447 / 18 Nov 2025"
- },
+},
+
+
 
   
 
@@ -371,6 +374,7 @@ const posts = [
 
   */
 ];
+
 
 
 
