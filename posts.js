@@ -347,8 +347,7 @@ const posts = [
         "<p>If your daily Qur’an reading drops, if three weekly workouts become one, or if you complete fewer projects than your minimum, pause, ask why, and fix it quickly.</p>" +
         "<p>People with standards are rare. Those whose standards come from the Qur’an and Sunnah and who remain committed to them are rarer still.</p>",
   date: "27 Jumada al-Awwal 1447 / 18 Nov 2025"
-}
-  },
+ },
 
   
 
@@ -372,6 +371,7 @@ const posts = [
 
   */
 ];
+
 
 
 
