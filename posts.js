@@ -335,6 +335,19 @@ const posts = [
         "<p>We need platforms that strengthen our iman, not ones filled with mockery of our Prophet ﷺ and the values we hold sacred. Yet some of us unknowingly help spread it further.</p>" +
         "<p>May Allah awaken our hearts and guide us to what pleases Him.</p>",
   date: "22 Jumada al-Awwal 1447 / 13 Nov 2025"
+
+  },
+  {
+  id: 26,
+  title: "Setting a Standard",
+  excerpt: "Your standard shapes your habits, actions, and who you become — especially when it’s grounded in Qur’an and Sunnah.",
+  body: "<p>BISMILLAH.</p>" +
+        "<p>In an age of distraction, corruption, and temptation, setting a standard for who you are and what you want from life is essential.</p>" +
+        "<p>Your standard becomes the measure of your input and output, shaping the quality of your habits and actions. When you notice yourself slipping below that standard, hold your nafs accountable and return to the disciplined version of yourself.</p>" +
+        "<p>If your daily Qur’an reading drops, if three weekly workouts become one, or if you complete fewer projects than your minimum, pause, ask why, and fix it quickly.</p>" +
+        "<p>People with standards are rare. Those whose standards come from the Qur’an and Sunnah and who remain committed to them are rarer still.</p>",
+  date: "27 Jumada al-Awwal 1447 / 18 Nov 2025"
+}
   },
 
   
@@ -359,6 +372,7 @@ const posts = [
 
   */
 ];
+
 
 
 
