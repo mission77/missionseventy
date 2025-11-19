@@ -9,17 +9,20 @@
   <!-- Open Graph Meta Tags for Social Sharing -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Mission Seventy — Making What Matters Work">
-  <meta property="og:description" content="Observations on faith, building, and finding solutions.">
+  <meta property="og:description" content="Observations on faith, building, and finding solutions. Read more on Mission Seventy.">
   <meta property="og:image" content="https://missionseventy.com/logoz.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://missionseventy.com">
   <meta property="og:site_name" content="Mission Seventy">
   
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mission Seventy — Making What Matters Work">
-  <meta name="twitter:description" content="Observations on faith, building, and finding solutions.">
+  <meta name="twitter:description" content="Observations on faith, building, and finding solutions. Read more on Mission Seventy.">
   <meta name="twitter:image" content="https://missionseventy.com/logoz.png">
   <meta name="twitter:creator" content="@missionseventy">
+  <meta name="twitter:site" content="@missionseventy">
   
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-D1KZK5NV5L"></script>
@@ -363,7 +366,7 @@
             <li>70-day tracking system with accountability built in</li>
             <li>Real examples from Mission Seventy posts</li>
           </ul>
-          <div style="margin-top: 24px;"><a href="https://missionseventy.gumroad.com/l/cpseyb" target="_blank" class="buy-btn">BUY NOW - $21</a></div>
+          <div style="margin-top: 24px;"><a href="https://gumroad.com/your-gumroad-username/the-seventy-system" target="_blank" class="buy-btn">BUY NOW - $21</a></div>
         </div>
         <div class="project-card">
           <h3>Nurayni.com</h3>
@@ -406,6 +409,41 @@
   <script src="posts.js"></script>
   
   <script>
+    // Post Scheduling Guide - Add to the top of your posts.js file as a comment:
+    /*
+    ============================================
+    HOW TO SCHEDULE POSTS
+    ============================================
+    
+    Your blog automatically publishes posts based on their DATE.
+    Posts only appear on their scheduled date or later.
+    
+    EXAMPLE:
+    - Add this post to posts.js TODAY with a FUTURE date
+    - It will NOT appear on your blog yet
+    - When that date arrives and someone visits, it will automatically appear!
+    
+    {
+      id: 21,
+      title: "My Future Post",
+      excerpt: "This post is scheduled for tomorrow",
+      body: "<p>Content here...</p>",
+      date: "15 Jumada al-Awwal 1447 / 15 Dec 2025"  ← FUTURE DATE
+    }
+    
+    DATES:
+    - Use the format: "Day Month Year / Gregorian Date"
+    - Example: "15 Jumada al-Awwal 1447 / 15 Dec 2025"
+    - The GREGORIAN DATE (after /) is what controls publishing
+    
+    TIPS:
+    ✓ Write posts in advance with future dates
+    ✓ They'll auto-publish on that date
+    ✓ No need to manually publish anything
+    ✓ Just refresh the page to see new posts
+    
+    ============================================
+    */
     const postsFeed = document.getElementById('postsFeed');
     const subscribeModal = document.getElementById('subscribeModal');
     const searchInput = document.getElementById('searchInput');
@@ -495,12 +533,26 @@
 
     function renderPosts(postsToRender = posts) {
       postsFeed.innerHTML = '';
-      // Sort posts by date (newest first)
-      const sortedPosts = [...postsToRender].sort((a, b) => {
+      // Sort posts by date (newest first) and filter only published posts
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      const sortedPosts = [...postsToRender].filter(post => {
+        // Extract the Gregorian date from the post date string
+        const dateStr = post.date.split(' / ')[1];
+        const postDate = new Date(dateStr);
+        postDate.setHours(0, 0, 0, 0);
+        return postDate <= today; // Only show posts from today or earlier
+      }).sort((a, b) => {
         const dateA = new Date(a.date.split(' / ')[1]);
         const dateB = new Date(b.date.split(' / ')[1]);
         return dateB - dateA;
       });
+      
+      if (sortedPosts.length === 0) {
+        postsFeed.innerHTML = '<p style="color: var(--text-muted); font-size: 16px; margin-top: 40px;">No posts published yet. Check back soon!</p>';
+        return;
+      }
       
       sortedPosts.forEach(post => {
         const item = document.createElement('div');
@@ -602,11 +654,12 @@
       document.getElementById('singlePostDate').textContent = post.date;
       document.getElementById('singlePostBody').innerHTML = post.body;
       
-      // Update meta tags for social sharing
+      // Update meta tags for social sharing with better formatting
+      const fullDescription = post.excerpt + "\n\nRead it on Mission Seventy";
       document.querySelector('meta[property="og:title"]').setAttribute('content', post.title);
-      document.querySelector('meta[property="og:description"]').setAttribute('content', post.excerpt);
+      document.querySelector('meta[property="og:description"]').setAttribute('content', fullDescription);
       document.querySelector('meta[name="twitter:title"]').setAttribute('content', post.title);
-      document.querySelector('meta[name="twitter:description"]').setAttribute('content', post.excerpt);
+      document.querySelector('meta[name="twitter:description"]').setAttribute('content', fullDescription);
       document.title = post.title + ' — Mission Seventy';
       
       // Update URL without page reload
@@ -843,21 +896,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
