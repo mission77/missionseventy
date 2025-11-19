@@ -406,9 +406,94 @@
   </div>
   
   <!-- Load posts from external file -->
-  <script src="posts.js"></script>
-  
   <script>
+    const posts = [
+      {
+        id: 26,
+        title: "Setting a Standard",
+        excerpt: "Your standard shapes your habits, actions, and who you become — especially when it's grounded in Qur'an and Sunnah. Hold yourself accountable to a higher measure.",
+        body: "<p>BISMILLAH.</p><p>In an age of distraction, corruption, and temptation, setting a standard for who you are and what you want from life is essential.</p><p>Your standard becomes the measure of your input and output, shaping the quality of your habits and actions. When you notice yourself slipping below that standard, hold your nafs accountable and return to the disciplined version of yourself.</p><p>If your daily Qur'an reading drops, if three weekly workouts become one, or if you complete fewer projects than your minimum, pause, ask why, and fix it quickly.</p><p>People with standards are rare. Those whose standards come from the Qur'an and Sunnah and who remain committed to them are rarer still.</p>",
+        date: "27 Jumada al-Awwal 1447 / 18 Nov 2025"
+      },
+      {
+        id: 25,
+        title: "The Question Most People Never Ask",
+        excerpt: "Every tap on social media carries weight — a reward or a sin. Before scrolling, ask yourself: Why am I here? What am I consuming?",
+        body: "<p>BISMILLAH.</p><p>Have you ever paused and asked yourself: Why am I on social media? Most people never do, and that's where the damage begins.</p><p>Social media is powerful. It can spread kheyr, reminders, knowledge and dawah that soften the heart. But the same platforms spread fitnah, immodesty and corruption just as quickly.</p><p>Every tap matters. A like. A comment. A share. You carry its reward if it's good and its sin if it's harmful. Our nafs forgets that.</p><p>May Allah awaken our hearts and guide us to what pleases Him.</p>",
+        date: "22 Jumada al-Awwal 1447 / 13 Nov 2025"
+      },
+      {
+        id: 24,
+        title: "Make the Qur'an Your Daily Companion",
+        excerpt: "Begin and end your day with the Qur'an. Let it be your companion, bringing ease to your heart and clarity to your mind.",
+        body: "<p>BISMILLAH.</p><p>The Glorious Qur'an is blessed. Beginning and ending your day with it brings ease to the heart and clarity to the mind.</p><p>At first, shaitan will discourage you from reading or listening. Ignore him. Let the Qur'an be your companion throughout the day.</p><p>And don't forget to reflect upon its verses and understand their meaning.</p><p>May Allah make us among the people of the Qur'an.</p>",
+        date: "14 Jumada al-Awwal 1447 / 5 Nov 2025"
+      },
+      {
+        id: 23,
+        title: "When Effort Becomes Easy",
+        excerpt: "Consistency turns difficulty into ease. Show up daily, seek Allah's help through du'a, and watch effort become effortless with His blessings.",
+        body: "<p>BISMILLAH.</p><p>Have you ever seen someone do things so effortlessly that it feels like they're superhuman?</p><p>The reason behind that ease often lies in many factors, but one stands out above all: consistency.</p><p>They've shown up every day, putting in hours of quiet effort until what was once difficult became second nature.</p><p>The beautiful thing is that anyone can reach that level. All it takes is showing up daily, even when it's boring, even when you don't feel like it.</p><p>May Allah grant us goodness in this world and the Hereafter.</p>",
+        date: "13 Jumada al-Awwal 1447 / 4 Nov 2025"
+      },
+      {
+        id: 22,
+        title: "The Spark Within",
+        excerpt: "Everyone has a spark — a hidden drive that awakens when motivation fades. Find yours. Mine is running. What's yours?",
+        body: "<p>BISMILLAH.</p><p>What if you were told that everyone has a spark, a hidden drive that awakens them when motivation fades?</p><p>Each person's spark is different. Some find it in writing, others in reading, and some through doing hard things. For me, it comes from running. Even after one mile, the fog clears. My body lightens. Tasks that felt heavy suddenly feel easy.</p><p>Some people know what fuels them and lean into it. Others don't, and that's why their days swing between motion and stillness, energy and fatigue.</p><p>What's your spark? What brings you back when life slows you down?</p>",
+        date: "12 Jumada al-Awwal 1447 / 3 Nov 2025"
+      },
+      {
+        id: 21,
+        title: "The Face That Welcomes",
+        excerpt: "A cheerful face is silent charity — it opens hearts before words do. Make others feel welcome before you speak.",
+        body: "<p>BISMILLAH.</p><p>What makes someone approachable at first sight? It's the warmth of their face: eager, open, smiling.</p><p>The opposite is just as true. Even if you needed something important from a person, one unwelcoming expression could make you hesitate and keep your distance.</p><p>In every setting, whether in business or teaching, it's important to make others feel at ease. A welcoming attitude can open hearts long before words do.</p><p>As our Prophet ﷺ said, \"Every good deed is charity. Verily, it is a good deed to meet your brother with a cheerful face.\"</p><p>May Allah bless us with good morals and hearts that shine through our faces.</p>",
+        date: "11 Jumada al-Awwal 1447 / 2 Nov 2025"
+      },
+      {
+        id: 20,
+        title: "Teaching the Nafs to Endure",
+        excerpt: "Patience is the discipline of the soul, tongue, and limbs. It's half of faith and the key to success in this life and the Hereafter.",
+        body: "<p>BISMILLAH.</p><p>Patience (Sabr) means, as Ibn al-Qayyim said, \"to restrain the soul from impatience, the tongue from complaint, and the limbs from inappropriate actions.\" (Madarij al-Salikin). It is said that patience is half of faith, as mentioned by Abdullah ibn Mas'ud. The Qur'an is filled with verses that praise the patient and show how Allah loves them. Patience is also a condition for success in the Hereafter.</p><p>In our day-to-day lives, we are tested in every way possible, and it is highly important to be conscious of how we face those tests. We might fail to be patient at times, but we need to pick ourselves up and continue practicing patience. We must resist all forms of things that go against what Allah wants for us.</p><p>It is challenging to practice patience, but that's how it has always been. The best of humans, the Prophets, were tested in the hardest ways. How can we think we will not go through some of what they went through?</p><p>Being patient is a habit that can be taught to the nafs (self). Over time, it becomes stronger, able to endure hard and seemingly impossible things that others cannot. May Allah help us practice patience and make us among the patient.</p>",
+        date: "10 Jumada al-Awwal 1447 / 1 Nov 2025"
+      },
+      {
+        id: 19,
+        title: "Boredom's gift",
+        excerpt: "Those boring moments aren't wasted time — they're when ideas and good thoughts pour in. Embrace boredom without your phone.",
+        body: "<p>BISMILLAH.</p><p>The people who succeed in this noisy environment are the ones who can restrain themselves and not be influenced by impulse scrolling all the time.</p><p>You will find people who even when eating food, they are watching a video (I used to be that way) instead of enjoying and putting the phone aside.</p><p>In my case, my excuse was sitting and eating is boring, and watching that video might help benefit few things.</p><p>What I found is that those boring moments are when ideas and good thoughts pour in.</p>",
+        date: "Ṣafar 23, 1447 / 17 August 2025"
+      },
+      {
+        id: 18,
+        title: "Your cart, their guns",
+        excerpt: "Our spending isn't neutral. Every purchase either stands with the oppressed or fuels the oppressor. Choose wisely where your money goes.",
+        body: "<p>BISMILLAH.</p><p>The genocide in Gaza is beyond words, each day, more innocent Muslims killed, more rubble, more grief. It has exposed hypocrites, cowardly Arab regimes, and the true face of the Zionist occupation.</p><p>What's worse is seeing Muslims still shopping at companies that have funded or aided this genocide. Two of them are ones we use daily:</p><p>●Walmart gave $1M to Magen David Adom.</p><p>●Amazon's AWS runs Project Nimbus for the Israeli government.</p><p>Our spending is not neutral. Every purchase either stands with the oppressed or fuels the oppressor.</p><p>And while Gaza bleeds, so do East Turkestan, Sudan, and Muslims in Myanmar. We must raise awareness for them all.</p><p>O Allah, grant victory to the oppressed, and Jannah to the martyrs.</p>",
+        date: "Ṣafar 20, 1447 / 14 August 2025"
+      },
+      {
+        id: 17,
+        title: "Who holds the keys",
+        excerpt: "Most large language models aren't in Muslim hands. We must build AI that respects privacy, protects data, and serves the Muslim community.",
+        body: "<p>Bismillah.</p><p>AI is a fascinating subject. I haven't spoken about it until now, even though I've been using it heavily and testing most of the top platforms.</p><p>It's incredibly useful, making complex things simple, like breaking down a difficult math problem or fixing a stubborn coding bug. But there's a part that worries me: how our data is used, and who truly controls it.</p><p>Muslims, it seems, are sleeping on this new era of AI. Yes, there are talented Muslim developers building amazing AI-powered tools, but most large language models (LLMs) are not in our hands.</p><p>We need to think bigger. We need to build LLMs that respect privacy, protect data, and make a real impact in the Muslim tech space.</p>",
+        date: "Ṣafar 18, 1447 / 12 August 2025"
+      },
+      {
+        id: 16,
+        title: "Guard the gates",
+        excerpt: "Every piece of content you consume shapes your iman. Guard your eyes, ears, and heart from what corrupts your faith and values.",
+        body: "<p>Bismillah.</p><p>Every piece of content consumed shapes the state of imaan. Allah says: And do not pursue that of which you have no knowledge. Indeed, the hearing, the sight and the heart - about all those [one] will be questioned.</p><p>When the day begins with Qur'an and beneficial reminders, the heart feels lighter and worship flows with ease. When heedlessness takes over and the mind is filled with distractions, the day feels heavy.</p><p>Feed the soul with khayr. Make it a habit to learn one thing about the deen every day. Guard the senses from harmful content. The Prophet ﷺ said: \"Whoever believes in Allah and the Last Day should speak good or remain silent.\" (Bukhari, Muslim)</p><p>The long-term solution is for Muslims to build spaces where the Qur'an is never placed alongside haram content.</p><p>May Allah guide us, protect from heedlessness, and keep us firm on the straight path.</p>",
+        date: "15 Safar, 1447 / 09 August 2025"
+      },
+      {
+        id: 1,
+        title: "The missing piece",
+        excerpt: "The best ideas don't come from thinking harder—they come from observing better and practicing the daily work of turning insights into writing.",
+        body: "<p>BISMILLAH.</p><p>Every good writer remembers their first success. Mine was primary school compositions. There's something powerful about discovering you can arrange words in ways that matter to other people. But talent without consistency is just potential.</p><p>The business world is full of smart people who could write, should write, but don't write. They're missing something crucial: the daily practice of turning observations into insights.</p><p>This blog is where I do that work. Not just business insights, but life insights. The small improvements that compound over time. Because the best ideas don't come from thinking harder. They come from observing better.</p>",
+        date: "29 Dhul Qadah 1446 / 27 May 2025"
+      }
+    ];
+  </script>
     // Post Scheduling Guide - Add to the top of your posts.js file as a comment:
     /*
     ============================================
@@ -907,3 +992,4 @@
   </script>
 </body>
 </html>
+
