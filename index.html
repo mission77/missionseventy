@@ -585,16 +585,20 @@
         item.querySelectorAll('.share-icon').forEach(btn => {
           btn.addEventListener('click', (e) => {
             e.preventDefault();
-            const postUrl = window.location.href;
-            const postTitle = encodeURIComponent(post.title);
+            const postUrl = window.location.origin + window.location.pathname + '?post=' + post.id;
+            const postTitle = post.title;
+            const postExcerpt = post.excerpt;
+            const shareText = `"${postTitle}"\n\n${postExcerpt}\n\nRead it on Mission Seventy`;
+            
             if (btn.classList.contains('share-fb')) {
               window.open(`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`, '_blank');
             } else if (btn.classList.contains('share-tw')) {
-              window.open(`https://twitter.com/intent/tweet?text=${postTitle}&url=${postUrl}`, '_blank');
+              window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(postUrl)}`, '_blank');
             } else if (btn.classList.contains('share-li')) {
-              window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${postUrl}`, '_blank');
+              window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`, '_blank');
             } else if (btn.classList.contains('share-copy')) {
-              navigator.clipboard.writeText(postUrl).then(() => alert('Link copied!'));
+              const fullShareText = `${shareText}\n\n${postUrl}`;
+              navigator.clipboard.writeText(fullShareText).then(() => alert('Post copied to clipboard!'));
             }
           });
         });
@@ -672,10 +676,12 @@
       const postUrl = window.location.origin + window.location.pathname + '?post=' + post.id;
       document.querySelector('meta[property="og:url"]').setAttribute('content', postUrl);
       
-      const postTitle = encodeURIComponent(post.title);
+      const shareText = `"${post.title}"\n\n${post.excerpt}\n\nRead it on Mission Seventy`;
+      const encodedShareText = encodeURIComponent(shareText);
+      
       document.getElementById('shareFacebook2').href = `https://www.facebook.com/sharer/sharer.php?u=${postUrl}`;
-      document.getElementById('shareTwitter2').href = `https://twitter.com/intent/tweet?text=${postTitle}&url=${postUrl}`;
-      document.getElementById('shareLinkedIn2').href = `https://www.linkedin.com/sharing/share-offsite/?url=${postUrl}`;
+      document.getElementById('shareTwitter2').href = `https://twitter.com/intent/tweet?text=${encodedShareText}&url=${encodeURIComponent(postUrl)}`;
+      document.getElementById('shareLinkedIn2').href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
     }
 
     function closeSinglePost() {
@@ -746,7 +752,12 @@
 
     document.getElementById('shareCopy2').addEventListener('click', (e) => {
       e.preventDefault();
-      navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
+      const post = posts.find(p => p.id === currentPostId);
+      if (post) {
+        const postUrl = window.location.origin + window.location.pathname + '?post=' + post.id;
+        const shareText = `"${post.title}"\n\n${post.excerpt}\n\nRead it on Mission Seventy\n\n${postUrl}`;
+        navigator.clipboard.writeText(shareText).then(() => alert('Post copied to clipboard!'));
+      }
     });
 
     document.getElementById('subscribeBtn').addEventListener('click', () => {
