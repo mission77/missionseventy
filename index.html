@@ -238,77 +238,258 @@
     #postsSection.active, #aboutSection.active, #projectsSection.active, #searchResultsPage.active { display: block; animation: fadeIn 0.4s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* --- RESPONSIVE MOBILE FIXES --- */
-    @media (max-width: 900px) {
-      body { flex-direction: column; }
-      .sidebar { 
-        width: 100%; height: auto; position: relative; padding: 25px 20px; 
-        border-right: none; border-bottom: 1px solid #333; 
-      }
-      .workspace { padding: 30px 20px; height: auto; background-image: none; }
-      
-      /* Tighter Mobile Typography */
-      .section-title { font-size: 28px; margin-bottom: 25px; letter-spacing: -1px; }
-      .entry-title { font-size: 20px; }
-      .entry-excerpt { font-size: 15px; }
-      .article-body { font-size: 17px; line-height: 1.7; }
-      .article-body p { margin-bottom: 20px; max-width: 100%; }
-      .mission-text p { font-size: 17px; line-height: 1.7; }
+    /* --- MOBILE HEADER --- */
+    .mobile-header {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--sidebar-bg);
+      z-index: 200;
+      padding: 15px 20px;
+      border-bottom: 2px solid var(--accent);
+    }
 
-      .brand { margin-bottom: 25px; justify-content: center; }
-      .nav-menu { 
-        flex-direction: row; justify-content: space-around; 
-        border-top: 1px solid #222; padding-top: 10px; margin-top: 20px;
+    .mobile-header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mobile-brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+    }
+
+    .mobile-brand-text h1 {
+      font-size: 12px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .mobile-date {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--accent);
+      background: #151515;
+      padding: 4px 8px;
+      border-radius: 3px;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: var(--sidebar-bg);
+      border-bottom: 1px solid #333;
+      padding: 10px 20px;
+      z-index: 199;
+    }
+
+    .mobile-nav.active {
+      display: flex;
+      gap: 5px;
+      justify-content: space-around;
+    }
+
+    .mobile-nav-item {
+      flex: 1;
+      padding: 12px 8px;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #777;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .mobile-nav-item.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .mobile-footer {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--sidebar-bg);
+      border-top: 1px solid #333;
+      padding: 15px 20px;
+      z-index: 199;
+    }
+
+    .mobile-socials {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 24px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    /* --- RESPONSIVE MOBILE LAYOUT --- */
+    @media (max-width: 900px) {
+      body { flex-direction: column; padding-top: 70px; padding-bottom: 65px; }
+      
+      .sidebar { display: none; }
+      
+      .mobile-header { display: block; }
+      .mobile-footer { display: block; }
+      
+      .workspace { 
+        padding: 20px 16px; 
+        height: auto; 
+        background-image: none;
+        overflow-y: visible;
       }
-      .nav-item { 
-        border: none; padding: 10px 5px; font-size: 10px; 
-        letter-spacing: 0.5px; border-bottom: none !important;
-      }
-      .nav-item.active { border: none; color: var(--accent); padding-left: 0; }
-      .nav-num { display: none; }
-      .focus-widget { display: none; }
-      .socials { justify-content: center; margin-top: 15px; }
       
       .top-bar { 
-        margin-bottom: 20px; gap: 15px; flex-direction: column; 
-        align-items: stretch; border-bottom: 1px solid var(--border);
+        margin-bottom: 25px; 
+        padding-bottom: 12px; 
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
       }
-      .hijri-display { 
-        order: -1; text-align: center; font-size: 11px; 
-        padding: 8px 12px; width: 100%;
-      }
+      
+      .hijri-display { display: none; }
+      
       .search-wrap { width: 100%; }
-      .search-wrap input { width: 100%; font-size: 13px; }
+      .search-wrap input { 
+        width: 100%; 
+        font-size: 13px; 
+        padding: 10px 0;
+      }
       .search-wrap input:focus { width: 100%; }
       
+      .section-title { 
+        font-size: 32px; 
+        margin-bottom: 20px; 
+        letter-spacing: -1px; 
+      }
+      
+      .log-entry { 
+        padding: 20px; 
+        margin-bottom: 18px;
+      }
+      .log-entry:hover { 
+        transform: translate(-1px, -1px); 
+        box-shadow: 4px 4px 0 var(--accent); 
+      }
+      
+      .entry-title { font-size: 20px; margin-bottom: 8px; }
+      .entry-excerpt { font-size: 15px; margin-bottom: 15px; }
+      .entry-footer { font-size: 10px; }
+      
       .system-card { 
-        grid-template-columns: 1fr; text-align: center; 
-        padding: 30px 20px; gap: 20px; 
+        grid-template-columns: 1fr; 
+        padding: 25px 20px; 
+        gap: 20px; 
+        text-align: center;
       }
       .system-info p { max-width: 100%; }
       .system-action { width: 100%; }
       .system-action a { display: block; width: 100%; }
       
-      .single-view { padding: 20px; box-shadow: none; border: none; }
-      .post-nav { flex-direction: column; margin-top: 20px; }
+      .single-view { 
+        padding: 20px 16px; 
+        border: none; 
+        box-shadow: none;
+      }
+      
+      .article-body { font-size: 17px; line-height: 1.7; }
+      .article-body p { margin-bottom: 20px; }
+      
+      .post-nav { 
+        flex-direction: column; 
+        gap: 12px;
+        margin-top: 20px;
+      }
       .nav-btn { padding: 15px; }
       .nav-btn.next { text-align: left; }
       
       .share-section { 
-        flex-direction: column; align-items: stretch; 
-        padding: 20px; gap: 15px;
+        flex-direction: column; 
+        padding: 20px; 
+        gap: 12px;
+        align-items: stretch;
       }
-      .share-buttons { justify-content: center; }
-      .copy-btn { flex: 1; }
+      .share-buttons { 
+        justify-content: center; 
+        flex-wrap: wrap;
+      }
+      .copy-btn { flex: 1; min-width: 120px; }
       
-      .log-entry { padding: 20px; }
-      .log-entry:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--accent); }
+      .mission-text p { font-size: 17px; line-height: 1.7; }
+      .mission-list { padding-left: 15px; }
+      .mission-list li { font-size: 16px; }
       
-      .project-grid { grid-template-columns: 1fr; }
+      .project-grid { 
+        grid-template-columns: 1fr; 
+        gap: 20px;
+      }
+      .project-card { padding: 25px 20px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Mobile Header -->
+  <header class="mobile-header">
+    <div class="mobile-header-content">
+      <div class="mobile-brand" id="mobileLogoClick">
+        <img src="logoz.png" alt="M70">
+        <div class="mobile-brand-text">
+          <h1>Mission Seventy</h1>
+        </div>
+      </div>
+      <div class="mobile-date" id="mobileDateDisplay"></div>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-item active" data-tab="blog">Logbook</div>
+    <div class="mobile-nav-item" data-tab="project">Shipments</div>
+    <div class="mobile-nav-item" data-tab="about">Mission</div>
+  </nav>
+
+  <!-- Mobile Footer with Socials -->
+  <footer class="mobile-footer">
+    <div class="mobile-socials">
+      <a href="https://www.instagram.com/missionseventy" target="_blank" class="social-icon" title="Instagram" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      
+      <a href="https://www.tiktok.com/@missionseventy" target="_blank" class="social-icon" title="TikTok" aria-label="TikTok">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+      </a>
+    </div>
+  </footer>
 
   <aside class="sidebar">
     <div>
@@ -469,32 +650,8 @@
 
   </main>
 
+  <script src="posts.js"></script>
   <script>
-    // Sample posts data - replace with your actual posts.js file
-    const posts = [
-      { 
-        id: 1, 
-        title: "The missing piece", 
-        excerpt: "Best ideas come from observing better.", 
-        body: "<p>Every good writer remembers their first success. Mine came from watching people struggle with something I'd already figured out.</p><p>The best content doesn't come from brainstorming sessions or content calendars. It comes from living, observing, and noticing what others miss.</p>", 
-        date: "29 Dhul Qadah 1446 / 27 May 2025" 
-      },
-      { 
-        id: 2, 
-        title: "Boredom's gift", 
-        excerpt: "Boring moments are when ideas pour in.", 
-        body: "<p>The people who succeed can restrain themselves from impulse scrolling.</p><p>Boredom isn't the enemy. It's the space where your mind finally has room to think. Every great idea I've had came during a walk, a shower, or staring at a wall.</p><p>We've outsourced our boredom to algorithms. Get it back.</p>", 
-        date: "Safar 23, 1447 / 17 August 2025" 
-      },
-      { 
-        id: 3, 
-        title: "Teaching the Nafs to Endure", 
-        excerpt: "Patience is the discipline of the soul.", 
-        body: "<p>Patience means to restrain the soul from impatience. To teach the nafs that not everything happens on its timeline.</p><p>This is jihad al-nafs—the struggle against the self. The hardest battle, because the enemy knows all your weaknesses.</p><p>But with each small victory, the nafs learns. It submits. And in that submission is peace.</p>", 
-        date: "10 Jumada al-Awwal 1447 / 1 Nov 2025" 
-      }
-    ];
-
     // --- APP CONTROLLER ---
     const app = {
       views: {
@@ -505,8 +662,10 @@
         search: document.getElementById('searchResultsPage')
       },
       nav: document.querySelectorAll('.nav-item'),
+      mobileNav: document.querySelectorAll('.mobile-nav-item'),
       feed: document.getElementById('postsFeed'),
       dateEl: document.getElementById('dateDisplay'),
+      mobileDateEl: document.getElementById('mobileDateDisplay'),
       currentPostIndex: -1
     };
 
@@ -518,35 +677,45 @@
       checkUrlParams();
     }
 
-    // --- DATE (Cross-browser Hijri support) ---
+    // --- HIJRI DATE (Proper format) ---
     function renderHijriDate() {
       try {
         const now = new Date();
-        const options = { 
-          day: 'numeric', 
-          month: 'long', 
-          year: 'numeric',
-          calendar: 'islamic-civil'
-        };
         
-        // Try modern approach first
-        const hijriFormatter = new Intl.DateTimeFormat('en-u-ca-islamic-civil', options);
-        const hijriDate = hijriFormatter.format(now);
+        // Create formatter for Islamic calendar
+        const formatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        });
         
-        // Check if it actually worked (some browsers fail silently)
-        if (hijriDate && !hijriDate.includes('NaN')) {
+        const hijriDate = formatter.format(now);
+        
+        // Desktop
+        if (app.dateEl) {
           app.dateEl.textContent = hijriDate.toUpperCase();
-        } else {
-          throw new Error('Hijri calendar not supported');
+        }
+        
+        // Mobile - shorter format
+        if (app.mobileDateEl) {
+          const shortFormatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+          });
+          app.mobileDateEl.textContent = shortFormatter.format(now).toUpperCase();
         }
       } catch (e) {
-        // Fallback: Show Gregorian with label
-        const gregorian = new Date().toLocaleDateString('en-US', { 
+        console.error('Hijri date error:', e);
+        // Fallback to Gregorian
+        const fallback = new Date().toLocaleDateString('en-US', { 
           year: 'numeric', 
           month: 'short', 
           day: 'numeric' 
-        });
-        app.dateEl.textContent = gregorian.toUpperCase();
+        }).toUpperCase();
+        
+        if (app.dateEl) app.dateEl.textContent = fallback;
+        if (app.mobileDateEl) app.mobileDateEl.textContent = fallback;
       }
     }
 
@@ -662,9 +831,13 @@
 
     function switchTab(tabName) {
       app.nav.forEach(el => el.classList.toggle('active', el.dataset.tab === tabName));
+      app.mobileNav.forEach(el => el.classList.toggle('active', el.dataset.tab === tabName));
       Object.values(app.views).forEach(el => el.classList.remove('active'));
       if(app.views[tabName]) app.views[tabName].classList.add('active');
       window.scrollTo(0,0);
+      
+      // Close mobile menu after selection
+      document.getElementById('mobileNav').classList.remove('active');
     }
 
     // --- SEARCH FUNCTIONALITY ---
@@ -705,8 +878,21 @@
 
     // --- LISTENERS ---
     function setupListeners() {
+      // Desktop nav
       app.nav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
+      
+      // Mobile nav
+      app.mobileNav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
+      
+      // Logo clicks
       document.getElementById('logoClick').addEventListener('click', () => switchTab('blog'));
+      document.getElementById('mobileLogoClick').addEventListener('click', () => switchTab('blog'));
+      
+      // Mobile menu toggle
+      document.getElementById('menuToggle').addEventListener('click', () => {
+        document.getElementById('mobileNav').classList.toggle('active');
+      });
+      
       document.getElementById('backBtn').addEventListener('click', closePost);
       document.getElementById('clearSearchBtn').addEventListener('click', () => switchTab('blog'));
       
