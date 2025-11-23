@@ -7,10 +7,12 @@
   <title>Mission Seventy — The Laboratory</title>
   
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Mission Seventy">
-  <meta property="og:description" content="Systems, Faith, and Software. The workshop of a builder.">
-  <meta property="og:image" content="https://missionseventy.com/logoz.png">
-  
+  <meta property="og:title" id="ogTitle" content="Mission Seventy — The Laboratory.">
+  <meta property="og:description" id="ogDescription" content="Systems, Faith, and Software. The workshop of a builder.">
+  <meta property="og:image" id="ogImage" content="https://missionseventy.com/logoz.png">
+  <meta property="og:url" id="ogUrl" content="https://missionseventy.com">
+  <meta name="twitter:card" content="summary_large_image">
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-D1KZK5NV5L"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -64,18 +66,12 @@
       flex-shrink: 0;
     }
 
-    .brand { display: flex; align-items: center; gap: 15px; margin-bottom: 50px; cursor: pointer; }
+    .brand { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; cursor: pointer; }
     .brand img { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--accent); }
     .brand-text h1 { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 1px; text-transform: uppercase; }
     
-    .status-badge {
-      font-family: var(--font-mono); font-size: 10px; color: var(--accent); margin-top: 5px;
-      display: flex; align-items: center; gap: 6px;
-    }
-    .status-dot {
-      width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
-      box-shadow: 0 0 5px var(--accent); animation: pulse 2s infinite;
-    }
+    .status-badge { font-family: var(--font-mono); font-size: 10px; color: var(--accent); margin-top: 5px; display: flex; align-items: center; gap: 6px; }
+    .status-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 5px var(--accent); animation: pulse 2s infinite; }
     @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
 
     .nav-menu { display: flex; flex-direction: column; gap: 2px; }
@@ -101,17 +97,23 @@
     .social-icon { color: #555; transition: 0.2s; }
     .social-icon:hover { color: var(--accent); }
     .social-icon svg { width: 18px; height: 18px; fill: currentColor; }
+    .socials-share {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
 
     /* --- WORKSPACE --- */
     .workspace {
-      flex: 1; height: 100vh; overflow-y: auto; padding: 60px 80px; position: relative;
+      flex: 1; height: 100vh; overflow-y: auto; padding: 40px 60px; position: relative; /* Reduced overall padding */
       background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
       background-size: 40px 40px; 
     }
 
     .top-bar {
       display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 70px; padding-bottom: 20px; border-bottom: 2px solid var(--text-main);
+      margin-bottom: 50px; padding-bottom: 15px; border-bottom: 2px solid var(--text-main); /* Reduced margin/padding */
     }
     .hijri-display {
       font-family: var(--font-mono); font-size: 13px; color: var(--text-main);
@@ -125,38 +127,38 @@
     .search-wrap input:focus { outline: none; border-bottom: 1px solid var(--text-main); width: 300px; }
     
     .section-title {
-      font-size: 56px; font-weight: 800; line-height: 1; margin-bottom: 50px;
+      font-size: 48px; font-weight: 800; line-height: 1; margin-bottom: 40px; /* Slightly smaller main header */
       letter-spacing: -1.5px; color: var(--text-main);
     }
 
     /* --- FEED STYLE --- */
     .log-entry {
-      background: var(--card-bg); border: 1px solid var(--text-main); padding: 35px;
-      margin-bottom: 30px; transition: transform 0.2s; cursor: pointer;
+      background: var(--card-bg); border: 1px solid var(--text-main); padding: 30px; /* Reduced padding */
+      margin-bottom: 25px; transition: transform 0.2s; cursor: pointer;
       box-shadow: 4px 4px 0 rgba(0,0,0,0.05); display: flex; flex-direction: column;
     }
     .log-entry:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--accent); }
 
-    .entry-title { font-size: 28px; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
-    .entry-excerpt { font-family: var(--font-body); font-size: 17px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+    .entry-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; } /* Smaller title in feed */
+    .entry-excerpt { font-family: var(--font-body); font-size: 16px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
     .entry-footer {
-      border-top: 1px solid #eee; padding-top: 15px; margin-top: auto;
+      border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px;
       font-family: var(--font-mono); font-size: 11px; color: #888; text-transform: uppercase;
       display: flex; justify-content: space-between;
     }
 
     /* --- PRODUCT CARD --- */
     .system-card {
-      background: #1a1a1a; color: #fff; padding: 45px; margin-bottom: 60px;
-      display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
+      background: #1a1a1a; color: #fff; padding: 40px; margin-bottom: 50px; /* Reduced padding/margin */
+      display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center;
       position: relative; overflow: hidden;
     }
     .system-card::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); }
-    .system-info h3 { font-size: 28px; margin-bottom: 12px; color: #fff; letter-spacing: -0.5px; }
-    .system-info p { color: #aaa; font-family: var(--font-body); font-size: 16px; line-height: 1.6; max-width: 550px; }
+    .system-info h3 { font-size: 26px; margin-bottom: 10px; color: #fff; letter-spacing: -0.5px; } /* Smaller product title */
+    .system-info p { color: #aaa; font-family: var(--font-body); font-size: 15px; line-height: 1.5; max-width: 550px; }
     .system-action a {
-      background: var(--accent); color: #000; text-decoration: none; padding: 16px 32px;
-      font-weight: 800; font-size: 13px; display: inline-block; text-transform: uppercase;
+      background: var(--accent); color: #000; text-decoration: none; padding: 14px 28px; /* Slightly smaller button */
+      font-weight: 800; font-size: 12px; display: inline-block; text-transform: uppercase;
       letter-spacing: 1px; transition: transform 0.2s;
     }
     .system-action a:hover { transform: scale(1.05); background: #fff; }
@@ -175,7 +177,7 @@
     
     .article-header { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
     .article-date { font-family: var(--font-mono); color: var(--accent); font-weight: 700; font-size: 12px; margin-top: 15px; display: block; }
-    .article-body { font-family: var(--font-body); font-size: 20px; line-height: 1.8; color: #222; }
+    .article-body { font-family: var(--font-body); font-size: 20px; line-height: 1.7; color: #222; }
     .article-body p { margin-bottom: 28px; max-width: 700px; } 
     .article-body h2 { font-size: 28px; margin-top: 40px; margin-bottom: 20px; font-family: var(--font-display); }
 
@@ -188,7 +190,6 @@
       flex: 1; padding: 20px; border: 1px solid #eee; cursor: pointer; transition: 0.2s;
       text-align: left;
     }
-    .nav-btn:hover { border-color: var(--accent); background: #fafafa; }
     .nav-btn.disabled { opacity: 0.3; pointer-events: none; border-color: #eee; }
     .nav-label { font-family: var(--font-mono); font-size: 10px; color: #888; text-transform: uppercase; display: block; margin-bottom: 5px; }
     .nav-title { font-size: 14px; font-weight: 700; color: #000; }
@@ -206,12 +207,6 @@
     .mission-list li { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #111; }
 
     .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
-    .project-card { background: #fff; border: 1px solid var(--border); padding: 35px; display: flex; flex-direction: column; justify-content: space-between; height: 100%; transition: 0.2s; }
-    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .project-card h3 { font-size: 24px; margin-bottom: 8px; }
-    .project-tag { font-family: var(--font-mono); font-size: 10px; color: #fff; background: #000; padding: 4px 8px; display: inline-block; margin-bottom: 15px; text-transform: uppercase; }
-    .project-desc { font-family: var(--font-body); font-size: 16px; color: var(--text-muted); margin-bottom: 25px; line-height: 1.5; }
-    .project-link { font-size: 12px; font-weight: 800; color: var(--text-main); text-decoration: none; border-bottom: 3px solid var(--accent); padding-bottom: 2px; align-self: flex-start; text-transform: uppercase; letter-spacing: 1px; }
 
     /* Sections Visibility */
     #postsSection, #aboutSection, #projectsSection, #searchResultsPage { display: none; }
@@ -222,11 +217,11 @@
     @media (max-width: 900px) {
       body { flex-direction: column; }
       .sidebar { width: 100%; height: auto; position: relative; padding: 25px 20px; border-right: none; border-bottom: 1px solid #333; }
-      .workspace { padding: 40px 20px; height: auto; background-image: none; }
+      .workspace { padding: 30px 20px; height: auto; background-image: none; } /* Slightly tighter mobile padding */
       
-      .section-title { font-size: 32px; margin-bottom: 30px; letter-spacing: -1px; }
-      .entry-title { font-size: 22px; }
-      .article-body { font-size: 17px; line-height: 1.6; }
+      .section-title { font-size: 30px; margin-bottom: 25px; letter-spacing: -1px; } /* Smaller mobile main header */
+      .entry-title { font-size: 20px; } /* Smaller mobile feed title */
+      .article-body { font-size: 16px; line-height: 1.6; } /* Perfect reading size for mobile */
       .article-body p { max-width: 100%; }
 
       .brand { margin-bottom: 25px; justify-content: center; }
@@ -235,7 +230,7 @@
       .nav-item.active { border: none; color: var(--accent); padding-left: 5px; }
       .nav-num, .focus-widget, .socials { display: none; }
       
-      .top-bar { margin-bottom: 40px; gap: 15px; flex-direction: column-reverse; align-items: flex-start; }
+      .top-bar { margin-bottom: 30px; gap: 10px; flex-direction: column-reverse; align-items: flex-start; }
       .search-wrap input { width: 100%; }
       .system-card { grid-template-columns: 1fr; text-align: center; padding: 30px 20px; gap: 20px; }
       .system-card::before { width: 100%; height: 4px; top: 0; left: 0; }
@@ -284,13 +279,11 @@
 
       <div class="socials">
         <a href="https://www.instagram.com/missionseventy" target="_blank" class="social-icon" title="Instagram">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
         
         <a href="YOUR_TIKTOK_LINK_HERE" target="_blank" class="social-icon" title="TikTok">
-          <svg viewBox="0 0 24 24">
-            <path d="M12.3 2.025c.3.176.4.385.4.594v1.272c.002.392-.047.887-.27 1.354-.223.467-.61.905-1.16 1.314v8.527c-.002.508-.415.92-.924.918-.508 0-.92-.412-.918-.92V6.632c-.553-.41-1.026-.848-1.25-1.314-.223-.467-.272-.962-.27-1.354V2.62c0-.21.1-.418.4-.594 2.822-1.645 5.86-2.025 8.4-2.025zm-2.003 14.88c-.002.508-.415.92-.924.918-.508 0-.92-.412-.918-.92v-7.23c-1.43.08-2.61.474-3.66 1.183-1.05.708-1.92 1.69-2.71 2.923v1.364c.002.508-.415.92-.924.918-.508 0-.92-.412-.918-.92v-1.365c.89-1.36 1.94-2.43 3.16-3.216 1.22-.785 2.65-1.18 4.29-1.18 1.63 0 3.06.395 4.29 1.18 1.22.785 2.27 1.856 3.16 3.216v7.23c-.002.508-.415.92-.924.918-.508 0-.92-.412-.918-.92v-8.527c-1.57-.49-3.22-.74-4.84-.74-1.62 0-3.27.25-4.84.74z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
         </a>
       </div>
     </div>
@@ -370,13 +363,16 @@
       <div class="back-link" id="backBtn"><span>← Return to Log</span></div>
       
       <h1 style="font-size: 38px; font-weight: 700; line-height: 1.2;" id="singlePostTitle"></h1>
-      <span class="article-date" id="singlePostDate"></span>
       
       <div class="article-body" id="singlePostBody" style="margin-top: 30px;"></div>
+
+      <div class="article-date-footer" id="singlePostDate"></div>
       
       <div class="share-section">
         <span class="share-label">Share this log</span>
-        <button class="copy-btn" id="shareCopyBtn">COPY LINK</button>
+        <div class="socials-share">
+            <button class="copy-btn" id="shareCopyBtn">COPY LINK</button>
+        </div>
       </div>
 
       <div class="post-nav">
@@ -416,36 +412,26 @@
       currentPostIndex: -1
     };
 
-    // --- INITIALIZATION ---
-    function init() {
-      renderHijriDate();
-      renderFeed();
-      setupListeners();
-      checkUrlParams();
-    }
-
-    // --- DATE (Simplified for Mobile Compatibility) ---
+    // --- DATE (FIXED for Consistency) ---
     function renderHijriDate() {
       try {
         const now = new Date();
-        const hijriFormatter = new Intl.DateTimeFormat('en-US-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' });
-        app.dateEl.textContent = hijriFormatter.format(now);
+        // This ensures consistent format across desktop and mobile
+        const hijriFormatter = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', calendar: 'islamic-civil' });
+        app.dateEl.textContent = hijriFormatter.format(now).toUpperCase();
       } catch (e) {
-        // Fallback if Islamic calendar not supported on device
-        app.dateEl.textContent = new Date().toLocaleDateString();
+        app.dateEl.textContent = 'DATE ERROR';
       }
     }
 
     // --- FEED RENDERER ---
     function renderFeed() {
-      if (typeof posts === 'undefined') {
-        app.feed.innerHTML = '<div class="log-entry">Data Source Not Found. Check posts.js</div>';
+      if (typeof posts === 'undefined' || posts.length === 0) {
+        app.feed.innerHTML = '<div class="log-entry" style="padding: 20px; border: 1px solid #ccc;">No logs found.</div>';
         return;
       }
 
       app.feed.innerHTML = '';
-      
-      // Sort by ID desc (newest first)
       const sortedPosts = [...posts].sort((a, b) => b.id - a.id);
 
       sortedPosts.forEach(post => {
@@ -465,27 +451,35 @@
     }
 
     // --- NAVIGATION ---
-    function switchTab(tabName) {
-      app.nav.forEach(el => el.classList.toggle('active', el.dataset.tab === tabName));
-      Object.values(app.views).forEach(el => el.classList.remove('active'));
-      if(app.views[tabName]) app.views[tabName].classList.add('active');
-      window.scrollTo(0,0);
+    function updateMetaTags(post) {
+      const postUrl = window.location.origin + window.location.pathname + '?post=' + post.id;
+      const postDescription = post.excerpt + " | Read more on Mission Seventy.";
+      
+      // Update Title (for browser tab and shares)
+      document.title = `${post.title} — Mission Seventy`;
+
+      // Update OG Tags (crucial for social sharing previews)
+      document.querySelector('#ogTitle').setAttribute('content', post.title);
+      document.querySelector('#ogDescription').setAttribute('content', postDescription);
+      document.querySelector('#ogUrl').setAttribute('content', postUrl);
+
+      // Note: OG tags generally need to be present and static when the social network first scrapes the page.
+      // For pure static JS sites like this, the browser updates are visible to social scrapers only if they execute JS.
     }
 
     function openPost(post) {
-      // UI Updates
       Object.values(app.views).forEach(el => el.classList.remove('active'));
       app.views.single.classList.add('active');
+      
       document.getElementById('singlePostTitle').textContent = post.title;
       document.getElementById('singlePostDate').textContent = post.date;
       document.getElementById('singlePostBody').innerHTML = post.body;
       
-      // Update URL & Title
-      document.title = `${post.title} — Mission Seventy`;
+      // Update URL State & Social Tags
       window.history.pushState({postId: post.id}, post.title, `?post=${post.id}`);
+      updateMetaTags(post);
       window.scrollTo(0,0);
 
-      // Setup Next/Prev Logic
       const index = posts.findIndex(p => p.id === post.id);
       app.currentPostIndex = index;
       updatePostNavigation(index);
@@ -495,7 +489,6 @@
       const prevBtn = document.getElementById('prevPostBtn');
       const nextBtn = document.getElementById('nextPostBtn');
       
-      // Newer Post (Previous in array, but "Newer" in time)
       if (currentIndex > 0) {
         const newer = posts[currentIndex - 1];
         prevBtn.classList.remove('disabled');
@@ -506,7 +499,6 @@
         document.getElementById('prevPostTitle').textContent = "None";
       }
 
-      // Older Post (Next in array)
       if (currentIndex < posts.length - 1) {
         const older = posts[currentIndex + 1];
         nextBtn.classList.remove('disabled');
@@ -520,34 +512,16 @@
 
     function closePost() {
       switchTab('blog');
+      // Reset document title and OG tags to homepage defaults
       document.title = 'Mission Seventy — The Laboratory';
+      document.querySelector('#ogTitle').setAttribute('content', "Mission Seventy — The Laboratory.");
+      document.querySelector('#ogDescription').setAttribute('content', "Systems, Faith, and Software. The workshop of a builder.");
       history.pushState(null, null, window.location.pathname); 
-    }
-
-    // --- SEARCH ---
-    function runSearch(query) {
-      if(!query) return;
-      Object.values(app.views).forEach(el => el.classList.remove('active'));
-      app.views.search.classList.add('active');
-      const results = posts.filter(p => p.title.toLowerCase().includes(query) || p.body.toLowerCase().includes(query));
-      const list = document.getElementById('searchResultsList');
-      list.innerHTML = '';
-      if(results.length === 0) {
-        list.innerHTML = '<p style="font-family:var(--font-mono)">No matches found.</p>';
-      } else {
-        results.forEach(post => {
-          const el = document.createElement('div');
-          el.className = 'log-entry';
-          el.innerHTML = `<h3 class="entry-title">${post.title}</h3><p class="entry-excerpt">${post.excerpt}</p>`;
-          el.onclick = () => openPost(post);
-          list.appendChild(el);
-        });
-      }
     }
 
     // --- LISTENERS ---
     function setupListeners() {
-      app.nav.forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+      app.nav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
       document.getElementById('logoClick').addEventListener('click', () => switchTab('blog'));
       document.getElementById('backBtn').addEventListener('click', closePost);
       document.getElementById('clearSearchBtn').addEventListener('click', () => switchTab('blog'));
@@ -555,10 +529,15 @@
       const searchInput = document.getElementById('searchInput');
       searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') runSearch(searchInput.value.toLowerCase()); });
 
-      // Share Button
+      // Share Button Logic
       document.getElementById('shareCopyBtn').addEventListener('click', () => {
         const url = window.location.href;
-        navigator.clipboard.writeText(url).then(() => {
+        const post = posts.find(p => p.id == (new URLSearchParams(window.location.search)).get('post'));
+        
+        let shareText = "Check out this log from Mission Seventy: ";
+        if (post) shareText = `${post.title}: ${post.excerpt}. Read more here: `;
+
+        navigator.clipboard.writeText(shareText + url).then(() => {
           const btn = document.getElementById('shareCopyBtn');
           const originalText = btn.textContent;
           btn.textContent = "COPIED!";
@@ -573,6 +552,8 @@
       if (postId && typeof posts !== 'undefined') {
         const post = posts.find(p => p.id == postId);
         if (post) openPost(post);
+      } else {
+          switchTab('blog'); // Default to blog view if no post ID
       }
     }
 
@@ -580,3 +561,4 @@
   </script>
 </body>
 </html>
+
