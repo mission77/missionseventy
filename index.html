@@ -7,12 +7,10 @@
   <title>Mission Seventy — The Laboratory</title>
   
   <meta property="og:type" content="website">
-  <meta property="og:title" id="ogTitle" content="Mission Seventy — The Laboratory.">
-  <meta property="og:description" id="ogDescription" content="Systems, Faith, and Software. The workshop of a builder.">
-  <meta property="og:image" id="ogImage" content="https://missionseventy.com/logoz.png">
-  <meta property="og:url" id="ogUrl" content="https://missionseventy.com">
-  <meta name="twitter:card" content="summary_large_image">
-
+  <meta property="og:title" content="Mission Seventy">
+  <meta property="og:description" content="Systems, Faith, and Software. The workshop of a builder.">
+  <meta property="og:image" content="https://missionseventy.com/logoz.png">
+  
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-D1KZK5NV5L"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -52,32 +50,50 @@
 
     /* --- SIDEBAR --- */
     .sidebar {
-      width: 300px; height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text);
-      position: sticky; top: 0; display: flex; flex-direction: column; justify-content: space-between;
-      padding: 40px 30px; z-index: 100; flex-shrink: 0;
+      width: 300px;
+      background: var(--sidebar-bg);
+      color: var(--sidebar-text);
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px 30px;
+      z-index: 100;
+      flex-shrink: 0;
     }
 
-    .brand { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; cursor: pointer; }
+    .brand { display: flex; align-items: center; gap: 15px; margin-bottom: 50px; cursor: pointer; }
     .brand img { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--accent); }
     .brand-text h1 { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 1px; text-transform: uppercase; }
     
-    .status-badge { font-family: var(--font-mono); font-size: 10px; color: var(--accent); margin-top: 5px; display: flex; align-items: center; gap: 6px; }
-    .status-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 5px var(--accent); animation: pulse 2s infinite; }
+    .status-badge {
+      font-family: var(--font-mono); font-size: 10px; color: var(--accent); margin-top: 5px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .status-dot {
+      width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
+      box-shadow: 0 0 5px var(--accent); animation: pulse 2s infinite;
+    }
     @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
 
     .nav-menu { display: flex; flex-direction: column; gap: 2px; }
     .nav-item {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 0; color: #777; font-size: 12px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase; border-bottom: 1px solid #222;
-      transition: all 0.2s; cursor: pointer;
+      padding: 16px 0; color: #777; text-decoration: none; font-size: 12px;
+      font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      border-bottom: 1px solid #222; transition: all 0.2s; cursor: pointer;
     }
     .nav-item:hover { color: #fff; padding-left: 5px; }
     .nav-item.active { color: var(--accent); border-bottom: 1px solid var(--accent); padding-left: 5px; }
     .nav-num { font-family: var(--font-mono); font-size: 10px; opacity: 0.4; }
 
     .sidebar-footer { margin-top: auto; }
-    .focus-widget { background: #151515; padding: 20px; border-radius: 4px; margin-bottom: 25px; border-left: 2px solid var(--accent); }
+    .focus-widget {
+      background: #151515; padding: 20px; border-radius: 4px; margin-bottom: 25px;
+      border-left: 2px solid var(--accent);
+    }
     .focus-label { font-size: 9px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-weight: 700; }
     .focus-value { font-size: 13px; color: #fff; line-height: 1.5; font-family: var(--font-body); font-style: italic; }
     
@@ -88,14 +104,14 @@
 
     /* --- WORKSPACE --- */
     .workspace {
-      flex: 1; height: 100vh; overflow-y: auto; padding: 40px 60px;
-      position: relative; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      flex: 1; height: 100vh; overflow-y: auto; padding: 60px 80px; position: relative;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
       background-size: 40px 40px; 
     }
 
     .top-bar {
       display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 30px; padding-bottom: 15px; border-bottom: 2px solid var(--text-main); /* Tighter top bar */
+      margin-bottom: 70px; padding-bottom: 20px; border-bottom: 2px solid var(--text-main);
     }
     .hijri-display {
       font-family: var(--font-mono); font-size: 13px; color: var(--text-main);
@@ -106,40 +122,41 @@
       padding: 8px 0; font-family: var(--font-mono); font-size: 14px; width: 250px;
       color: var(--text-main); transition: 0.2s;
     }
+    .search-wrap input:focus { outline: none; border-bottom: 1px solid var(--text-main); width: 300px; }
     
     .section-title {
-      font-size: 42px; font-weight: 800; line-height: 1; margin-bottom: 30px; /* Reduced main heading size for a cleaner look */
+      font-size: 56px; font-weight: 800; line-height: 1; margin-bottom: 50px;
       letter-spacing: -1.5px; color: var(--text-main);
     }
 
     /* --- FEED STYLE --- */
     .log-entry {
-      background: var(--card-bg); border: 1px solid var(--text-main); padding: 30px;
-      margin-bottom: 25px; transition: transform 0.2s; cursor: pointer;
+      background: var(--card-bg); border: 1px solid var(--text-main); padding: 35px;
+      margin-bottom: 30px; transition: transform 0.2s; cursor: pointer;
       box-shadow: 4px 4px 0 rgba(0,0,0,0.05); display: flex; flex-direction: column;
     }
     .log-entry:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--accent); }
 
-    .entry-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
-    .entry-excerpt { font-family: var(--font-body); font-size: 16px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+    .entry-title { font-size: 28px; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
+    .entry-excerpt { font-family: var(--font-body); font-size: 17px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
     .entry-footer {
-      border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px;
+      border-top: 1px solid #eee; padding-top: 15px; margin-top: auto;
       font-family: var(--font-mono); font-size: 11px; color: #888; text-transform: uppercase;
       display: flex; justify-content: space-between;
     }
 
     /* --- PRODUCT CARD --- */
     .system-card {
-      background: #1a1a1a; color: #fff; padding: 40px; margin-bottom: 40px;
-      display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center;
+      background: #1a1a1a; color: #fff; padding: 45px; margin-bottom: 60px;
+      display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
       position: relative; overflow: hidden;
     }
     .system-card::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); }
-    .system-info h3 { font-size: 26px; margin-bottom: 10px; color: #fff; letter-spacing: -0.5px; }
-    .system-info p { color: #aaa; font-family: var(--font-body); font-size: 15px; line-height: 1.5; max-width: 550px; }
+    .system-info h3 { font-size: 28px; margin-bottom: 12px; color: #fff; letter-spacing: -0.5px; }
+    .system-info p { color: #aaa; font-family: var(--font-body); font-size: 16px; line-height: 1.6; max-width: 550px; }
     .system-action a {
-      background: var(--accent); color: #000; text-decoration: none; padding: 14px 28px;
-      font-weight: 800; font-size: 12px; display: inline-block; text-transform: uppercase;
+      background: var(--accent); color: #000; text-decoration: none; padding: 16px 32px;
+      font-weight: 800; font-size: 13px; display: inline-block; text-transform: uppercase;
       letter-spacing: 1px; transition: transform 0.2s;
     }
     .system-action a:hover { transform: scale(1.05); background: #fff; }
@@ -154,15 +171,24 @@
       color: var(--text-muted); cursor: pointer; margin-bottom: 40px; 
       text-transform: uppercase; letter-spacing: 1px;
     }
+    .back-link:hover { color: var(--accent); }
     
-    .article-header { margin-bottom: 10px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
-    .article-date-footer { font-family: var(--font-mono); color: var(--accent); font-weight: 700; font-size: 12px; margin-top: 30px; padding-top: 10px; border-top: 1px solid #eee; display: block; text-align: right;}
-    .article-body { font-family: var(--font-body); font-size: 20px; line-height: 1.7; color: #222; }
+    .article-header { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
+    .article-date { font-family: var(--font-mono); color: var(--accent); font-weight: 700; font-size: 12px; margin-top: 15px; display: block; }
+    .article-body { font-family: var(--font-body); font-size: 20px; line-height: 1.8; color: #222; }
     .article-body p { margin-bottom: 28px; max-width: 700px; } 
+    .article-body h2 { font-size: 28px; margin-top: 40px; margin-bottom: 20px; font-family: var(--font-display); }
 
     /* Post Navigation (Next/Prev) */
-    .post-nav { margin-top: 30px; padding-top: 10px; display: flex; justify-content: space-between; gap: 20px; }
-    .nav-btn { flex: 1; padding: 20px; border: 1px solid #eee; cursor: pointer; transition: 0.2s; text-align: left; }
+    .post-nav { 
+      margin-top: 60px; border-top: 1px solid #eee; padding-top: 30px; 
+      display: flex; justify-content: space-between; gap: 20px;
+    }
+    .nav-btn {
+      flex: 1; padding: 20px; border: 1px solid #eee; cursor: pointer; transition: 0.2s;
+      text-align: left;
+    }
+    .nav-btn:hover { border-color: var(--accent); background: #fafafa; }
     .nav-btn.disabled { opacity: 0.3; pointer-events: none; border-color: #eee; }
     .nav-label { font-family: var(--font-mono); font-size: 10px; color: #888; text-transform: uppercase; display: block; margin-bottom: 5px; }
     .nav-title { font-size: 14px; font-weight: 700; color: #000; }
@@ -172,26 +198,49 @@
     .share-section { margin-top: 40px; padding: 20px; background: #fafafa; border-radius: 4px; display: flex; align-items: center; justify-content: space-between; }
     .share-label { font-family: var(--font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; }
     .copy-btn { background: #fff; border: 1px solid #ddd; padding: 8px 16px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* --- RESPONSIVE MOBILE FIXES --- */
+    /* --- ABOUT & PROJECTS --- */
+    .mission-text p { font-size: 20px; line-height: 1.7; margin-bottom: 25px; font-family: var(--font-body); color: #222; }
+    .mission-list { list-style: none; margin: 30px 0; border-left: 3px solid var(--accent); padding-left: 20px; }
+    .mission-list li { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #111; }
+
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+    .project-card { background: #fff; border: 1px solid var(--border); padding: 35px; display: flex; flex-direction: column; justify-content: space-between; height: 100%; transition: 0.2s; }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .project-card h3 { font-size: 24px; margin-bottom: 8px; }
+    .project-tag { font-family: var(--font-mono); font-size: 10px; color: #fff; background: #000; padding: 4px 8px; display: inline-block; margin-bottom: 15px; text-transform: uppercase; }
+    .project-desc { font-family: var(--font-body); font-size: 16px; color: var(--text-muted); margin-bottom: 25px; line-height: 1.5; }
+    .project-link { font-size: 12px; font-weight: 800; color: var(--text-main); text-decoration: none; border-bottom: 3px solid var(--accent); padding-bottom: 2px; align-self: flex-start; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Sections Visibility */
+    #postsSection, #aboutSection, #projectsSection, #searchResultsPage { display: none; }
+    #postsSection.active, #aboutSection.active, #projectsSection.active, #searchResultsPage.active { display: block; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* --- RESPONSIVE MOBILE --- */
     @media (max-width: 900px) {
       body { flex-direction: column; }
       .sidebar { width: 100%; height: auto; position: relative; padding: 25px 20px; border-right: none; border-bottom: 1px solid #333; }
-      .workspace { padding: 30px 20px; height: auto; background-image: none; }
+      .workspace { padding: 40px 20px; height: auto; background-image: none; }
       
-      .section-title { font-size: 30px; margin-bottom: 25px; letter-spacing: -1px; }
-      .entry-title { font-size: 20px; }
+      .section-title { font-size: 32px; margin-bottom: 30px; letter-spacing: -1px; }
+      .entry-title { font-size: 22px; }
+      .article-body { font-size: 17px; line-height: 1.6; }
+      .article-body p { max-width: 100%; }
+
+      .brand { margin-bottom: 25px; justify-content: center; }
+      .nav-menu { flex-direction: row; justify-content: space-around; border-top: 1px solid #222; padding-top: 10px; }
+      .nav-item { border: none; padding: 10px 5px; font-size: 11px; letter-spacing: 0.5px; }
+      .nav-item.active { border: none; color: var(--accent); padding-left: 5px; }
+      .nav-num, .focus-widget, .socials { display: none; }
       
-      /* KEY FIX: Mobile Readability */
-      .article-body { font-size: 16px; line-height: 1.7; } 
-      .article-body p { margin-bottom: 20px; }
-      .mission-text p { font-size: 17px; line-height: 1.7; }
-      
-      .top-bar { margin-bottom: 20px; gap: 10px; flex-direction: column-reverse; align-items: flex-start; }
+      .top-bar { margin-bottom: 40px; gap: 15px; flex-direction: column-reverse; align-items: flex-start; }
       .search-wrap input { width: 100%; }
       .system-card { grid-template-columns: 1fr; text-align: center; padding: 30px 20px; gap: 20px; }
+      .system-card::before { width: 100%; height: 4px; top: 0; left: 0; }
       .single-view { padding: 0; box-shadow: none; border: none; }
-      .post-nav { flex-direction: column; margin-top: 10px; }
+      .post-nav { flex-direction: column; }
       .nav-btn.next { text-align: left; }
     }
   </style>
@@ -239,7 +288,9 @@
         </a>
         
         <a href="YOUR_TIKTOK_LINK_HERE" target="_blank" class="social-icon" title="TikTok">
-          <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+          <svg viewBox="0 0 24 24">
+            <path d="M12.3 2.025c.3.176.4.385.4.594v1.272c.002.392-.047.887-.27 1.354-.223.467-.61.905-1.16 1.314v8.527c-.002.508-.415.92-.924.918-.508 0-.92-.412-.918-.92V6.632c-.553-.41-1.026-.848-1.25-1.314-.223-.467-.272-.962-.27-1.354V2.62c0-.21.1-.418.4-.594 2.822-1.645 5.86-2.025 8.4-2.025zm-2.003 14.88c-.002.508-.415.92-.924.918-.508 0-.92-.412-.918-.92v-7.23c-1.43.08-2.61.474-3.66 1.183-1.05.708-1.92 1.69-2.71 2.923v1.364c.002.508-.415.92-.924.918-.508 0-.92-.412-.918-.92v-1.365c.89-1.36 1.94-2.43 3.16-3.216 1.22-.785 2.65-1.18 4.29-1.18 1.63 0 3.06.395 4.29 1.18 1.22.785 2.27 1.856 3.16 3.216v7.23c-.002.508-.415.92-.924.918-.508 0-.92-.412-.918-.92v-8.527c-1.57-.49-3.22-.74-4.84-.74-1.62 0-3.27.25-4.84.74z"/>
+          </svg>
         </a>
       </div>
     </div>
@@ -319,16 +370,13 @@
       <div class="back-link" id="backBtn"><span>← Return to Log</span></div>
       
       <h1 style="font-size: 38px; font-weight: 700; line-height: 1.2;" id="singlePostTitle"></h1>
+      <span class="article-date" id="singlePostDate"></span>
       
       <div class="article-body" id="singlePostBody" style="margin-top: 30px;"></div>
-
-      <div class="article-date-footer" id="singlePostDate"></div>
       
       <div class="share-section">
         <span class="share-label">Share this log</span>
-        <div class="socials-share">
-            <button class="copy-btn" id="shareCopyBtn">COPY LINK</button>
-        </div>
+        <button class="copy-btn" id="shareCopyBtn">COPY LINK</button>
       </div>
 
       <div class="post-nav">
@@ -368,25 +416,36 @@
       currentPostIndex: -1
     };
 
-    // --- DATE (FIXED for Consistency) ---
+    // --- INITIALIZATION ---
+    function init() {
+      renderHijriDate();
+      renderFeed();
+      setupListeners();
+      checkUrlParams();
+    }
+
+    // --- DATE (Simplified for Mobile Compatibility) ---
     function renderHijriDate() {
       try {
         const now = new Date();
-        const hijriFormatter = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', calendar: 'islamic-civil' });
-        app.dateEl.textContent = hijriFormatter.format(now).toUpperCase();
+        const hijriFormatter = new Intl.DateTimeFormat('en-US-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' });
+        app.dateEl.textContent = hijriFormatter.format(now);
       } catch (e) {
-        app.dateEl.textContent = 'DATE ERROR';
+        // Fallback if Islamic calendar not supported on device
+        app.dateEl.textContent = new Date().toLocaleDateString();
       }
     }
 
     // --- FEED RENDERER ---
     function renderFeed() {
-      if (typeof posts === 'undefined' || posts.length === 0) {
-        app.feed.innerHTML = '<div class="log-entry" style="padding: 20px; border: 1px solid #ccc; font-family:var(--font-mono); color: var(--text-muted); text-align:center;">NO LOGS FOUND. PUBLISH YOUR FIRST POST.</div>';
+      if (typeof posts === 'undefined') {
+        app.feed.innerHTML = '<div class="log-entry">Data Source Not Found. Check posts.js</div>';
         return;
       }
 
       app.feed.innerHTML = '';
+      
+      // Sort by ID desc (newest first)
       const sortedPosts = [...posts].sort((a, b) => b.id - a.id);
 
       sortedPosts.forEach(post => {
@@ -405,31 +464,28 @@
       });
     }
 
-    // --- NAVIGATION & SHARING ---
-    function updateMetaTags(post) {
-      const postUrl = window.location.origin + window.location.pathname + '?post=' + post.id;
-      const postDescription = post.excerpt + " | Read more on Mission Seventy.";
-      
-      document.title = `${post.title} — Mission Seventy`;
-
-      // Update OG Tags (crucial for social sharing previews)
-      document.querySelector('#ogTitle').setAttribute('content', post.title);
-      document.querySelector('#ogDescription').setAttribute('content', postDescription);
-      document.querySelector('#ogUrl').setAttribute('content', postUrl);
+    // --- NAVIGATION ---
+    function switchTab(tabName) {
+      app.nav.forEach(el => el.classList.toggle('active', el.dataset.tab === tabName));
+      Object.values(app.views).forEach(el => el.classList.remove('active'));
+      if(app.views[tabName]) app.views[tabName].classList.add('active');
+      window.scrollTo(0,0);
     }
 
     function openPost(post) {
+      // UI Updates
       Object.values(app.views).forEach(el => el.classList.remove('active'));
       app.views.single.classList.add('active');
-      
       document.getElementById('singlePostTitle').textContent = post.title;
       document.getElementById('singlePostDate').textContent = post.date;
       document.getElementById('singlePostBody').innerHTML = post.body;
       
+      // Update URL & Title
+      document.title = `${post.title} — Mission Seventy`;
       window.history.pushState({postId: post.id}, post.title, `?post=${post.id}`);
-      updateMetaTags(post);
       window.scrollTo(0,0);
 
+      // Setup Next/Prev Logic
       const index = posts.findIndex(p => p.id === post.id);
       app.currentPostIndex = index;
       updatePostNavigation(index);
@@ -439,6 +495,7 @@
       const prevBtn = document.getElementById('prevPostBtn');
       const nextBtn = document.getElementById('nextPostBtn');
       
+      // Newer Post (Previous in array, but "Newer" in time)
       if (currentIndex > 0) {
         const newer = posts[currentIndex - 1];
         prevBtn.classList.remove('disabled');
@@ -449,6 +506,7 @@
         document.getElementById('prevPostTitle').textContent = "None";
       }
 
+      // Older Post (Next in array)
       if (currentIndex < posts.length - 1) {
         const older = posts[currentIndex + 1];
         nextBtn.classList.remove('disabled');
@@ -463,22 +521,33 @@
     function closePost() {
       switchTab('blog');
       document.title = 'Mission Seventy — The Laboratory';
-      document.querySelector('#ogTitle').setAttribute('content', "Mission Seventy — The Laboratory.");
-      document.querySelector('#ogDescription').setAttribute('content', "Systems, Faith, and Software. The workshop of a builder.");
       history.pushState(null, null, window.location.pathname); 
     }
 
-    function switchTab(tabName) {
-      app.nav.forEach(el => el.classList.toggle('active', el.dataset.tab === tabName));
+    // --- SEARCH ---
+    function runSearch(query) {
+      if(!query) return;
       Object.values(app.views).forEach(el => el.classList.remove('active'));
-      if(app.views[tabName]) app.views[tabName].classList.add('active');
-      window.scrollTo(0,0);
+      app.views.search.classList.add('active');
+      const results = posts.filter(p => p.title.toLowerCase().includes(query) || p.body.toLowerCase().includes(query));
+      const list = document.getElementById('searchResultsList');
+      list.innerHTML = '';
+      if(results.length === 0) {
+        list.innerHTML = '<p style="font-family:var(--font-mono)">No matches found.</p>';
+      } else {
+        results.forEach(post => {
+          const el = document.createElement('div');
+          el.className = 'log-entry';
+          el.innerHTML = `<h3 class="entry-title">${post.title}</h3><p class="entry-excerpt">${post.excerpt}</p>`;
+          el.onclick = () => openPost(post);
+          list.appendChild(el);
+        });
+      }
     }
-
 
     // --- LISTENERS ---
     function setupListeners() {
-      app.nav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
+      app.nav.forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
       document.getElementById('logoClick').addEventListener('click', () => switchTab('blog'));
       document.getElementById('backBtn').addEventListener('click', closePost);
       document.getElementById('clearSearchBtn').addEventListener('click', () => switchTab('blog'));
@@ -486,15 +555,10 @@
       const searchInput = document.getElementById('searchInput');
       searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') runSearch(searchInput.value.toLowerCase()); });
 
-      // Share Button Logic (Copy to Clipboard)
+      // Share Button
       document.getElementById('shareCopyBtn').addEventListener('click', () => {
         const url = window.location.href;
-        const post = posts.find(p => p.id == (new URLSearchParams(window.location.search)).get('post'));
-        
-        let shareText = "Check out this log from Mission Seventy: ";
-        if (post) shareText = `${post.title}: ${post.excerpt}. Read more here: `;
-
-        navigator.clipboard.writeText(shareText + url).then(() => {
+        navigator.clipboard.writeText(url).then(() => {
           const btn = document.getElementById('shareCopyBtn');
           const originalText = btn.textContent;
           btn.textContent = "COPIED!";
@@ -509,8 +573,6 @@
       if (postId && typeof posts !== 'undefined') {
         const post = posts.find(p => p.id == postId);
         if (post) openPost(post);
-      } else {
-          switchTab('blog');
       }
     }
 
