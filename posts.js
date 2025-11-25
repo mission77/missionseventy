@@ -343,6 +343,17 @@ const posts = [
         "<p>People with standards are rare. Those whose standards come from the Qur’an and Sunnah and who remain committed to them are rarer still.</p>",
   date: "27 Jumada al-Awwal 1447 / 18 Nov 2025"
  },
+  {
+  id: 27,
+  title: "The Power of a Single Thought",
+  excerpt: "A single thought carries great power. It can influence your mood, shape your actions and determine how your day unfolds.",
+  body: "<p>BISMILLAH.</p>" +
+        "<p>A single thought carries great power. It can influence your mood, shape your actions and determine how your day unfolds. Every action begins with a thought, whether you realize it or not.</p>" +
+        "<p>This is why it is important to examine your thoughts as they appear. Ask yourself if they are positive or negative, helpful or harmful. Build a conscious filter that helps you let go of destructive thoughts and keep the ones that improve you.</p>" +
+        "<p>Your environment also shapes your thinking. I often feel amazed by students of knowledge and scholars whose surroundings protect their hearts. We should try to place ourselves in environments that increase our productivity and keep us close to people of kheyr.</p>" +
+        "<p>A strong way to begin is by reading and writing materials that build Adab and good character. Have goals that direct your thoughts toward positive action. May Allah grant us beneficial knowledge and protect us from heedlessness.</p>",
+  date: "4 Jumada Al-Akhirah, 1447 / 25 Nov 2025"
+  },
 
   // TO ADD A NEW POST:
   // 1. Copy the format below
@@ -364,3 +375,4 @@ const posts = [
 
   */
 ];
+
