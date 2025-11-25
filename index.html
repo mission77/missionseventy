@@ -694,17 +694,21 @@
           
           // Check if it actually returned a valid Hijri date
           if (hijriDate && !hijriDate.toLowerCase().includes('january') && !hijriDate.includes('1970')) {
-            // Format: "4 Jumada Al-Akhirah, 1447"
-            const formattedDate = hijriDate.replace(/(\d+)\s+([A-Za-z\s-]+)\s+(\d+)/, '$1 $2, $3');
-            
             // Desktop
             if (app.dateEl) {
-              app.dateEl.textContent = formattedDate.toUpperCase();
+              app.dateEl.textContent = hijriDate.toUpperCase();
             }
             
-            // Mobile - same format
+            // Mobile - shorter format
             if (app.mobileDateEl) {
-              app.mobileDateEl.textContent = formattedDate.toUpperCase();
+              const shortFormatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+              });
+              const mobileDate = shortFormatter.format(now);
+              // Format: "4 Jumada al-Thani 1447 AH" or similar
+              app.mobileDateEl.textContent = mobileDate.replace('AH', '').trim().toUpperCase();
             }
             return; // Success!
           }
@@ -715,19 +719,25 @@
         // Manual Hijri calculation fallback (Umm al-Qura algorithm approximation)
         const hijriDate = gregorianToHijri(now);
         const hijriMonths = [
-          'Muharram', 'Safar', 'Rabi Al-Awwal', 'Rabi Al-Thani', 
-          'Jumada Al-Awwal', 'Jumada Al-Akhirah', 'Rajab', 'Shaban', 
+          'Muharram', 'Safar', 'Rabi al-Awwal', 'Rabi al-Thani', 
+          'Jumada al-Awwal', 'Jumada al-Thani', 'Rajab', 'Shaban', 
           'Ramadan', 'Shawwal', 'Dhul Qadah', 'Dhul Hijjah'
         ];
+        const hijriMonthsShort = [
+          'Muh', 'Saf', 'Rab I', 'Rab II', 
+          'Jum I', 'Jum II', 'Raj', 'Sha', 
+          'Ram', 'Shaw', 'Dhu Q', 'Dhu H'
+        ];
         
-        const fullDate = `${hijriDate.day} ${hijriMonths[hijriDate.month - 1]}, ${hijriDate.year}`;
+        const fullDate = `${hijriDate.day} ${hijriMonths[hijriDate.month - 1]} ${hijriDate.year}`;
+        const shortDate = `${hijriDate.day} ${hijriMonthsShort[hijriDate.month - 1]} ${hijriDate.year}`;
         
         if (app.dateEl) {
           app.dateEl.textContent = fullDate.toUpperCase();
         }
         
         if (app.mobileDateEl) {
-          app.mobileDateEl.textContent = fullDate.toUpperCase();
+          app.mobileDateEl.textContent = shortDate.toUpperCase();
         }
         
       } catch (e) {
@@ -735,12 +745,12 @@
         // Final fallback to Gregorian
         const fallback = new Date().toLocaleDateString('en-US', { 
           year: 'numeric', 
-          month: 'long', 
+          month: 'short', 
           day: 'numeric' 
-        });
+        }).toUpperCase();
         
-        if (app.dateEl) app.dateEl.textContent = fallback.toUpperCase();
-        if (app.mobileDateEl) app.mobileDateEl.textContent = fallback.toUpperCase();
+        if (app.dateEl) app.dateEl.textContent = fallback;
+        if (app.mobileDateEl) app.mobileDateEl.textContent = fallback;
       }
     }
 
