@@ -354,6 +354,17 @@ const posts = [
         "<p>A strong way to begin is by reading and writing materials that build Adab and good character. Have goals that direct your thoughts toward positive action. May Allah grant us beneficial knowledge and protect us from heedlessness.</p>",
   date: "4 Jumada Al-Akhirah, 1447 / 25 Nov 2025"
   },
+  {
+  id: 27,
+  title: "The Small Things Reveal Us",
+  excerpt: "One thing I’ve observed is that people care selectively. They care in some areas and completely neglect others.",
+  body: "<p>BISMILLAH.</p>" +
+        "<p>One thing I’ve observed is that people care selectively. They care in some areas and completely neglect others. That may be normal, but not caring about things that matter, things that affect the people around you is a sign of heedlessness.</p>" +
+        "<p>You’ll see someone leave their trash behind, or worse, enter a clean place and make it worse. And I always wonder: why is that the case?</p>" +
+        "<p>I’ve come to realize that they simply don’t care enough. That one word care is what I’m highlighting. These small examples reveal a person’s level of concern.</p>" +
+        "<p>Caring improves one’s life in every way and affects all other parts of it. Start caring about the things that affect you, your environment, and the people around you.</p>",
+  date: " 7 Jumada Al-Akhirah, 1447 / 28 Nov 2025"
+  },
 
   // TO ADD A NEW POST:
   // 1. Copy the format below
@@ -375,4 +386,5 @@ const posts = [
 
   */
 ];
+
 
