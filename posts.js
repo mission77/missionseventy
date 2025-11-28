@@ -355,7 +355,7 @@ const posts = [
   date: "4 Jumada Al-Akhirah, 1447 / 25 Nov 2025"
   },
   {
-  id: 27,
+  id: 28,
   title: "The Small Things Reveal Us",
   excerpt: "One thing I’ve observed is that people care selectively. They care in some areas and completely neglect others.",
   body: "<p>BISMILLAH.</p>" +
@@ -386,5 +386,6 @@ const posts = [
 
   */
 ];
+
 
 
