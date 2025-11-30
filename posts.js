@@ -365,6 +365,15 @@ const posts = [
         "<p>Caring improves one’s life in every way and affects all other parts of it. Start caring about the things that affect you, your environment, and the people around you.</p>",
   date: " 7 Jumada Al-Akhirah, 1447 / 28 Nov 2025"
   },
+  {
+  id: 29,
+  title: "Momentum Makes the Difference",
+  excerpt: "Maintaining momentum is not easy, but it becomes possible when your goals and targets are clear.",
+  body: "<p>BISMILLAH.</p>" +
+        "<p>Maintaining momentum is not easy, but it becomes possible when your goals and targets are clear. Momentum keeps you productive and effective in your daily tasks, helping you move toward your desired destination.</p>" +
+        "<p>Not everyone can sustain it consistently. What matters is the ability to improvise, adjust, and learn from every pause that occurs.</p>",
+  date: "9 Jumada Al-Akhirah, 1447 / 30 Nov 2025"
+  }
 
   // TO ADD A NEW POST:
   // 1. Copy the format below
@@ -386,6 +395,7 @@ const posts = [
 
   */
 ];
+
 
 
 
