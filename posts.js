@@ -397,7 +397,7 @@ const posts = [
         "<p>The solution lies in seeking Islamic knowledge and certainty, balancing our time online, taking benefit, then shutting it off when done. When I say shut the gate, I mean it literally. Turn off the internet. Be present with people and your environment. That is how we remain conscious in an age of mental destruction.</p>" +
         "<p>May Allah protect us from this fitnah and place barakah in our lives.</p>",
   date: "23 Jumada Al-Akhirah, 1447 / 14 Dec 2025"
- },
+ }
 
 Send the next one.
 
@@ -422,6 +422,7 @@ Send the next one.
 
   */
 ];
+
 
 
 
