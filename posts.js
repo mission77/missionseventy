@@ -3,20 +3,6 @@ const posts = [
   // IMPORTANT: Give each post a unique sequential ID
   
   {
-    id: 31,
-    title: "Close the Gate",
-    excerpt: "There is a gate we often forget to close, and we are heedless about it.",
-    body: "<p>BISMILLAH.</p>" +
-          "<p>There is a gate we often forget to close, and we are heedless about it. This gate opens to both good and evil. It is not physical, but virtual. It is the internet. Many of us have become so consumed by it that life without it feels abnormal.</p>" +
-          "<p>In both the short and long term, excessive consumption weakens focus and turns a person into a full time consumer instead of someone productive. I have observed this in myself. On days when I am constantly online and posting, life begins to feel unreal.</p>" +
-          "<p>These devices are engineered to shape how people think, act, and live, until life becomes reduced to screens and endless scrolling. Privacy is eroded, and for Muslims, faith itself can be affected when doubts are planted by shaitan and those who aid him, especially among those with limited Islamic knowledge.</p>" +
-          "<p>This is why Muslim owned platforms are important. Until then, we must be cautious about what we watch and who we follow.</p>" +
-          "<p>The solution lies in seeking Islamic knowledge and certainty, balancing our time online, taking benefit, then shutting it off when done. When I say shut the gate, I mean it literally. Turn off the internet. Be present with people and your environment. That is how we remain conscious in an age of mental destruction.</p>" +
-          "<p>May Allah protect us from this fitnah and place barakah in our lives.</p>",
-    date: "23 Jumada Al-Akhirah, 1447 / 14 Dec 2025"
-  },
-
-  {
     id: 30,
     title: "The Hidden Illness of the Heart",
     excerpt: "Imam Ibn al-Qayyim رحمه الله writes: \"Sometimes the heart is affected severely by illness, but its possessor does not know because he is busy in other things.",
@@ -404,6 +390,7 @@ const posts = [
     date: "29 Dhul Qadah 1446 / 27 May 2025"
   }
 ];
+
 
 
 
