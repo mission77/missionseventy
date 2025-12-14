@@ -398,6 +398,7 @@ const posts = [
         "<p>May Allah protect us from this fitnah and place barakah in our lives.</p>",
   date: "23 Jumada Al-Akhirah, 1447 / 14 Dec 2025"
  }
+];
 
 Send the next one.
 
@@ -422,6 +423,7 @@ Send the next one.
 
   */
 ];
+
 
 
 
