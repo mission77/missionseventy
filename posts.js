@@ -385,8 +385,7 @@ const posts = [
         "<p>Imam Ibn al-Qayyim, from “Supporting the Distressed Against the Tricks of Satan”</p>",
   date: "12 Jumada Al-Akhirah, 1447 / 3 Dec 2025"
  },
-
-{
+  {
   id: 31,
   title: "Close the Gate",
   excerpt: "There is a gate we often forget to close, and we are heedless about it.",
@@ -398,7 +397,7 @@ const posts = [
         "<p>The solution lies in seeking Islamic knowledge and certainty, balancing our time online, taking benefit, then shutting it off when done. When I say shut the gate, I mean it literally. Turn off the internet. Be present with people and your environment. That is how we remain conscious in an age of mental destruction.</p>" +
         "<p>May Allah protect us from this fitnah and place barakah in our lives.</p>",
   date: "23 Jumada Al-Akhirah, 1447 / 14 Dec 2025"
-}
+ },
 
 Send the next one.
 
@@ -423,6 +422,7 @@ Send the next one.
 
   */
 ];
+
 
 
 
