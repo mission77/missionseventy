@@ -384,7 +384,25 @@ const posts = [
         "<p>He may prepare himself to endure but his intention fades because of the lack of knowledge, understanding and power of patience. He is like a man who takes a perilous path which leads to complete security. He is aware that if he remains steadfast, the fear will go away and safety will follow. He is in need of firm patience and strong belief in his future. If his patience and belief are shaken, he will return to the path and will not be able to stand its hardship especially if he has no companion and feels lonely and starts saying: 'Where have the people gone? How can I find them to follow them?' This is the condition of most people. The sincere and intelligent person is not scared of the lack of companionship because his heart realises the company of the pious party. They are those whom Allah has blessed: the messengers, the truthful, the martyrs and the righteous. What excellent companions they are! (4:69)\"</p>" +
         "<p>Imam Ibn al-Qayyim, from “Supporting the Distressed Against the Tricks of Satan”</p>",
   date: "12 Jumada Al-Akhirah, 1447 / 3 Dec 2025"
+ },
+
+{
+  id: 31,
+  title: "Close the Gate",
+  excerpt: "There is a gate we often forget to close, and we are heedless about it.",
+  body: "<p>BISMILLAH.</p>" +
+        "<p>There is a gate we often forget to close, and we are heedless about it. This gate opens to both good and evil. It is not physical, but virtual. It is the internet. Many of us have become so consumed by it that life without it feels abnormal.</p>" +
+        "<p>In both the short and long term, excessive consumption weakens focus and turns a person into a full time consumer instead of someone productive. I have observed this in myself. On days when I am constantly online and posting, life begins to feel unreal.</p>" +
+        "<p>These devices are engineered to shape how people think, act, and live, until life becomes reduced to screens and endless scrolling. Privacy is eroded, and for Muslims, faith itself can be affected when doubts are planted by shaitan and those who aid him, especially among those with limited Islamic knowledge.</p>" +
+        "<p>This is why Muslim owned platforms are important. Until then, we must be cautious about what we watch and who we follow.</p>" +
+        "<p>The solution lies in seeking Islamic knowledge and certainty, balancing our time online, taking benefit, then shutting it off when done. When I say shut the gate, I mean it literally. Turn off the internet. Be present with people and your environment. That is how we remain conscious in an age of mental destruction.</p>" +
+        "<p>May Allah protect us from this fitnah and place barakah in our lives.</p>",
+  date: "23 Jumada Al-Akhirah, 1447 / 14 Dec 2025"
 }
+
+Send the next one.
+
+
   // TO ADD A NEW POST:
   // 1. Copy the format below
   // 2. Increment the id by 1 from the post above
@@ -405,6 +423,7 @@ const posts = [
 
   */
 ];
+
 
 
 
