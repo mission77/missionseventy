@@ -1,4 +1,5 @@
-const posts = [
+window.posts = [
+
   {
    id: 31,
     title: "Close the Gate",
@@ -401,6 +402,7 @@ const posts = [
     date: "29 Dhul Qadah 1446 / 27 May 2025"
   }
 ];
+
 
 
 
