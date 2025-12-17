@@ -622,166 +622,381 @@
 
     </main>
 
-<!-- LOAD POSTS DATA FIRST -->
-<script src="posts.js"></script>
+  <script src="posts.js"></script>
 
-<!-- MAIN APPLICATION SCRIPT -->
-<script>
-// ===== APP INITIALIZATION =====
-const app = {
-  views: {
-    blog: document.getElementById('postsSection'),
-    project: document.getElementById('projectsSection'),
-    about: document.getElementById('aboutSection'),
-    single: document.getElementById('singlePostView'),
-    search: document.getElementById('searchResultsPage')
-  },
-  nav: document.querySelectorAll('.nav-item'),
-  mobileNav: document.querySelectorAll('.mobile-nav-item'),
-  feed: document.getElementById('postsFeed'),
-  dateEl: document.getElementById('dateDisplay'),
-  mobileDateEl: document.getElementById('mobileDateDisplay'),
-  currentPostIndex: -1
-};
+  <script>
+    // --- APP CONTROLLER ---
+    // Consolidated into a single source of truth
+    const app = {
+      views: {
+        blog: document.getElementById('postsSection'),
+        project: document.getElementById('projectsSection'),
+        about: document.getElementById('aboutSection'),
+        single: document.getElementById('singlePostView'),
+        search: document.getElementById('searchResultsPage')
+      },
+      nav: document.querySelectorAll('.nav-item'),
+      mobileNav: document.querySelectorAll('.mobile-nav-item'),
+      feed: document.getElementById('postsFeed'),
+      dateEl: document.getElementById('dateDisplay'),
+      mobileDateEl: document.getElementById('mobileDateDisplay'), // Kept from your first snippet
+      currentPostIndex: -1
+    };
 
-function init() {
-  renderHijriDate();
-  renderFeed();
-  setupListeners();
-  checkUrlParams();
-}
+    // ===== APP INITIALIZATION =====
+    function init() {
+      // Ensure 'posts' variable from posts.js is loaded
+      if (typeof posts === 'undefined') {
+        console.error('CRITICAL: posts.js not loaded or "posts" array missing.');
+        app.feed.innerHTML = '<div class="log-entry" style="text-align:center;">ERROR: Data not found.</div>';
+        return;
+      }
 
-/* ===================== HIJRI DATE ===================== */
-function renderHijriDate() {
-  try {
-    const now = new Date();
-    const formatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    });
-
-    const hijriDate = formatter.format(now);
-    if (app.dateEl) app.dateEl.textContent = hijriDate.toUpperCase();
-  } catch (e) {
-    const fallback = new Date().toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    }).toUpperCase();
-    if (app.dateEl) app.dateEl.textContent = fallback;
-  }
-}
-
-/* ===================== FEED ===================== */
-function renderFeed() {
-  if (!Array.isArray(posts) || posts.length === 0) {
-    app.feed.innerHTML =
-      '<div class="log-entry" style="text-align:center;">NO LOGS FOUND.</div>';
-    return;
-  }
-
-  app.feed.innerHTML = '';
-  [...posts].sort((a, b) => b.id - a.id).forEach(post => {
-    const el = document.createElement('div');
-    el.className = 'log-entry';
-    el.innerHTML = `
-      <h3 class="entry-title">${post.title}</h3>
-      <div class="entry-excerpt">${post.excerpt}</div>
-      <div class="entry-footer">
-        <div>LOG #${String(post.id).padStart(3, '0')}</div>
-        <div>${post.date.split(' / ')[0]}</div>
-      </div>
-    `;
-    el.onclick = () => openPost(post);
-    app.feed.appendChild(el);
-  });
-}
-
-/* ===================== POSTS ===================== */
-function openPost(post) {
-  Object.values(app.views).forEach(v => v.classList.remove('active'));
-  app.views.single.classList.add('active');
-
-  document.getElementById('singlePostTitle').textContent = post.title;
-  document.getElementById('singlePostDate').textContent = post.date;
-  document.getElementById('singlePostBody').innerHTML = post.body;
-
-  history.pushState({ postId: post.id }, post.title, `?post=${post.id}`);
-  window.scrollTo(0, 0);
-}
-
-/* ===================== NAVIGATION ===================== */
-function switchTab(tab) {
-  app.nav.forEach(el => el.classList.toggle('active', el.dataset.tab === tab));
-  app.mobileNav.forEach(el => el.classList.toggle('active', el.dataset.tab === tab));
-  Object.values(app.views).forEach(v => v.classList.remove('active'));
-  app.views[tab].classList.add('active');
-}
-
-/* ===================== SEARCH ===================== */
-function runSearch(query) {
-  if (!query) return;
-  const results = posts.filter(p =>
-    p.title.toLowerCase().includes(query) ||
-    p.excerpt.toLowerCase().includes(query) ||
-    p.body.toLowerCase().includes(query)
-  );
-
-  const list = document.getElementById('searchResultsList');
-  list.innerHTML = '';
-  results.forEach(post => {
-    const el = document.createElement('div');
-    el.className = 'log-entry';
-    el.innerHTML = `<h3>${post.title}</h3><div>${post.excerpt}</div>`;
-    el.onclick = () => openPost(post);
-    list.appendChild(el);
-  });
-
-  Object.values(app.views).forEach(v => v.classList.remove('active'));
-  app.views.search.classList.add('active');
-}
-
-/* ===================== LISTENERS ===================== */
-function setupListeners() {
-  app.nav.forEach(btn =>
-    btn.addEventListener('click', () => switchTab(btn.dataset.tab))
-  );
-
-  document.getElementById('logoClick')?.addEventListener('click', () => switchTab('blog'));
-
-  document.getElementById('searchInput')?.addEventListener('keypress', e => {
-    if (e.key === 'Enter') {
-      runSearch(e.target.value.toLowerCase());
-      e.target.value = '';
+      renderHijriDate();
+      renderFeed();
+      setupListeners();
+      checkUrlParams();
     }
-  });
 
-  window.addEventListener('popstate', checkUrlParams);
-}
+    function renderHijriDate() {
+      try {
+        const now = new Date();
+        let finalDateString = "";
 
-/* ===================== URL ===================== */
-function checkUrlParams() {
-  const postId = new URLSearchParams(window.location.search).get('post');
-  if (!postId) return switchTab('blog');
+        // 1. Try Native Intl Support
+        try {
+          const formatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          });
+          
+          const hijriDate = formatter.format(now);
+          
+          // Validate result (some browsers fallback to Gregorian silently)
+          if (hijriDate && !hijriDate.toLowerCase().includes('january') && !hijriDate.includes('1970')) {
+            finalDateString = hijriDate.toUpperCase();
+          } else {
+            throw new Error('Intl fallback detected');
+          }
+        } catch (e) {
+          // 2. Manual Fallback
+          console.log('Intl Hijri not supported, using manual calculation');
+          const hijriDate = gregorianToHijri(now);
+          const hijriMonths = [
+            'Muharram', 'Safar', 'Rabi al-Awwal', 'Rabi al-Thani', 
+            'Jumada al-Awwal', 'Jumada al-Thani', 'Rajab', 'Shaban', 
+            'Ramadan', 'Shawwal', 'Dhul Qadah', 'Dhul Hijjah'
+          ];
+          finalDateString = `${hijriDate.day} ${hijriMonths[hijriDate.month - 1]} ${hijriDate.year}`.toUpperCase();
+        }
 
-  const post = posts.find(p => p.id == postId);
-  post ? openPost(post) : switchTab('blog');
-}
+        // Update DOM
+        if (app.dateEl) app.dateEl.textContent = finalDateString;
+        if (app.mobileDateEl) app.mobileDateEl.textContent = finalDateString;
 
-/* ===================== START ===================== */
-init();
-</script>
+      } catch (e) {
+        console.error('Hijri date error:', e);
+        const fallback = new Date().toLocaleDateString('en-US', { 
+          year: 'numeric', 
+          month: 'short', 
+          day: 'numeric' 
+        }).toUpperCase();
+        
+        if (app.dateEl) app.dateEl.textContent = fallback;
+        if (app.mobileDateEl) app.mobileDateEl.textContent = fallback;
+      }
+    }
 
+    function gregorianToHijri(date) {
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      
+      let a = Math.floor((14 - month) / 12);
+      let y = year + 4800 - a;
+      let m = month + 12 * a - 3;
+      
+      let jd = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+      
+      let l = jd - 1948440 + 10632;
+      let n = Math.floor((l - 1) / 10631);
+      l = l - 10631 * n + 354;
+      let j = (Math.floor((10985 - l) / 5316)) * (Math.floor((50 * l) / 17719)) + (Math.floor(l / 5670)) * (Math.floor((43 * l) / 15238));
+      l = l - (Math.floor((30 - j) / 15)) * (Math.floor((17719 * j) / 50)) - (Math.floor(j / 16)) * (Math.floor((15238 * j) / 43)) + 29;
+      m = Math.floor((24 * l) / 709);
+      let d = l - Math.floor((709 * m) / 24);
+      y = 30 * n + j - 30;
+      
+      return { day: d, month: m, year: y };
+    }
+
+    function renderFeed() {
+      // Safety check for empty data
+      if (typeof posts === 'undefined' || posts.length === 0) {
+        app.feed.innerHTML = '<div class="log-entry" style="padding: 20px; border: 1px solid #ccc; font-family:var(--font-mono); color: var(--text-muted); text-align:center;">NO LOGS FOUND. ADD YOUR POSTS TO THE POSTS ARRAY.</div>';
+        return;
+      }
+
+      app.feed.innerHTML = '';
+      const sortedPosts = [...posts].sort((a, b) => b.id - a.id);
+
+      sortedPosts.forEach(post => {
+        const el = document.createElement('div');
+        el.className = 'log-entry';
+        el.innerHTML = `
+          <h3 class="entry-title">${post.title}</h3>
+          <div class="entry-excerpt">${post.excerpt}</div>
+          <div class="entry-footer">
+             <div>LOG #${String(post.id).padStart(3, '0')}</div>
+             <div>${post.date.split(' / ')[0]}</div>
+          </div>
+        `;
+        el.onclick = () => openPost(post);
+        app.feed.appendChild(el);
+      });
+    }
+
+    function updateMetaTags(post) {
+      const postUrl = window.location.origin + window.location.pathname + '?post=' + post.id;
+      const postDescription = post.excerpt;
+      const postTitle = post.title + " — Mission Seventy";
+      
+      document.title = postTitle;
+
+      const metaTags = {
+        '#ogTitle': postTitle,
+        '#ogDescription': postDescription,
+        '#ogUrl': postUrl,
+        '#twitterTitle': postTitle,
+        '#twitterDescription': postDescription
+      };
+
+      for (const [selector, value] of Object.entries(metaTags)) {
+        const el = document.querySelector(selector);
+        if (el) el.setAttribute('content', value);
+      }
+    }
+
+    function openPost(post) {
+      Object.values(app.views).forEach(el => el.classList.remove('active'));
+      app.views.single.classList.add('active');
+      
+      document.getElementById('singlePostTitle').textContent = post.title;
+      document.getElementById('singlePostDate').textContent = post.date;
+      document.getElementById('singlePostBody').innerHTML = post.body;
+      
+      window.history.pushState({postId: post.id}, post.title, `?post=${post.id}`);
+      updateMetaTags(post);
+      window.scrollTo(0,0);
+
+      const index = posts.findIndex(p => p.id === post.id);
+      app.currentPostIndex = index;
+      updatePostNavigation(index);
+      setupShareButtons(post);
+    }
+
+    function updatePostNavigation(currentIndex) {
+      const prevBtn = document.getElementById('prevPostBtn');
+      const nextBtn = document.getElementById('nextPostBtn');
+      
+      // Newer post (Previous ID is higher in sorted array logic, but lower index)
+      if (currentIndex > 0) {
+        const newer = posts[currentIndex - 1];
+        prevBtn.classList.remove('disabled');
+        document.getElementById('prevPostTitle').textContent = newer.title;
+        prevBtn.onclick = () => openPost(newer);
+      } else {
+        prevBtn.classList.add('disabled');
+        document.getElementById('prevPostTitle').textContent = "None";
+        prevBtn.onclick = null;
+      }
+
+      // Older post
+      if (currentIndex < posts.length - 1) {
+        const older = posts[currentIndex + 1];
+        nextBtn.classList.remove('disabled');
+        document.getElementById('nextPostTitle').textContent = older.title;
+        nextBtn.onclick = () => openPost(older);
+      } else {
+        nextBtn.classList.add('disabled');
+        document.getElementById('nextPostTitle').textContent = "None";
+        nextBtn.onclick = null;
+      }
+    }
+
+    function setupShareButtons(post) {
+      const postUrl = window.location.href;
+      const shareText = `${post.title}: ${post.excerpt}`;
+      
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(postUrl)}`;
+      const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
+      
+      const twBtn = document.getElementById('shareTwitter');
+      const liBtn = document.getElementById('shareLinkedIn');
+
+      if(twBtn) twBtn.href = twitterUrl;
+      if(liBtn) liBtn.href = linkedinUrl;
+    }
+
+    function closePost() {
+      switchTab('blog');
+      document.title = 'Mission Seventy — The Laboratory';
+      
+      // Reset Meta Tags
+      const defaults = {
+        '#ogTitle': "Mission Seventy — The Laboratory",
+        '#ogDescription': "Systems, Faith, and Software. The workshop of a builder.",
+        '#twitterTitle': "Mission Seventy — The Laboratory",
+        '#twitterDescription': "Systems, Faith, and Software. The workshop of a builder."
+      };
+
+      for (const [selector, value] of Object.entries(defaults)) {
+        const el = document.querySelector(selector);
+        if (el) el.setAttribute('content', value);
+      }
+      
+      history.pushState(null, null, window.location.pathname); 
+    }
+
+    function switchTab(tabName) {
+      app.nav.forEach(el => el.classList.toggle('active', el.dataset.tab === tabName));
+      app.mobileNav.forEach(el => el.classList.toggle('active', el.dataset.tab === tabName));
+      Object.values(app.views).forEach(el => el.classList.remove('active'));
+      
+      if(app.views[tabName]) app.views[tabName].classList.add('active');
+      window.scrollTo(0,0);
+      
+      const mobileMenu = document.getElementById('mobileNav');
+      if(mobileMenu) mobileMenu.classList.remove('active');
+    }
+
+    function runSearch(query) {
+      if (!query || query.trim() === '') return;
+      
+      const results = posts.filter(post => 
+        post.title.toLowerCase().includes(query) ||
+        post.excerpt.toLowerCase().includes(query) ||
+        post.body.toLowerCase().includes(query)
+      );
+
+      const resultsList = document.getElementById('searchResultsList');
+      
+      if (results.length === 0) {
+        resultsList.innerHTML = '<div class="log-entry" style="text-align:center; color: var(--text-muted);">No results found for "' + query + '"</div>';
+      } else {
+        resultsList.innerHTML = '';
+        results.forEach(post => {
+          const el = document.createElement('div');
+          el.className = 'log-entry';
+          el.innerHTML = `
+            <h3 class="entry-title">${post.title}</h3>
+            <div class="entry-excerpt">${post.excerpt}</div>
+            <div class="entry-footer">
+               <div>LOG #${String(post.id).padStart(3, '0')}</div>
+               <div>${post.date.split(' / ')[0]}</div>
+            </div>
+          `;
+          el.onclick = () => openPost(post);
+          resultsList.appendChild(el);
+        });
+      }
+      
+      Object.values(app.views).forEach(el => el.classList.remove('active'));
+      app.views.search.classList.add('active');
+    }
+
+    function setupListeners() {
+      // Navigation
+      app.nav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
+      app.mobileNav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
+      
+      // Logos
+      const logo = document.getElementById('logoClick');
+      if(logo) logo.addEventListener('click', () => switchTab('blog'));
+      
+      const mobileLogo = document.getElementById('mobileLogoClick');
+      if(mobileLogo) mobileLogo.addEventListener('click', () => switchTab('blog'));
+      
+      // Menu Toggle
+      const menuBtn = document.getElementById('menuToggle');
+      if(menuBtn) {
+        menuBtn.addEventListener('click', () => {
+          document.getElementById('mobileNav').classList.toggle('active');
+        });
+      }
+      
+      // Back Button
+      const backBtn = document.getElementById('backBtn');
+      if(backBtn) backBtn.addEventListener('click', closePost);
+      
+      // Clear Search
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if(clearBtn) clearBtn.addEventListener('click', () => switchTab('blog'));
+      
+      // Search Input
+      const searchInput = document.getElementById('searchInput');
+      if(searchInput) {
+        searchInput.addEventListener('keypress', (e) => { 
+          if (e.key === 'Enter') {
+            runSearch(searchInput.value.toLowerCase()); 
+            searchInput.value = '';
+          }
+        });
+      }
+
+      // Share Copy Button
+      const shareBtn = document.getElementById('shareCopyBtn');
+      if(shareBtn) {
+        shareBtn.addEventListener('click', () => {
+          const url = window.location.href;
+          const urlParams = new URLSearchParams(window.location.search);
+          const post = posts.find(p => p.id == urlParams.get('post'));
+          
+          let shareText = url;
+          if (post) {
+            shareText = `${post.title}: ${post.excerpt}\n\nRead more: ${url}`;
+          }
+
+          navigator.clipboard.writeText(shareText).then(() => {
+            const originalText = shareBtn.textContent;
+            shareBtn.textContent = "COPIED!";
+            shareBtn.style.background = 'var(--accent)';
+            shareBtn.style.color = '#000';
+            setTimeout(() => {
+              shareBtn.textContent = originalText;
+              shareBtn.style.background = '#fff';
+              shareBtn.style.color = '';
+            }, 2000);
+          }).catch(err => {
+            console.error('Failed to copy:', err);
+            alert('Failed to copy link');
+          });
+        });
+      }
+
+      window.addEventListener('popstate', checkUrlParams);
+    }
+
+    function checkUrlParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get('post');
+      
+      if (postId && typeof posts !== 'undefined') {
+        const post = posts.find(p => p.id == postId);
+        if (post) {
+          openPost(post);
+        } else {
+          // If ID exists but post doesn't, go home
+          switchTab('blog');
+        }
+      } else {
+        switchTab('blog');
+      }
+    }
+
+    // Initialize App
+    init();
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
