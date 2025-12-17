@@ -15,18 +15,8 @@
   <meta name="twitter:title" id="twitterTitle" content="Mission Seventy — The Laboratory">
   <meta name="twitter:description" id="twitterDescription" content="Systems, Faith, and Software. The workshop of a builder.">
   <meta name="twitter:image" content="https://missionseventy.com/logoz.png">
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D1KZK5NV5L"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-D1KZK5NV5L');
-  </script>
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="217b616f-3ce0-43cb-bb93-1dc5d77f1d18"></script>
   
   <style>
-    /* --- SYSTEM VARIABLES --- */
     :root {
       --sidebar-bg: #0a0a0a;
       --sidebar-text: #e0e0e0;
@@ -54,7 +44,6 @@
       font-family: var(--font-display);
     }
 
-    /* --- SIDEBAR --- */
     .sidebar {
       width: 300px; height: 100vh; background: var(--sidebar-bg); color: var(--sidebar-text);
       position: sticky; top: 0; display: flex; flex-direction: column; justify-content: space-between;
@@ -90,7 +79,6 @@
     .social-icon:hover { color: var(--accent); transform: scale(1.1); }
     .social-icon svg { width: 20px; height: 20px; fill: currentColor; }
 
-    /* --- WORKSPACE --- */
     .workspace {
       flex: 1; height: 100vh; overflow-y: auto; padding: 40px 60px;
       position: relative; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
@@ -117,7 +105,6 @@
       letter-spacing: -1.5px; color: var(--text-main);
     }
 
-    /* --- FEED STYLE --- */
     .log-entry {
       background: var(--card-bg); border: 1px solid var(--text-main); padding: 30px;
       margin-bottom: 25px; transition: all 0.3s; cursor: pointer;
@@ -133,7 +120,6 @@
       display: flex; justify-content: space-between;
     }
 
-    /* --- PRODUCT CARD --- */
     .system-card {
       background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); 
       color: #fff; padding: 40px; margin-bottom: 40px;
@@ -154,7 +140,6 @@
     }
     .system-action a:hover { transform: scale(1.05); background: #fff; box-shadow: 0 4px 15px rgba(253, 181, 21, 0.4); }
 
-    /* --- SINGLE POST --- */
     .single-view { display: none; background: #fff; padding: 60px; border: 1px solid var(--border); max-width: 850px; margin: 0 auto; }
     .single-view.active { display: block; animation: fadeIn 0.4s ease; }
     
@@ -170,14 +155,12 @@
     .article-body { font-family: var(--font-body); font-size: 20px; line-height: 1.7; color: #222; }
     .article-body p { margin-bottom: 28px; max-width: 700px; } 
     
-    /* DATE AT THE BOTTOM OF POST */
     .article-date-footer { 
       font-family: var(--font-mono); color: var(--accent); font-weight: 700; font-size: 12px; 
       margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; 
       display: block; text-align: right; text-transform: uppercase; letter-spacing: 1px;
     }
 
-    /* Post Navigation (Next/Prev) */
     .post-nav { margin-top: 30px; padding-top: 10px; display: flex; justify-content: space-between; gap: 20px; }
     .nav-btn { flex: 1; padding: 20px; border: 1px solid #eee; cursor: pointer; transition: 0.2s; text-align: left; }
     .nav-btn:hover:not(.disabled) { border-color: var(--accent); background: #fafafa; }
@@ -186,7 +169,6 @@
     .nav-title { font-size: 14px; font-weight: 700; color: #000; }
     .nav-btn.next { text-align: right; }
 
-    /* Share Section */
     .share-section { 
       margin-top: 40px; padding: 25px; background: #fafafa; border-radius: 6px; 
       display: flex; align-items: center; justify-content: space-between; gap: 15px;
@@ -208,7 +190,6 @@
     .share-icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
     .share-icon-btn:hover { background: var(--accent); transform: scale(1.1); }
 
-    /* --- ABOUT & PROJECTS --- */
     .mission-text p { font-size: 20px; line-height: 1.7; margin-bottom: 25px; font-family: var(--font-body); color: #222; }
     .mission-list { list-style: none; margin: 30px 0; border-left: 3px solid var(--accent); padding-left: 20px; }
     .mission-list li { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #111; }
@@ -233,12 +214,10 @@
     }
     .project-link:hover { color: var(--accent); }
 
-    /* Sections Visibility */
     #postsSection, #aboutSection, #projectsSection, #searchResultsPage { display: none; }
     #postsSection.active, #aboutSection.active, #projectsSection.active, #searchResultsPage.active { display: block; animation: fadeIn 0.4s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* --- MOBILE HEADER --- */
     .mobile-header {
       display: none;
       position: fixed;
@@ -276,15 +255,6 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-
-    /*.mobile-date {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      color: var(--accent);
-      background: #151515;
-      padding: 4px 8px;
-      border-radius: 3px;
-    }*/
 
     .mobile-nav {
       display: none;
@@ -350,7 +320,6 @@
       padding: 5px;
     }
 
-    /* --- RESPONSIVE MOBILE LAYOUT --- */
     @media (max-width: 900px) {
       body { flex-direction: column; padding-top: 70px; padding-bottom: 65px; }
       
@@ -464,28 +433,24 @@
 </head>
 <body>
 
-  <!-- Mobile Header -->
   <header class="mobile-header">
     <div class="mobile-header-content">
       <div class="mobile-brand" id="mobileLogoClick">
-        <img src="logoz.png" alt="M70">
+        <img src="https://via.placeholder.com/36" alt="M70">
         <div class="mobile-brand-text">
           <h1>Mission Seventy</h1>
         </div>
       </div>
-      <!--<div class="mobile-date" id="mobileDateDisplay"></div>-->
       <button class="menu-toggle" id="menuToggle">☰</button>
     </div>
   </header>
 
-  <!-- Mobile Navigation -->
   <nav class="mobile-nav" id="mobileNav">
     <div class="mobile-nav-item active" data-tab="blog">Logbook</div>
     <div class="mobile-nav-item" data-tab="project">Shipments</div>
     <div class="mobile-nav-item" data-tab="about">Mission</div>
   </nav>
 
-  <!-- Mobile Footer with Socials -->
   <footer class="mobile-footer">
     <div class="mobile-socials">
       <a href="https://www.instagram.com/missionseventy" target="_blank" class="social-icon" title="Instagram" aria-label="Instagram">
@@ -501,7 +466,7 @@
   <aside class="sidebar">
     <div>
       <div class="brand" id="logoClick">
-        <img src="logoz.png" alt="M70">
+        <img src="https://via.placeholder.com/48" alt="M70">
         <div class="brand-text">
           <h1>Mission Seventy</h1>
           <div class="status-badge">
@@ -563,7 +528,7 @@
           <p>Never wonder what to post again. A 7x11 content framework designed for consistent output without burnout. Used by builders, writers, and thinkers.</p>
         </div>
         <div class="system-action">
-          <a href="https://missionseventy.gumroad.com/l/cpseyb" target="_blank">Free Access </a>
+          <a href="https://missionseventy.gumroad.com/l/cpseyb" target="_blank">Free Access</a>
         </div>
       </div>
 
@@ -656,14 +621,13 @@
     </div>
 
   </main>
+
 <script>
-// ===== EMBEDDED POSTS DATA =====
+// ===== POSTS DATA - ADD YOUR POSTS HERE =====
 const posts = [
-  // NEW POSTS GO AT THE TOP - Add your newest post here
-  // IMPORTANT: Give each post a unique sequential ID
-  
+  // Example post format - replace with your actual posts
   {
-    id: 31,
+   id: 31,
     title: "Close the Gate",
     excerpt: "There is a gate we often forget to close, and we are heedless about it.",
     body: "<p>BISMILLAH.</p>" +
@@ -1063,386 +1027,324 @@ const posts = [
           "<p>This blog is where I do that work. Not just business insights, but life insights. The small improvements that compound over time. Because the best ideas don't come from thinking harder. They come from observing better.</p>",
     date: "29 Dhul Qadah 1446 / 27 May 2025"
   }
+  // Add more posts here following the same format
+];
 
-  // TO ADD A NEW POST:
-  // 1. Copy the format below
-  // 2. Increment the id by 1 from the post above
-  // 3. Add your new post ABOVE this comment section (so newest appears first on the blog)
-  // 4. Example:
-  /*
-  {
-    id: 32,
-    title: "Your Post Title Here",
-    excerpt: "Short summary of your post (appears in previews)",
-    body: "<p>Your post content here. You can use <p> tags for paragraphs.</p>" +
-          "<p>Add more paragraphs like this.</p>",
-    date: "Day Month Year / Gregorian Date"
+// ===== APP INITIALIZATION =====
+const app = {
+  views: {
+    blog: document.getElementById('postsSection'),
+    project: document.getElementById('projectsSection'),
+    about: document.getElementById('aboutSection'),
+    single: document.getElementById('singlePostView'),
+    search: document.getElementById('searchResultsPage')
   },
-  */
-  ];
-    // --- APP CONTROLLER ---
-    const app = {
-      views: {
-        blog: document.getElementById('postsSection'),
-        project: document.getElementById('projectsSection'),
-        about: document.getElementById('aboutSection'),
-        single: document.getElementById('singlePostView'),
-        search: document.getElementById('searchResultsPage')
-      },
-      nav: document.querySelectorAll('.nav-item'),
-      mobileNav: document.querySelectorAll('.mobile-nav-item'),
-      feed: document.getElementById('postsFeed'),
-      dateEl: document.getElementById('dateDisplay'),
-      mobileDateEl: document.getElementById('mobileDateDisplay'),
-      currentPostIndex: -1
-    };
-// --- INITIALIZATION ---
-    function init() {
-      renderHijriDate();
-      renderFeed();
-      setupListeners();
-      checkUrlParams();
-    }
+  nav: document.querySelectorAll('.nav-item'),
+  mobileNav: document.querySelectorAll('.mobile-nav-item'),
+  feed: document.getElementById('postsFeed'),
+  dateEl: document.getElementById('dateDisplay'),
+  currentPostIndex: -1
+};
 
-    // --- HIJRI DATE (Proper format with fallback calculation) ---
-    function renderHijriDate() {
-      try {
-        const now = new Date();
-        
-        // Try modern Intl API first
-        try {
-          const formatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-          });
-          
-          const hijriDate = formatter.format(now);
-          
-          // Check if it actually returned a valid Hijri date
-          if (hijriDate && !hijriDate.toLowerCase().includes('january') && !hijriDate.includes('1970')) {
-            // Desktop
-            if (app.dateEl) {
-              app.dateEl.textContent = hijriDate.toUpperCase();
-            }
-            
-            // Mobile - shorter format
-            if (app.mobileDateEl) {
-              const shortFormatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric'
-              });
-              const mobileDate = shortFormatter.format(now);
-              // Format: "4 Jumada al-Thani 1447 AH" or similar
-              app.mobileDateEl.textContent = mobileDate.replace('AH', '').trim().toUpperCase();
-            }
-            return; // Success!
-          }
-        } catch (e) {
-          console.log('Intl Hijri not supported, using manual calculation');
-        }
-        
-        // Manual Hijri calculation fallback (Umm al-Qura algorithm approximation)
-        const hijriDate = gregorianToHijri(now);
-        const hijriMonths = [
-          'Muharram', 'Safar', 'Rabi al-Awwal', 'Rabi al-Thani', 
-          'Jumada al-Awwal', 'Jumada al-Thani', 'Rajab', 'Shaban', 
-          'Ramadan', 'Shawwal', 'Dhul Qadah', 'Dhul Hijjah'
-        ];
-        const hijriMonthsShort = [
-          'Muh', 'Saf', 'Rab I', 'Rab II', 
-          'Jum I', 'Jum II', 'Raj', 'Sha', 
-          'Ram', 'Shaw', 'Dhu Q', 'Dhu H'
-        ];
-        
-        const fullDate = `${hijriDate.day} ${hijriMonths[hijriDate.month - 1]} ${hijriDate.year}`;
-        const shortDate = `${hijriDate.day} ${hijriMonthsShort[hijriDate.month - 1]} ${hijriDate.year}`;
-        
+function init() {
+  renderHijriDate();
+  renderFeed();
+  setupListeners();
+  checkUrlParams();
+}
+
+function renderHijriDate() {
+  try {
+    const now = new Date();
+    
+    try {
+      const formatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+      
+      const hijriDate = formatter.format(now);
+      
+      if (hijriDate && !hijriDate.toLowerCase().includes('january') && !hijriDate.includes('1970')) {
         if (app.dateEl) {
-          app.dateEl.textContent = fullDate.toUpperCase();
+          app.dateEl.textContent = hijriDate.toUpperCase();
         }
-        
-        if (app.mobileDateEl) {
-          app.mobileDateEl.textContent = shortDate.toUpperCase();
-        }
-        
-      } catch (e) {
-        console.error('Hijri date error:', e);
-        // Final fallback to Gregorian
-        const fallback = new Date().toLocaleDateString('en-US', { 
-          year: 'numeric', 
-          month: 'short', 
-          day: 'numeric' 
-        }).toUpperCase();
-        
-        if (app.dateEl) app.dateEl.textContent = fallback;
-        if (app.mobileDateEl) app.mobileDateEl.textContent = fallback;
-      }
-    }
-
-    // Manual Hijri conversion (Umm al-Qura approximation)
-    function gregorianToHijri(date) {
-      // Julian day calculation
-      const year = date.getFullYear();
-      const month = date.getMonth() + 1;
-      const day = date.getDate();
-      
-      let a = Math.floor((14 - month) / 12);
-      let y = year + 4800 - a;
-      let m = month + 12 * a - 3;
-      
-      let jd = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
-      
-      // Convert Julian day to Hijri
-      let l = jd - 1948440 + 10632;
-      let n = Math.floor((l - 1) / 10631);
-      l = l - 10631 * n + 354;
-      let j = (Math.floor((10985 - l) / 5316)) * (Math.floor((50 * l) / 17719)) + (Math.floor(l / 5670)) * (Math.floor((43 * l) / 15238));
-      l = l - (Math.floor((30 - j) / 15)) * (Math.floor((17719 * j) / 50)) - (Math.floor(j / 16)) * (Math.floor((15238 * j) / 43)) + 29;
-      m = Math.floor((24 * l) / 709);
-      let d = l - Math.floor((709 * m) / 24);
-      y = 30 * n + j - 30;
-      
-      return { day: d, month: m, year: y };
-    }
-
-    // --- FEED RENDERER ---
-    function renderFeed() {
-      if (typeof posts === 'undefined' || posts.length === 0) {
-        app.feed.innerHTML = '<div class="log-entry" style="padding: 20px; border: 1px solid #ccc; font-family:var(--font-mono); color: var(--text-muted); text-align:center;">NO LOGS FOUND. PUBLISH YOUR FIRST POST.</div>';
         return;
       }
-
-      app.feed.innerHTML = '';
-      const sortedPosts = [...posts].sort((a, b) => b.id - a.id);
-
-      sortedPosts.forEach(post => {
-        const el = document.createElement('div');
-        el.className = 'log-entry';
-        el.innerHTML = `
-          <h3 class="entry-title">${post.title}</h3>
-          <div class="entry-excerpt">${post.excerpt}</div>
-          <div class="entry-footer">
-             <div>LOG #${String(post.id).padStart(3, '0')}</div>
-             <div>${post.date.split(' / ')[0]}</div>
-          </div>
-        `;
-        el.onclick = () => openPost(post);
-        app.feed.appendChild(el);
-      });
+    } catch (e) {
+      console.log('Intl Hijri not supported, using manual calculation');
     }
     
+    const hijriDate = gregorianToHijri(now);
+    const hijriMonths = [
+      'Muharram', 'Safar', 'Rabi al-Awwal', 'Rabi al-Thani', 
+      'Jumada al-Awwal', 'Jumada al-Thani', 'Rajab', 'Shaban', 
+      'Ramadan', 'Shawwal', 'Dhul Qadah', 'Dhul Hijjah'
+    ];
+    
+    const fullDate = `${hijriDate.day} ${hijriMonths[hijriDate.month - 1]} ${hijriDate.year}`;
+    
+    if (app.dateEl) {
+      app.dateEl.textContent = fullDate.toUpperCase();
+    }
+    
+  } catch (e) {
+    console.error('Hijri date error:', e);
+    const fallback = new Date().toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric' 
+    }).toUpperCase();
+    
+    if (app.dateEl) app.dateEl.textContent = fallback;
+  }
+}
 
-    // --- NAVIGATION & META TAGS ---
-    function updateMetaTags(post) {
-      const postUrl = window.location.origin + window.location.pathname + '?post=' + post.id;
-      const postDescription = post.excerpt;
-      const postTitle = post.title + " — Mission Seventy";
-      
-      document.title = postTitle;
+function gregorianToHijri(date) {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  
+  let a = Math.floor((14 - month) / 12);
+  let y = year + 4800 - a;
+  let m = month + 12 * a - 3;
+  
+  let jd = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+  
+  let l = jd - 1948440 + 10632;
+  let n = Math.floor((l - 1) / 10631);
+  l = l - 10631 * n + 354;
+  let j = (Math.floor((10985 - l) / 5316)) * (Math.floor((50 * l) / 17719)) + (Math.floor(l / 5670)) * (Math.floor((43 * l) / 15238));
+  l = l - (Math.floor((30 - j) / 15)) * (Math.floor((17719 * j) / 50)) - (Math.floor(j / 16)) * (Math.floor((15238 * j) / 43)) + 29;
+  m = Math.floor((24 * l) / 709);
+  let d = l - Math.floor((709 * m) / 24);
+  y = 30 * n + j - 30;
+  
+  return { day: d, month: m, year: y };
+}
 
-      // Open Graph
-      document.querySelector('#ogTitle').setAttribute('content', postTitle);
-      document.querySelector('#ogDescription').setAttribute('content', postDescription);
-      document.querySelector('#ogUrl').setAttribute('content', postUrl);
-      
-      // Twitter Card
-      document.querySelector('#twitterTitle').setAttribute('content', postTitle);
-      document.querySelector('#twitterDescription').setAttribute('content', postDescription);
+function renderFeed() {
+  if (typeof posts === 'undefined' || posts.length === 0) {
+    app.feed.innerHTML = '<div class="log-entry" style="padding: 20px; border: 1px solid #ccc; font-family:var(--font-mono); color: var(--text-muted); text-align:center;">NO LOGS FOUND. ADD YOUR POSTS TO THE POSTS ARRAY.</div>';
+    return;
+  }
+
+  app.feed.innerHTML = '';
+  const sortedPosts = [...posts].sort((a, b) => b.id - a.id);
+
+  sortedPosts.forEach(post => {
+    const el = document.createElement('div');
+    el.className = 'log-entry';
+    el.innerHTML = `
+      <h3 class="entry-title">${post.title}</h3>
+      <div class="entry-excerpt">${post.excerpt}</div>
+      <div class="entry-footer">
+         <div>LOG #${String(post.id).padStart(3, '0')}</div>
+         <div>${post.date.split(' / ')[0]}</div>
+      </div>
+    `;
+    el.onclick = () => openPost(post);
+    app.feed.appendChild(el);
+  });
+}
+
+function updateMetaTags(post) {
+  const postUrl = window.location.origin + window.location.pathname + '?post=' + post.id;
+  const postDescription = post.excerpt;
+  const postTitle = post.title + " — Mission Seventy";
+  
+  document.title = postTitle;
+
+  document.querySelector('#ogTitle').setAttribute('content', postTitle);
+  document.querySelector('#ogDescription').setAttribute('content', postDescription);
+  document.querySelector('#ogUrl').setAttribute('content', postUrl);
+  
+  document.querySelector('#twitterTitle').setAttribute('content', postTitle);
+  document.querySelector('#twitterDescription').setAttribute('content', postDescription);
+}
+
+function openPost(post) {
+  Object.values(app.views).forEach(el => el.classList.remove('active'));
+  app.views.single.classList.add('active');
+  
+  document.getElementById('singlePostTitle').textContent = post.title;
+  document.getElementById('singlePostDate').textContent = post.date;
+  document.getElementById('singlePostBody').innerHTML = post.body;
+  
+  window.history.pushState({postId: post.id}, post.title, `?post=${post.id}`);
+  updateMetaTags(post);
+  window.scrollTo(0,0);
+
+  const index = posts.findIndex(p => p.id === post.id);
+  app.currentPostIndex = index;
+  updatePostNavigation(index);
+  setupShareButtons(post);
+}
+
+function updatePostNavigation(currentIndex) {
+  const prevBtn = document.getElementById('prevPostBtn');
+  const nextBtn = document.getElementById('nextPostBtn');
+  
+  if (currentIndex > 0) {
+    const newer = posts[currentIndex - 1];
+    prevBtn.classList.remove('disabled');
+    document.getElementById('prevPostTitle').textContent = newer.title;
+    prevBtn.onclick = () => openPost(newer);
+  } else {
+    prevBtn.classList.add('disabled');
+    document.getElementById('prevPostTitle').textContent = "None";
+  }
+
+  if (currentIndex < posts.length - 1) {
+    const older = posts[currentIndex + 1];
+    nextBtn.classList.remove('disabled');
+    document.getElementById('nextPostTitle').textContent = older.title;
+    nextBtn.onclick = () => openPost(older);
+  } else {
+    nextBtn.classList.add('disabled');
+    document.getElementById('nextPostTitle').textContent = "None";
+  }
+}
+
+function setupShareButtons(post) {
+  const postUrl = window.location.href;
+  const shareText = `${post.title}: ${post.excerpt}`;
+  
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(postUrl)}`;
+  document.getElementById('shareTwitter').href = twitterUrl;
+  
+  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
+  document.getElementById('shareLinkedIn').href = linkedinUrl;
+}
+
+function closePost() {
+  switchTab('blog');
+  document.title = 'Mission Seventy — The Laboratory';
+  document.querySelector('#ogTitle').setAttribute('content', "Mission Seventy — The Laboratory");
+  document.querySelector('#ogDescription').setAttribute('content', "Systems, Faith, and Software. The workshop of a builder.");
+  document.querySelector('#twitterTitle').setAttribute('content', "Mission Seventy — The Laboratory");
+  document.querySelector('#twitterDescription').setAttribute('content', "Systems, Faith, and Software. The workshop of a builder.");
+  history.pushState(null, null, window.location.pathname); 
+}
+
+function switchTab(tabName) {
+  app.nav.forEach(el => el.classList.toggle('active', el.dataset.tab === tabName));
+  app.mobileNav.forEach(el => el.classList.toggle('active', el.dataset.tab === tabName));
+  Object.values(app.views).forEach(el => el.classList.remove('active'));
+  if(app.views[tabName]) app.views[tabName].classList.add('active');
+  window.scrollTo(0,0);
+  
+  document.getElementById('mobileNav').classList.remove('active');
+}
+
+function runSearch(query) {
+  if (!query || query.trim() === '') return;
+  
+  const results = posts.filter(post => 
+    post.title.toLowerCase().includes(query) ||
+    post.excerpt.toLowerCase().includes(query) ||
+    post.body.toLowerCase().includes(query)
+  );
+
+  const resultsList = document.getElementById('searchResultsList');
+  
+  if (results.length === 0) {
+    resultsList.innerHTML = '<div class="log-entry" style="text-align:center; color: var(--text-muted);">No results found for "' + query + '"</div>';
+  } else {
+    resultsList.innerHTML = '';
+    results.forEach(post => {
+      const el = document.createElement('div');
+      el.className = 'log-entry';
+      el.innerHTML = `
+        <h3 class="entry-title">${post.title}</h3>
+        <div class="entry-excerpt">${post.excerpt}</div>
+        <div class="entry-footer">
+           <div>LOG #${String(post.id).padStart(3, '0')}</div>
+           <div>${post.date.split(' / ')[0]}</div>
+        </div>
+      `;
+      el.onclick = () => openPost(post);
+      resultsList.appendChild(el);
+    });
+  }
+  
+  Object.values(app.views).forEach(el => el.classList.remove('active'));
+  app.views.search.classList.add('active');
+}
+
+function setupListeners() {
+  app.nav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
+  
+  app.mobileNav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
+  
+  document.getElementById('logoClick').addEventListener('click', () => switchTab('blog'));
+  document.getElementById('mobileLogoClick').addEventListener('click', () => switchTab('blog'));
+  
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('mobileNav').classList.toggle('active');
+  });
+  
+  document.getElementById('backBtn').addEventListener('click', closePost);
+  document.getElementById('clearSearchBtn').addEventListener('click', () => switchTab('blog'));
+  
+  const searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('keypress', (e) => { 
+    if (e.key === 'Enter') {
+      runSearch(searchInput.value.toLowerCase()); 
+      searchInput.value = '';
+    }
+  });
+
+  document.getElementById('shareCopyBtn').addEventListener('click', () => {
+    const url = window.location.href;
+    const post = posts.find(p => p.id == (new URLSearchParams(window.location.search)).get('post'));
+    
+    let shareText = url;
+    if (post) {
+      shareText = `${post.title}: ${post.excerpt}\n\nRead more: ${url}`;
     }
 
-    function openPost(post) {
-      Object.values(app.views).forEach(el => el.classList.remove('active'));
-      app.views.single.classList.add('active');
-      
-      document.getElementById('singlePostTitle').textContent = post.title;
-      document.getElementById('singlePostDate').textContent = post.date;
-      document.getElementById('singlePostBody').innerHTML = post.body;
-      
-      window.history.pushState({postId: post.id}, post.title, `?post=${post.id}`);
-      updateMetaTags(post);
-      window.scrollTo(0,0);
+    navigator.clipboard.writeText(shareText).then(() => {
+      const btn = document.getElementById('shareCopyBtn');
+      const originalText = btn.textContent;
+      btn.textContent = "COPIED!";
+      btn.style.background = 'var(--accent)';
+      btn.style.color = '#000';
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '#fff';
+        btn.style.color = '';
+      }, 2000);
+    }).catch(err => {
+      console.error('Failed to copy:', err);
+      alert('Failed to copy link');
+    });
+  });
 
-      const index = posts.findIndex(p => p.id === post.id);
-      app.currentPostIndex = index;
-      updatePostNavigation(index);
-      setupShareButtons(post);
-    }
+  window.addEventListener('popstate', checkUrlParams);
+}
 
-    function updatePostNavigation(currentIndex) {
-      const prevBtn = document.getElementById('prevPostBtn');
-      const nextBtn = document.getElementById('nextPostBtn');
-      
-      if (currentIndex > 0) {
-        const newer = posts[currentIndex - 1];
-        prevBtn.classList.remove('disabled');
-        document.getElementById('prevPostTitle').textContent = newer.title;
-        prevBtn.onclick = () => openPost(newer);
-      } else {
-        prevBtn.classList.add('disabled');
-        document.getElementById('prevPostTitle').textContent = "None";
-      }
-
-      if (currentIndex < posts.length - 1) {
-        const older = posts[currentIndex + 1];
-        nextBtn.classList.remove('disabled');
-        document.getElementById('nextPostTitle').textContent = older.title;
-        nextBtn.onclick = () => openPost(older);
-      } else {
-        nextBtn.classList.add('disabled');
-        document.getElementById('nextPostTitle').textContent = "None";
-      }
-    }
-
-    function setupShareButtons(post) {
-      const postUrl = window.location.href;
-      const shareText = `${post.title}: ${post.excerpt}`;
-      
-      // Twitter/X share
-      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(postUrl)}`;
-      document.getElementById('shareTwitter').href = twitterUrl;
-      
-      // LinkedIn share
-      const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
-      document.getElementById('shareLinkedIn').href = linkedinUrl;
-    }
-
-    function closePost() {
+function checkUrlParams() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const postId = urlParams.get('post');
+  if (postId && typeof posts !== 'undefined') {
+    const post = posts.find(p => p.id == postId);
+    if (post) {
+      openPost(post);
+    } else {
       switchTab('blog');
-      document.title = 'Mission Seventy — The Laboratory';
-      document.querySelector('#ogTitle').setAttribute('content', "Mission Seventy — The Laboratory");
-      document.querySelector('#ogDescription').setAttribute('content', "Systems, Faith, and Software. The workshop of a builder.");
-      document.querySelector('#twitterTitle').setAttribute('content', "Mission Seventy — The Laboratory");
-      document.querySelector('#twitterDescription').setAttribute('content', "Systems, Faith, and Software. The workshop of a builder.");
-      history.pushState(null, null, window.location.pathname); 
     }
+  } else {
+    switchTab('blog');
+  }
+}
 
-    function switchTab(tabName) {
-      app.nav.forEach(el => el.classList.toggle('active', el.dataset.tab === tabName));
-      app.mobileNav.forEach(el => el.classList.toggle('active', el.dataset.tab === tabName));
-      Object.values(app.views).forEach(el => el.classList.remove('active'));
-      if(app.views[tabName]) app.views[tabName].classList.add('active');
-      window.scrollTo(0,0);
-      
-      // Close mobile menu after selection
-      document.getElementById('mobileNav').classList.remove('active');
-    }
-
-    // --- SEARCH FUNCTIONALITY ---
-    function runSearch(query) {
-      if (!query || query.trim() === '') return;
-      
-      const results = posts.filter(post => 
-        post.title.toLowerCase().includes(query) ||
-        post.excerpt.toLowerCase().includes(query) ||
-        post.body.toLowerCase().includes(query)
-      );
-
-      const resultsList = document.getElementById('searchResultsList');
-      
-      if (results.length === 0) {
-        resultsList.innerHTML = '<div class="log-entry" style="text-align:center; color: var(--text-muted);">No results found for "' + query + '"</div>';
-      } else {
-        resultsList.innerHTML = '';
-        results.forEach(post => {
-          const el = document.createElement('div');
-          el.className = 'log-entry';
-          el.innerHTML = `
-            <h3 class="entry-title">${post.title}</h3>
-            <div class="entry-excerpt">${post.excerpt}</div>
-            <div class="entry-footer">
-               <div>LOG #${String(post.id).padStart(3, '0')}</div>
-               <div>${post.date.split(' / ')[0]}</div>
-            </div>
-          `;
-          el.onclick = () => openPost(post);
-          resultsList.appendChild(el);
-        });
-      }
-      
-      Object.values(app.views).forEach(el => el.classList.remove('active'));
-      app.views.search.classList.add('active');
-    }
-
-    // --- LISTENERS ---
-    function setupListeners() {
-      // Desktop nav
-      app.nav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
-      
-      // Mobile nav
-      app.mobileNav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
-      
-      // Logo clicks
-      document.getElementById('logoClick').addEventListener('click', () => switchTab('blog'));
-      document.getElementById('mobileLogoClick').addEventListener('click', () => switchTab('blog'));
-      
-      // Mobile menu toggle
-      document.getElementById('menuToggle').addEventListener('click', () => {
-        document.getElementById('mobileNav').classList.toggle('active');
-      });
-      
-      document.getElementById('backBtn').addEventListener('click', closePost);
-      document.getElementById('clearSearchBtn').addEventListener('click', () => switchTab('blog'));
-      
-      const searchInput = document.getElementById('searchInput');
-      searchInput.addEventListener('keypress', (e) => { 
-        if (e.key === 'Enter') {
-          runSearch(searchInput.value.toLowerCase()); 
-          searchInput.value = '';
-        }
-      });
-
-      // Copy Link Button
-      document.getElementById('shareCopyBtn').addEventListener('click', () => {
-        const url = window.location.href;
-        const post = posts.find(p => p.id == (new URLSearchParams(window.location.search)).get('post'));
-        
-        let shareText = url;
-        if (post) {
-          shareText = `${post.title}: ${post.excerpt}\n\nRead more: ${url}`;
-        }
-
-        navigator.clipboard.writeText(shareText).then(() => {
-          const btn = document.getElementById('shareCopyBtn');
-          const originalText = btn.textContent;
-          btn.textContent = "COPIED!";
-          btn.style.background = 'var(--accent)';
-          btn.style.color = '#000';
-          setTimeout(() => {
-            btn.textContent = originalText;
-            btn.style.background = '#fff';
-            btn.style.color = '';
-          }, 2000);
-        }).catch(err => {
-          console.error('Failed to copy:', err);
-          alert('Failed to copy link');
-        });
-      });
-
-      // Handle browser back/forward
-      window.addEventListener('popstate', checkUrlParams);
-    }
-
-    function checkUrlParams() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const postId = urlParams.get('post');
-      if (postId && typeof posts !== 'undefined') {
-        const post = posts.find(p => p.id == postId);
-        if (post) {
-          openPost(post);
-        } else {
-          switchTab('blog');
-        }
-      } else {
-        switchTab('blog');
-      }
-    }
-
-    init();
-  </script>
+init();
+</script>
 </body>
-  </html>
+</html>
+
 
 
 
