@@ -625,8 +625,7 @@
   <script src="posts.js"></script>
 
   <script>
-    // --- APP CONTROLLER ---
-    // Consolidated into a single source of truth
+   // --- APP CONTROLLER ---
     const app = {
       views: {
         blog: document.getElementById('postsSection'),
@@ -639,31 +638,23 @@
       mobileNav: document.querySelectorAll('.mobile-nav-item'),
       feed: document.getElementById('postsFeed'),
       dateEl: document.getElementById('dateDisplay'),
-      mobileDateEl: document.getElementById('mobileDateDisplay'), // Kept from your first snippet
+      mobileDateEl: document.getElementById('mobileDateDisplay'),
       currentPostIndex: -1
     };
-
-    // ===== APP INITIALIZATION =====
+// --- INITIALIZATION ---
     function init() {
-      // Ensure 'posts' variable from posts.js is loaded
-      if (typeof posts === 'undefined') {
-        console.error('CRITICAL: posts.js not loaded or "posts" array missing.');
-        app.feed.innerHTML = '<div class="log-entry" style="text-align:center;">ERROR: Data not found.</div>';
-        return;
-      }
-
       renderHijriDate();
       renderFeed();
       setupListeners();
       checkUrlParams();
     }
 
+    // --- HIJRI DATE (Proper format with fallback calculation) ---
     function renderHijriDate() {
       try {
         const now = new Date();
-        let finalDateString = "";
-
-        // 1. Try Native Intl Support
+        
+        // Try modern Intl API first
         try {
           const formatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
             day: 'numeric',
@@ -673,30 +664,57 @@
           
           const hijriDate = formatter.format(now);
           
-          // Validate result (some browsers fallback to Gregorian silently)
+          // Check if it actually returned a valid Hijri date
           if (hijriDate && !hijriDate.toLowerCase().includes('january') && !hijriDate.includes('1970')) {
-            finalDateString = hijriDate.toUpperCase();
-          } else {
-            throw new Error('Intl fallback detected');
+            // Desktop
+            if (app.dateEl) {
+              app.dateEl.textContent = hijriDate.toUpperCase();
+            }
+            
+            // Mobile - shorter format
+            if (app.mobileDateEl) {
+              const shortFormatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+              });
+              const mobileDate = shortFormatter.format(now);
+              // Format: "4 Jumada al-Thani 1447 AH" or similar
+              app.mobileDateEl.textContent = mobileDate.replace('AH', '').trim().toUpperCase();
+            }
+            return; // Success!
           }
         } catch (e) {
-          // 2. Manual Fallback
           console.log('Intl Hijri not supported, using manual calculation');
-          const hijriDate = gregorianToHijri(now);
-          const hijriMonths = [
-            'Muharram', 'Safar', 'Rabi al-Awwal', 'Rabi al-Thani', 
-            'Jumada al-Awwal', 'Jumada al-Thani', 'Rajab', 'Shaban', 
-            'Ramadan', 'Shawwal', 'Dhul Qadah', 'Dhul Hijjah'
-          ];
-          finalDateString = `${hijriDate.day} ${hijriMonths[hijriDate.month - 1]} ${hijriDate.year}`.toUpperCase();
         }
-
-        // Update DOM
-        if (app.dateEl) app.dateEl.textContent = finalDateString;
-        if (app.mobileDateEl) app.mobileDateEl.textContent = finalDateString;
-
+        
+        // Manual Hijri calculation fallback (Umm al-Qura algorithm approximation)
+        const hijriDate = gregorianToHijri(now);
+        const hijriMonths = [
+          'Muharram', 'Safar', 'Rabi al-Awwal', 'Rabi al-Thani', 
+          'Jumada al-Awwal', 'Jumada al-Thani', 'Rajab', 'Shaban', 
+          'Ramadan', 'Shawwal', 'Dhul Qadah', 'Dhul Hijjah'
+        ];
+        const hijriMonthsShort = [
+          'Muh', 'Saf', 'Rab I', 'Rab II', 
+          'Jum I', 'Jum II', 'Raj', 'Sha', 
+          'Ram', 'Shaw', 'Dhu Q', 'Dhu H'
+        ];
+        
+        const fullDate = `${hijriDate.day} ${hijriMonths[hijriDate.month - 1]} ${hijriDate.year}`;
+        const shortDate = `${hijriDate.day} ${hijriMonthsShort[hijriDate.month - 1]} ${hijriDate.year}`;
+        
+        if (app.dateEl) {
+          app.dateEl.textContent = fullDate.toUpperCase();
+        }
+        
+        if (app.mobileDateEl) {
+          app.mobileDateEl.textContent = shortDate.toUpperCase();
+        }
+        
       } catch (e) {
         console.error('Hijri date error:', e);
+        // Final fallback to Gregorian
         const fallback = new Date().toLocaleDateString('en-US', { 
           year: 'numeric', 
           month: 'short', 
@@ -708,7 +726,9 @@
       }
     }
 
+    // Manual Hijri conversion (Umm al-Qura approximation)
     function gregorianToHijri(date) {
+      // Julian day calculation
       const year = date.getFullYear();
       const month = date.getMonth() + 1;
       const day = date.getDate();
@@ -719,6 +739,7 @@
       
       let jd = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
       
+      // Convert Julian day to Hijri
       let l = jd - 1948440 + 10632;
       let n = Math.floor((l - 1) / 10631);
       l = l - 10631 * n + 354;
@@ -731,10 +752,10 @@
       return { day: d, month: m, year: y };
     }
 
+    // --- FEED RENDERER ---
     function renderFeed() {
-      // Safety check for empty data
       if (typeof posts === 'undefined' || posts.length === 0) {
-        app.feed.innerHTML = '<div class="log-entry" style="padding: 20px; border: 1px solid #ccc; font-family:var(--font-mono); color: var(--text-muted); text-align:center;">NO LOGS FOUND. ADD YOUR POSTS TO THE POSTS ARRAY.</div>';
+        app.feed.innerHTML = '<div class="log-entry" style="padding: 20px; border: 1px solid #ccc; font-family:var(--font-mono); color: var(--text-muted); text-align:center;">NO LOGS FOUND. PUBLISH YOUR FIRST POST.</div>';
         return;
       }
 
@@ -756,7 +777,9 @@
         app.feed.appendChild(el);
       });
     }
+    
 
+    // --- NAVIGATION & META TAGS ---
     function updateMetaTags(post) {
       const postUrl = window.location.origin + window.location.pathname + '?post=' + post.id;
       const postDescription = post.excerpt;
@@ -764,18 +787,14 @@
       
       document.title = postTitle;
 
-      const metaTags = {
-        '#ogTitle': postTitle,
-        '#ogDescription': postDescription,
-        '#ogUrl': postUrl,
-        '#twitterTitle': postTitle,
-        '#twitterDescription': postDescription
-      };
-
-      for (const [selector, value] of Object.entries(metaTags)) {
-        const el = document.querySelector(selector);
-        if (el) el.setAttribute('content', value);
-      }
+      // Open Graph
+      document.querySelector('#ogTitle').setAttribute('content', postTitle);
+      document.querySelector('#ogDescription').setAttribute('content', postDescription);
+      document.querySelector('#ogUrl').setAttribute('content', postUrl);
+      
+      // Twitter Card
+      document.querySelector('#twitterTitle').setAttribute('content', postTitle);
+      document.querySelector('#twitterDescription').setAttribute('content', postDescription);
     }
 
     function openPost(post) {
@@ -800,7 +819,6 @@
       const prevBtn = document.getElementById('prevPostBtn');
       const nextBtn = document.getElementById('nextPostBtn');
       
-      // Newer post (Previous ID is higher in sorted array logic, but lower index)
       if (currentIndex > 0) {
         const newer = posts[currentIndex - 1];
         prevBtn.classList.remove('disabled');
@@ -809,10 +827,8 @@
       } else {
         prevBtn.classList.add('disabled');
         document.getElementById('prevPostTitle').textContent = "None";
-        prevBtn.onclick = null;
       }
 
-      // Older post
       if (currentIndex < posts.length - 1) {
         const older = posts[currentIndex + 1];
         nextBtn.classList.remove('disabled');
@@ -821,7 +837,6 @@
       } else {
         nextBtn.classList.add('disabled');
         document.getElementById('nextPostTitle').textContent = "None";
-        nextBtn.onclick = null;
       }
     }
 
@@ -829,33 +844,22 @@
       const postUrl = window.location.href;
       const shareText = `${post.title}: ${post.excerpt}`;
       
+      // Twitter/X share
       const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(postUrl)}`;
-      const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
+      document.getElementById('shareTwitter').href = twitterUrl;
       
-      const twBtn = document.getElementById('shareTwitter');
-      const liBtn = document.getElementById('shareLinkedIn');
-
-      if(twBtn) twBtn.href = twitterUrl;
-      if(liBtn) liBtn.href = linkedinUrl;
+      // LinkedIn share
+      const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
+      document.getElementById('shareLinkedIn').href = linkedinUrl;
     }
 
     function closePost() {
       switchTab('blog');
       document.title = 'Mission Seventy — The Laboratory';
-      
-      // Reset Meta Tags
-      const defaults = {
-        '#ogTitle': "Mission Seventy — The Laboratory",
-        '#ogDescription': "Systems, Faith, and Software. The workshop of a builder.",
-        '#twitterTitle': "Mission Seventy — The Laboratory",
-        '#twitterDescription': "Systems, Faith, and Software. The workshop of a builder."
-      };
-
-      for (const [selector, value] of Object.entries(defaults)) {
-        const el = document.querySelector(selector);
-        if (el) el.setAttribute('content', value);
-      }
-      
+      document.querySelector('#ogTitle').setAttribute('content', "Mission Seventy — The Laboratory");
+      document.querySelector('#ogDescription').setAttribute('content', "Systems, Faith, and Software. The workshop of a builder.");
+      document.querySelector('#twitterTitle').setAttribute('content', "Mission Seventy — The Laboratory");
+      document.querySelector('#twitterDescription').setAttribute('content', "Systems, Faith, and Software. The workshop of a builder.");
       history.pushState(null, null, window.location.pathname); 
     }
 
@@ -863,14 +867,14 @@
       app.nav.forEach(el => el.classList.toggle('active', el.dataset.tab === tabName));
       app.mobileNav.forEach(el => el.classList.toggle('active', el.dataset.tab === tabName));
       Object.values(app.views).forEach(el => el.classList.remove('active'));
-      
       if(app.views[tabName]) app.views[tabName].classList.add('active');
       window.scrollTo(0,0);
       
-      const mobileMenu = document.getElementById('mobileNav');
-      if(mobileMenu) mobileMenu.classList.remove('active');
+      // Close mobile menu after selection
+      document.getElementById('mobileNav').classList.remove('active');
     }
 
+    // --- SEARCH FUNCTIONALITY ---
     function runSearch(query) {
       if (!query || query.trim() === '') return;
       
@@ -906,88 +910,73 @@
       app.views.search.classList.add('active');
     }
 
+    // --- LISTENERS ---
     function setupListeners() {
-      // Navigation
+      // Desktop nav
       app.nav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
+      
+      // Mobile nav
       app.mobileNav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
       
-      // Logos
-      const logo = document.getElementById('logoClick');
-      if(logo) logo.addEventListener('click', () => switchTab('blog'));
+      // Logo clicks
+      document.getElementById('logoClick').addEventListener('click', () => switchTab('blog'));
+      document.getElementById('mobileLogoClick').addEventListener('click', () => switchTab('blog'));
       
-      const mobileLogo = document.getElementById('mobileLogoClick');
-      if(mobileLogo) mobileLogo.addEventListener('click', () => switchTab('blog'));
+      // Mobile menu toggle
+      document.getElementById('menuToggle').addEventListener('click', () => {
+        document.getElementById('mobileNav').classList.toggle('active');
+      });
       
-      // Menu Toggle
-      const menuBtn = document.getElementById('menuToggle');
-      if(menuBtn) {
-        menuBtn.addEventListener('click', () => {
-          document.getElementById('mobileNav').classList.toggle('active');
-        });
-      }
+      document.getElementById('backBtn').addEventListener('click', closePost);
+      document.getElementById('clearSearchBtn').addEventListener('click', () => switchTab('blog'));
       
-      // Back Button
-      const backBtn = document.getElementById('backBtn');
-      if(backBtn) backBtn.addEventListener('click', closePost);
-      
-      // Clear Search
-      const clearBtn = document.getElementById('clearSearchBtn');
-      if(clearBtn) clearBtn.addEventListener('click', () => switchTab('blog'));
-      
-      // Search Input
       const searchInput = document.getElementById('searchInput');
-      if(searchInput) {
-        searchInput.addEventListener('keypress', (e) => { 
-          if (e.key === 'Enter') {
-            runSearch(searchInput.value.toLowerCase()); 
-            searchInput.value = '';
-          }
+      searchInput.addEventListener('keypress', (e) => { 
+        if (e.key === 'Enter') {
+          runSearch(searchInput.value.toLowerCase()); 
+          searchInput.value = '';
+        }
+      });
+
+      // Copy Link Button
+      document.getElementById('shareCopyBtn').addEventListener('click', () => {
+        const url = window.location.href;
+        const post = posts.find(p => p.id == (new URLSearchParams(window.location.search)).get('post'));
+        
+        let shareText = url;
+        if (post) {
+          shareText = `${post.title}: ${post.excerpt}\n\nRead more: ${url}`;
+        }
+
+        navigator.clipboard.writeText(shareText).then(() => {
+          const btn = document.getElementById('shareCopyBtn');
+          const originalText = btn.textContent;
+          btn.textContent = "COPIED!";
+          btn.style.background = 'var(--accent)';
+          btn.style.color = '#000';
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '#fff';
+            btn.style.color = '';
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy:', err);
+          alert('Failed to copy link');
         });
-      }
+      });
 
-      // Share Copy Button
-      const shareBtn = document.getElementById('shareCopyBtn');
-      if(shareBtn) {
-        shareBtn.addEventListener('click', () => {
-          const url = window.location.href;
-          const urlParams = new URLSearchParams(window.location.search);
-          const post = posts.find(p => p.id == urlParams.get('post'));
-          
-          let shareText = url;
-          if (post) {
-            shareText = `${post.title}: ${post.excerpt}\n\nRead more: ${url}`;
-          }
-
-          navigator.clipboard.writeText(shareText).then(() => {
-            const originalText = shareBtn.textContent;
-            shareBtn.textContent = "COPIED!";
-            shareBtn.style.background = 'var(--accent)';
-            shareBtn.style.color = '#000';
-            setTimeout(() => {
-              shareBtn.textContent = originalText;
-              shareBtn.style.background = '#fff';
-              shareBtn.style.color = '';
-            }, 2000);
-          }).catch(err => {
-            console.error('Failed to copy:', err);
-            alert('Failed to copy link');
-          });
-        });
-      }
-
+      // Handle browser back/forward
       window.addEventListener('popstate', checkUrlParams);
     }
 
     function checkUrlParams() {
       const urlParams = new URLSearchParams(window.location.search);
       const postId = urlParams.get('post');
-      
       if (postId && typeof posts !== 'undefined') {
         const post = posts.find(p => p.id == postId);
         if (post) {
           openPost(post);
         } else {
-          // If ID exists but post doesn't, go home
           switchTab('blog');
         }
       } else {
@@ -995,8 +984,7 @@
       }
     }
 
-    // Initialize App
     init();
   </script>
 </body>
-</html>
+  </html>
