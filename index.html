@@ -436,7 +436,7 @@
   <header class="mobile-header">
     <div class="mobile-header-content">
       <div class="mobile-brand" id="mobileLogoClick">
-        <img src="https://via.placeholder.com/36" alt="M70">
+        <img src="logoz.png" alt="M70">
         <div class="mobile-brand-text">
           <h1>Mission Seventy</h1>
         </div>
@@ -620,16 +620,11 @@
       <div class="back-link" id="clearSearchBtn" style="margin-top: 20px;">CLEAR SEARCH</div>
     </div>
 
-    </main>
+  </main>
 
   <script src="postz.js"></script>
   <script>
-  const posts = window.posts;
-</script>
-
-
-  <script>
-   // --- APP CONTROLLER ---
+    // --- APP CONTROLLER ---
     const app = {
       views: {
         blog: document.getElementById('postsSection'),
@@ -642,10 +637,10 @@
       mobileNav: document.querySelectorAll('.mobile-nav-item'),
       feed: document.getElementById('postsFeed'),
       dateEl: document.getElementById('dateDisplay'),
-      mobileDateEl: document.getElementById('mobileDateDisplay'),
       currentPostIndex: -1
     };
-// --- INITIALIZATION ---
+
+    // --- INITIALIZATION ---
     function init() {
       renderHijriDate();
       renderFeed();
@@ -653,12 +648,11 @@
       checkUrlParams();
     }
 
-    // --- HIJRI DATE (Proper format with fallback calculation) ---
+    // --- HIJRI DATE ---
     function renderHijriDate() {
       try {
         const now = new Date();
         
-        // Try modern Intl API first
         try {
           const formatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
             day: 'numeric',
@@ -668,57 +662,31 @@
           
           const hijriDate = formatter.format(now);
           
-          // Check if it actually returned a valid Hijri date
           if (hijriDate && !hijriDate.toLowerCase().includes('january') && !hijriDate.includes('1970')) {
-            // Desktop
             if (app.dateEl) {
               app.dateEl.textContent = hijriDate.toUpperCase();
             }
-            
-            // Mobile - shorter format
-            if (app.mobileDateEl) {
-              const shortFormatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric'
-              });
-              const mobileDate = shortFormatter.format(now);
-              // Format: "4 Jumada al-Thani 1447 AH" or similar
-              app.mobileDateEl.textContent = mobileDate.replace('AH', '').trim().toUpperCase();
-            }
-            return; // Success!
+            return;
           }
         } catch (e) {
           console.log('Intl Hijri not supported, using manual calculation');
         }
         
-        // Manual Hijri calculation fallback (Umm al-Qura algorithm approximation)
         const hijriDate = gregorianToHijri(now);
         const hijriMonths = [
           'Muharram', 'Safar', 'Rabi al-Awwal', 'Rabi al-Thani', 
           'Jumada al-Awwal', 'Jumada al-Thani', 'Rajab', 'Shaban', 
           'Ramadan', 'Shawwal', 'Dhul Qadah', 'Dhul Hijjah'
         ];
-        const hijriMonthsShort = [
-          'Muh', 'Saf', 'Rab I', 'Rab II', 
-          'Jum I', 'Jum II', 'Raj', 'Sha', 
-          'Ram', 'Shaw', 'Dhu Q', 'Dhu H'
-        ];
         
         const fullDate = `${hijriDate.day} ${hijriMonths[hijriDate.month - 1]} ${hijriDate.year}`;
-        const shortDate = `${hijriDate.day} ${hijriMonthsShort[hijriDate.month - 1]} ${hijriDate.year}`;
         
         if (app.dateEl) {
           app.dateEl.textContent = fullDate.toUpperCase();
         }
         
-        if (app.mobileDateEl) {
-          app.mobileDateEl.textContent = shortDate.toUpperCase();
-        }
-        
       } catch (e) {
         console.error('Hijri date error:', e);
-        // Final fallback to Gregorian
         const fallback = new Date().toLocaleDateString('en-US', { 
           year: 'numeric', 
           month: 'short', 
@@ -726,13 +694,10 @@
         }).toUpperCase();
         
         if (app.dateEl) app.dateEl.textContent = fallback;
-        if (app.mobileDateEl) app.mobileDateEl.textContent = fallback;
       }
     }
 
-    // Manual Hijri conversion (Umm al-Qura approximation)
     function gregorianToHijri(date) {
-      // Julian day calculation
       const year = date.getFullYear();
       const month = date.getMonth() + 1;
       const day = date.getDate();
@@ -743,7 +708,6 @@
       
       let jd = day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
       
-      // Convert Julian day to Hijri
       let l = jd - 1948440 + 10632;
       let n = Math.floor((l - 1) / 10631);
       l = l - 10631 * n + 354;
@@ -758,7 +722,9 @@
 
     // --- FEED RENDERER ---
     function renderFeed() {
-      if (typeof posts === 'undefined' || posts.length === 0) {
+      const posts = window.posts || [];
+      
+      if (posts.length === 0) {
         app.feed.innerHTML = '<div class="log-entry" style="padding: 20px; border: 1px solid #ccc; font-family:var(--font-mono); color: var(--text-muted); text-align:center;">NO LOGS FOUND. PUBLISH YOUR FIRST POST.</div>';
         return;
       }
@@ -782,7 +748,6 @@
       });
     }
     
-
     // --- NAVIGATION & META TAGS ---
     function updateMetaTags(post) {
       const postUrl = window.location.origin + window.location.pathname + '?post=' + post.id;
@@ -791,17 +756,16 @@
       
       document.title = postTitle;
 
-      // Open Graph
       document.querySelector('#ogTitle').setAttribute('content', postTitle);
       document.querySelector('#ogDescription').setAttribute('content', postDescription);
       document.querySelector('#ogUrl').setAttribute('content', postUrl);
       
-      // Twitter Card
       document.querySelector('#twitterTitle').setAttribute('content', postTitle);
       document.querySelector('#twitterDescription').setAttribute('content', postDescription);
     }
 
     function openPost(post) {
+      const posts = window.posts || [];
       Object.values(app.views).forEach(el => el.classList.remove('active'));
       app.views.single.classList.add('active');
       
@@ -820,6 +784,7 @@
     }
 
     function updatePostNavigation(currentIndex) {
+      const posts = window.posts || [];
       const prevBtn = document.getElementById('prevPostBtn');
       const nextBtn = document.getElementById('nextPostBtn');
       
@@ -848,11 +813,9 @@
       const postUrl = window.location.href;
       const shareText = `${post.title}: ${post.excerpt}`;
       
-      // Twitter/X share
       const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(postUrl)}`;
       document.getElementById('shareTwitter').href = twitterUrl;
       
-      // LinkedIn share
       const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
       document.getElementById('shareLinkedIn').href = linkedinUrl;
     }
@@ -874,12 +837,12 @@
       if(app.views[tabName]) app.views[tabName].classList.add('active');
       window.scrollTo(0,0);
       
-      // Close mobile menu after selection
       document.getElementById('mobileNav').classList.remove('active');
     }
 
     // --- SEARCH FUNCTIONALITY ---
     function runSearch(query) {
+      const posts = window.posts || [];
       if (!query || query.trim() === '') return;
       
       const results = posts.filter(post => 
@@ -916,17 +879,12 @@
 
     // --- LISTENERS ---
     function setupListeners() {
-      // Desktop nav
       app.nav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
-      
-      // Mobile nav
       app.mobileNav.forEach(btn => btn.addEventListener('click', (e) => switchTab(btn.dataset.tab)));
       
-      // Logo clicks
       document.getElementById('logoClick').addEventListener('click', () => switchTab('blog'));
       document.getElementById('mobileLogoClick').addEventListener('click', () => switchTab('blog'));
       
-      // Mobile menu toggle
       document.getElementById('menuToggle').addEventListener('click', () => {
         document.getElementById('mobileNav').classList.toggle('active');
       });
@@ -942,8 +900,8 @@
         }
       });
 
-      // Copy Link Button
       document.getElementById('shareCopyBtn').addEventListener('click', () => {
+        const posts = window.posts || [];
         const url = window.location.href;
         const post = posts.find(p => p.id == (new URLSearchParams(window.location.search)).get('post'));
         
@@ -969,14 +927,14 @@
         });
       });
 
-      // Handle browser back/forward
       window.addEventListener('popstate', checkUrlParams);
     }
 
     function checkUrlParams() {
+      const posts = window.posts || [];
       const urlParams = new URLSearchParams(window.location.search);
       const postId = urlParams.get('post');
-      if (postId && typeof posts !== 'undefined') {
+      if (postId && posts.length > 0) {
         const post = posts.find(p => p.id == postId);
         if (post) {
           openPost(post);
@@ -991,8 +949,4 @@
     init();
   </script>
 </body>
-  </html>
-
-
-
-
+        </html>
