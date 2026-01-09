@@ -402,3 +402,4 @@ window.posts = [
     date: "29 Dhul Qadah 1446 / 27 May 2025"
   }
 ];
+console.log("Posts loaded:", window.posts.length, "posts");
