@@ -22,7 +22,7 @@ window.posts = [
           "<p>Imam Ibn al-Qayyim رحمه الله writes:</p>" +
           "<p>\"Sometimes the heart is affected severely by illness, but its possessor does not know because he is busy in other things. His heart may perish without him noticing that. Sometime he realizes its illness but he is scared of the bitterness of the medicine and enduring it; so he opts for bearing the pain rather taking the medicine. His treatment lies in going against his passion and that is the most difficult thing for the soul.</p>" +
           "<p>He may prepare himself to endure but his intention fades because of the lack of knowledge, understanding and power of patience. He is like a man who takes a perilous path which leads to complete security. He is aware that if he remains steadfast, the fear will go away and safety will follow. He is in need of firm patience and strong belief in his future. If his patience and belief are shaken, he will return to the path and will not be able to stand its hardship especially if he has no companion and feels lonely and starts saying: 'Where have the people gone? How can I find them to follow them?' This is the condition of most people. The sincere and intelligent person is not scared of the lack of companionship because his heart realises the company of the pious party. They are those whom Allah has blessed: the messengers, the truthful, the martyrs and the righteous. What excellent companions they are! (4:69)\"</p>" +
-         "<p>Imam Ibn al-Qayyim, from 'Supporting the Distressed Against the Tricks of Satan'</p>",
+        "<p>Imam Ibn al-Qayyim, from \"Supporting the Distressed Against the Tricks of Satan\"</p>",
     date: "12 Jumada Al-Akhirah, 1447 / 3 Dec 2025"
   },
 
