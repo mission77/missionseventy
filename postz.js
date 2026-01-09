@@ -136,7 +136,7 @@ window.posts = [
           "<p>What makes someone approachable at first sight? It's the warmth of their face: eager, open, smiling.</p>" +
           "<p>The opposite is just as true. Even if you needed something important from a person, one unwelcoming expression could make you hesitate and keep your distance.</p>" +
           "<p>In every setting, whether in business or teaching, it's important to make others feel at ease. A welcoming attitude can open hearts long before words do.</p>" +
-          "<p>As our Prophet ﷺ said, "Every good deed is charity. Verily, it is a good deed to meet your brother with a cheerful face."</p>" +
+          "<p>As our Prophet ﷺ said,  \"Every good deed is charity. Verily, it is a good deed to meet your brother with a cheerful face."</p>" +
           "<p>May Allah bless us with good morals and hearts that shine through our faces.</p>",
     date: "11 Jumada al-Awwal 1447 / 2 Nov 2025"
   },
