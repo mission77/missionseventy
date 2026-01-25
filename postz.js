@@ -1,6 +1,16 @@
 window.posts = [
 
   {
+    id: 32,
+title: "When the Path Isn't Clear",
+excerpt: "Finding your path requires reflection, clarity, and daily action. Without it, stagnation and confusion can hold you back.",
+body: "<p>BISMILLAH.</p>" +
+      "<p>One of the most difficult challenges a person faces is defining the path they want to walk. It takes energy, focus, and honest reflection. It begins by asking yourself: what am I truly interested in? What is my intention behind these interests and why do they matter? These questions spark insight and help forge a path from stagnation to daily action and renewed ambition.</p>" +
+      "<p>Some people get stuck because they don’t realize they are in a dead end. The only way forward is sometimes to cut your losses, step back, and find a new way toward your target. But it is not enough to simply start; you must define your target in clear, simple words. Without clarity, confusion lingers. For example, a person may spend years trying multiple projects without understanding what success looks like.</p>" +
+      "<p>When the path is clearly defined, the remaining task is execution, putting in daily effort that gradually moves you closer to your goal. And when your actions are paired with clear intention, progress becomes inevitable. The solution lies in asking the right questions, understanding yourself deeply, and executing consistently each day.</p>",
+date: "6 Shaban, 1447 / 25 Jan 2026" 
+  },
+{
    id: 31,
     title: "Close the Gate",
     excerpt: "There is a gate we often forget to close, and we are heedless about it.",
