@@ -1,5 +1,13 @@
 window.posts = [
-
+  {id: 33,
+title: "Reliance on Allah, Clarity and Consistency",
+excerpt: "Clarity begins with honest questions, reliance on Allah, and consistent daily action. This is how intention turns into progress.",
+body: "<p>BISMILLAH.</p>" +
+      "<p>One thing that is very important is clarity. Clarity in the path you want to take and the direction you are moving toward. This clarity is not accidental. It comes when a person asks themselves honest and intentional questions about what they want to pursue and why it matters. Once clarity is found, the next step is simple: initiate, then execute daily until the target is reached.</p>" +
+      "<p>Although the idea is simple, many people struggle with it. For many, the problem is simple: they have never clearly defined what they want or how they want to contribute to the Ummah. Instead, they move through life on default, shaped by routines and systems that make it difficult to step back and think. One of the most important shifts in this process is turning to dua. Asking Allah sincerely to guide you to what is good in this life and in the Hereafter is essential.</p>" +
+      "<p>Consistency in small actions is what transforms intention into reality. Morning and evening adhkaar, daily Qur’an reading, or completing a course may seem small on their own, but they compound over time. These actions build discipline and direction. Initiate with clarity, execute daily with intention, and repeat. And do not forget to ask Allah every day for success in this world and the Hereafter.</p>",
+date: "7 Shaban, 1447 / 26 Jan 2026"
+    },
   {
     id: 32,
 title: "When the Path Isn't Clear",
