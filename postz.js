@@ -1,4 +1,19 @@
 window.posts = [
+{
+  id: 34,
+  title: "From Watching to Doing",
+  excerpt: "Remarkable action inspires people, but progress begins when observation turns into execution.",
+  body:
+    "<p><strong>BISMILLAH</strong></p>" +
+    "<p>Have you noticed how often businesses display footage of people performing impressive skills? A cyclist moving confidently through a crowded street, an athlete executing precise football techniques, or someone exploring the ocean alongside dolphins. These images capture attention because remarkable action is enjoyable to watch. It represents a dream many people quietly hold.</p>" +
+    "<p>What is often overlooked is that the person watching is usually capable of meaningful action themselves. Progress does not begin with observation; it begins with starting.</p>" +
+    "<p>Many people have ideas they never bring into the world. Not because execution is impossible, but because fear intervenes. Fear of failure, judgment, or wasted effort. We are taught that failure is something to avoid, when in reality it is part of growth.</p>" +
+    "<p>Failure only becomes final when it prevents you from finishing.</p>" +
+    "<p>The correct approach is to take ideas to completion. Ship what you are building. If it does not succeed, study the outcome, improve, and ship again. Execution is a skill that strengthens through repetition.</p>" +
+    "<p>Initiate early. Finish deliberately.</p>" +
+    "<p>What will you ship today?</p>",
+  date: "8 Shaban, 1447 / 27 Jan 2026"
+},
   {id: 33,
 title: "Reliance on Allah, Clarity and Consistency",
 excerpt: "Clarity begins with honest questions, reliance on Allah, and consistent daily action. This is how intention turns into progress.",
