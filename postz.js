@@ -1,4 +1,18 @@
 window.posts = [
+  {
+  id: 35,
+  title: "The Child We Quietly Lost",
+  excerpt: "Over time, conditioning replaces curiosity, dulling the initiative and ambition we once carried naturally.",
+  body:
+    "<p><strong>BISMILLAH</strong></p>" +
+    "<p>Do you remember when you were a child? You would freely make chaos in the house, try things that felt new, get in trouble, and still do it again the next day in a different way. You were curious, bold, and full of ideas.</p>" +
+    "<p>At some point, that child slowly disappeared.</p>" +
+    "<p>Not because curiosity was wrong, but because you were conditioned into order. You were taught to follow instructions, to ask permission for everything, even to raise your hand to go to the bathroom. This is not about disrespecting order, but about understanding how conditioning works.</p>" +
+    "<p>Over time, this process dulls the very qualities that once gave you ambition and energy. Systems designed for control often suppress curiosity, initiative, and independent thinking.</p>" +
+    "<p>It is natural to want independence from a rigid nine-to-five life. It is natural to want to build something of your own. It is natural to want to contribute work that matters and to initiate daily. Yet many people are trained to become replaceable parts in a machine, easily substituted when conditions change.</p>" +
+    "<p>If we want to move forward, we must first become aware of this conditioning. We must detox it from our thinking. Until then, we risk treating the wrong problems while the real issue remains untouched.</p>",
+  date: "9 Shaban, 1447 / 28 Jan 2026"
+  },
 {
   id: 34,
   title: "From Watching to Doing",
