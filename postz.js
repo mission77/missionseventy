@@ -1,4 +1,15 @@
 window.posts = [
+  {id: 36,
+title: "Deadlines Are Fuel",
+excerpt: "Deadlines introduce pressure, and that pressure becomes fuel. Even when missed, they create movement and shape the identity of someone who gets things done.",
+body:
+  "<p>BISMILLAH.</p>" +
+  "<p>Deadlines help a person stay accountable to the promises they make to themselves. They introduce pressure, and that pressure can be useful fuel for execution. Even when a deadline is missed, it still creates more movement than having none at all.</p>" +
+  "<p>The inconvenience that comes with deadlines is necessary. It is part of the growth process. Over time, it builds a new identity — someone who gets things done.</p>" +
+  "<p>When it’s time to ship a product, waiting for perfection only delays learning. The market is far better at providing feedback than personal speculation. Uncertainty about results is natural, but outcomes are not fully in our control.</p>" +
+  "<p>What is in our control is meeting the deadline, shipping the work, and accepting the uncertainty that follows.</p>",
+date: "12 Rajab 1447 AH / January 31, 2026"
+  },
   {
   id: 35,
   title: "The Child We Quietly Lost",
