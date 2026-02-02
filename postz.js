@@ -1,4 +1,13 @@
 window.posts = [
+  {id: 37,
+title: "On Intention",
+excerpt: "Intention gives weight to action. Without it, effort fades before completion.",
+body:
+  "<p>BISMILLAH.</p>" +
+  "<p>The Prophet ﷺ said, <em>“Actions are judged by intentions.”</em> Without intention, deeds are not accepted by Allah. And when it comes to succeeding in a matter, one must carry intention in his actions all the way until the result is reached. If there is no intention in one’s actions, it becomes difficult to reach the end.</p>" +
+  "<p>Improvising also helps the one whose intention is clear. When intention is firm, adjusting along the way becomes easier, and that is when the work itself starts to get done.</p>",
+date: "13 Rajab 1447 AH / February 1, 2026"
+  },
   {id: 36,
 title: "Deadlines Are Fuel",
 excerpt: "Deadlines introduce pressure, and that pressure becomes fuel. Even when missed, they create movement and shape the identity of someone who gets things done.",
