@@ -1,4 +1,21 @@
 window.posts = [
+  {
+  id: 38,
+  title: "Becoming Is a Daily Choice",
+  excerpt: "Resisting short-term comfort shapes identity. Who you become is built through repeated choices.",
+  body:
+    "<p>BISMILLAH.</p>" +
+    "<p>Resisting short-term comfort is essential in becoming the person you want to become.</p>" +
+    "<p>One has to think through choices and ask himself: am I choosing the easy path of comfort and falling into temptations, or the more difficult path that leads to something desired and beneficial?</p>" +
+    "<p>Studies done over and over have found that people who resist in the short term become more successful over the years.</p>" +
+    "<p>Long-term benefit is what we should target.</p>" +
+    "<p>Just like a long-distance runner puts in miles every morning, resists going back to sleep, and does that for years in the hope of becoming better, this is how we are supposed to think.</p>" +
+    "<p>We should resist anything that comes between our goals for Jannah, success in this dunya, and seeking the pleasure of Allah (SWT).</p>" +
+    "<p>What happens over time by making the right choices is that a new identity is created.</p>" +
+    "<p>The mind begins to desire the actions it has been trained on and avoids the non-beneficial ones.</p>" +
+    "<p>That is when a person moves from being controlled by the mind to being in charge of his everyday actions with clear intention of who he wants to become.</p>",
+  date: "16 Shaban, 1447 AH / February 4, 2026"
+},
   {id: 37,
 title: "On Intention",
 excerpt: "Intention gives weight to action. Without it, effort fades before completion.",
@@ -6,7 +23,7 @@ body:
   "<p>BISMILLAH.</p>" +
   "<p>The Prophet ﷺ said, <em>“Actions are judged by intentions.”</em> Without intention, deeds are not accepted by Allah. And when it comes to succeeding in a matter, one must carry intention in his actions all the way until the result is reached. If there is no intention in one’s actions, it becomes difficult to reach the end.</p>" +
   "<p>Improvising also helps the one whose intention is clear. When intention is firm, adjusting along the way becomes easier, and that is when the work itself starts to get done.</p>",
-date: "13 Rajab 1447 AH / February 1, 2026"
+date: "13 Shaban 1447 AH / February 1, 2026"
   },
   {id: 36,
 title: "Deadlines Are Fuel",
@@ -17,7 +34,7 @@ body:
   "<p>The inconvenience that comes with deadlines is necessary. It is part of the growth process. Over time, it builds a new identity, someone who gets things done.</p>" +
   "<p>When it’s time to ship a product, waiting for perfection only delays learning. The market is far better at providing feedback than personal speculation. Uncertainty about results is natural, but outcomes are not fully in our control.</p>" +
   "<p>What is in our control is meeting the deadline, shipping the work, and accepting the uncertainty that follows.</p>",
-date: "12 Rajab 1447 AH / January 31, 2026"
+date: "12 Shaban 1447 AH / January 31, 2026"
   },
   {
   id: 35,
