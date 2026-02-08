@@ -1,5 +1,20 @@
 window.posts = [
   {
+  id: 39,
+  title: "Choosing What Enters the Mind",
+  excerpt: "What we read shapes how we think, and how we think shapes what we seek.",
+  body:
+    "<p>BISMILLAH.</p>" +
+    "<p>I have come to realize that what we read shapes how we think, and how we think shapes what we seek.</p>" +
+    "<p>When I read books by non-Muslim writers, I notice my perspective drifting toward material success as the primary goal. That in itself reveals a problem, because as Muslims our ultimate purpose is to seek Allah’s pleasure, and every path we take should lead back to Him.</p>" +
+    "<p>Worldviews are not neutral. When we repeatedly consume ideas rooted in a different foundation, they slowly influence our beliefs, priorities, and ambitions, often without us realizing it.</p>" +
+    "<p>The only way to catch this is through self-observation. Watching our actions. Listening to what our heart inclines toward. Questioning the direction of our nafs.</p>" +
+    "<p>Renewing intention must become a daily practice, just like renewing wudu. We let go of what conflicts with our Muslim identity and replace it with what strengthens it.</p>" +
+    "<p>If we wish to deepen our understanding of any subject, whether discipline, character, purpose, or knowledge itself, we should first seek it from Muslim scholars. Especially the classical scholars who wrote with the Hereafter in mind, such as Ibn Taymiyyah, Ibn al-Jawzi, Ibn Qudamah, and others.</p>" +
+    "<p>May Allah grant us knowledge that benefits, hearts that remain sincere, and paths that lead back to Him.</p>",
+  date: "20 Shaban, 1447 AH / February 8, 2026"
+},
+  {
   id: 38,
   title: "Becoming Is a Daily Choice",
   excerpt: "Resisting short-term comfort shapes identity. Who you become is built through repeated choices.",
