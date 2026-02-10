@@ -1,4 +1,16 @@
 window.posts = [
+  {id: 40,
+title: "The System You Can Sustain",
+excerpt: "The real question is not which system sounds better. The real question is which system you can stay consistent with.",
+body: "<p>BISMILLAH.</p>" +
+      "<p>Some people operate with rituals. They repeat certain actions daily until those actions become part of who they are. Others wake up and move through the day reacting to whatever appears in front of them.</p>" +
+      "<p>Both systems can get things done. But the person with rituals is usually more stable in the long run.</p>" +
+      "<p>The real question is not which system sounds better. The real question is which system you can stay consistent with.</p>" +
+      "<p>The goal in both cases is the same: meaningful progress.</p>" +
+      "<p>If a system helps you move forward daily, it is effective. If it collapses over time, it is not.</p>" +
+      "<p>Sometimes people mix approaches, and that is normal. But it is better to choose a simple system that works for you and commit to it. Consistency beats complexity.</p>",
+date: "22 Shaban, 1447 AH / February 10, 2026"
+  },
   {
   id: 39,
   title: "Choosing What Enters the Mind",
