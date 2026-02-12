@@ -1,4 +1,21 @@
 window.posts = [
+  {
+  id: 41,
+  title: "Two Paths: Gratitude or Destruction",
+  excerpt: "Gratitude is not a small act. It is a condition of the heart. It determines whether blessings remain or are removed.",
+  body:
+    "<p>BISMILLAH.</p>" +
+    "<p>Allah says [16.112 And Allah brings forward a story: A city having (the comfort of) security and peace, well supplied with livelihood from every place: Yet it was still thankless for the gifts of Allah: So Allah made it taste hunger and fear (choking it) like a coat (from every side), because of what (its people) earned.]</p>" +
+    "<p>Also Allah says [16.120. Verily, Ibrahim (Abraham) was a true model, (sincerely and) piously obedient to Allah, true in faith, and he did not join gods with Allah: 16.121. He showed his thanks for the Favors of Allah, Who chose him, and guided him to a Straight Path. 16.122. And We gave him good in this world, and in the Hereafter, he will be together with the Righteous.]</p>" +
+    "<p>Also Allah says [16.128. Truly, Allah is with those who guard themselves, and those who do good.]</p>" +
+    "<p>The same word echoes across these ayah: gratitude.</p>" +
+    "<p>One nation had security, provision, and peace yet it was thankless. The result was hunger and fear. Another servant, Ibrahim (A.S), showed thanks for the favors of Allah for choosing him and guiding him to the Straight Path, and Allah honored him in this world and promised him righteousness in the next.</p>" +
+    "<p>Gratitude is not a small act. It is a condition of the heart. It determines whether blessings remain or are removed. It determines whether we are left to ourselves or guided to the Straight Path.</p>" +
+    "<p>Every breath we take is a favor. Every day we wake up is an opportunity to say Alhamdulillah not only with our tongues, but with obedience, sincerity, and action.</p>" +
+    "<p>Ramadan is one week away. This Friday should not pass like any other Friday. Renew your intention. Prepare your body. Prepare your heart. Increase your kheyr now so when Ramadan begins, you are already in motion, already disciplined, already grateful.</p>" +
+    "<p>May Allah allow us to reach Ramadan. May He make us among those who are thankful. May He make us among those who do kheyr. May He forgive us and keep us firm on the Straight Path.</p>",
+  date: "24 Shaban, 1447 AH / February 12, 2026"
+},
   {id: 40,
 title: "The System You Can Sustain",
 excerpt: "The real question is not which system sounds better. The real question is which system you can stay consistent with.",
