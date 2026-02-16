@@ -1,5 +1,20 @@
 window.posts = [
   {
+  id: 42,
+  title: "Productivity Is Personal",
+  excerpt: "If you do not define what a productive day means to you, you will struggle to live it consistently.",
+  body:
+    "<p>BISMILLAH.</p>" +
+    "<p>What does a productive day actually look like for you?</p>" +
+    "<p>Is it praying all five prayers at the Masjid, or maybe just Fajr and Isha? Is it reading one juz, or memorizing two pages of Qur'an? Is it working out for 45 minutes? Or is it simply doing one of those things well?</p>" +
+    "<p>You have to define what a productive day means for you. When you picture it clearly in your mind, you should also imagine how it feels to live that day fully.</p>" +
+    "<p>I have noticed something. If you dislike a task because it was imposed on you, that is understandable. But if you do not enjoy something you personally chose, then it is time to pause and question yourself. Why did you choose it? What do you really want?</p>" +
+    "<p>The real challenge is not starting. Anyone can start. The challenge is showing up every day and improving slightly from the day before. Weeks turn into months. Months turn into years. That is where success and failure quietly separate.</p>" +
+    "<p>So ask yourself honestly.</p>" +
+    "<p>Do you know what a productive day looks like for you?</p>",
+  date: "27 Shaban, 1447 AH / February 15, 2026"
+},
+  {
   id: 41,
   title: "Two Paths: Gratitude or Destruction",
   excerpt: "Gratitude is not a small act. It is a condition of the heart. It determines whether blessings remain or are removed.",
